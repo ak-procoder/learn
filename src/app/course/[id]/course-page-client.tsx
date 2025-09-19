@@ -1,8 +1,9 @@
 "use client"
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useCallback } from 'react'
 import { ArrowLeft, Clock, BookOpen, ChevronRight, Settings, CheckCircle } from 'lucide-react'
 import Link from 'next/link'
+import { useRouter } from 'next/navigation'
 
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
@@ -23,6 +24,7 @@ export default function CoursePageClient({ courseId }: CoursePageClientProps) {
   const [courseContent, setCourseContent] = useState<CourseContent | null>(null)
   const [isLoading, setIsLoading] = useState(true)
   const [completedTopics, setCompletedTopics] = useState<Set<string>>(new Set())
+  const router = useRouter()
 
   const course = courses.find(c => c.id === courseId)
 
@@ -65,6 +67,37 @@ export default function CoursePageClient({ courseId }: CoursePageClientProps) {
       setCompletedTopics(prev => new Set([...prev, selectedTopic.id]))
     }
   }
+
+  const handleNextTopic = useCallback(() => {
+    if (!selectedTopic || !courseContent) return
+    
+    const currentTopicIndex = courseContent.topics.findIndex(topic => topic.id === selectedTopic.id)
+    const nextTopicIndex = currentTopicIndex + 1
+    
+    if (nextTopicIndex < courseContent.topics.length) {
+      const nextTopic = courseContent.topics[nextTopicIndex]
+      setSelectedTopic(nextTopic)
+      setCurrentSlides(nextTopic.slides)
+    }
+  }, [selectedTopic, courseContent])
+
+  const handleFinishCourse = useCallback(() => {
+    router.push('/browse-courses')
+  }, [router])
+
+  // Helper function to check if current topic is the last topic
+  const isLastTopic = useCallback(() => {
+    if (!selectedTopic || !courseContent) return false
+    const currentTopicIndex = courseContent.topics.findIndex(topic => topic.id === selectedTopic.id)
+    return currentTopicIndex === courseContent.topics.length - 1
+  }, [selectedTopic, courseContent])
+
+  // Helper function to check if there's a next topic
+  const hasNextTopic = useCallback(() => {
+    if (!selectedTopic || !courseContent) return false
+    const currentTopicIndex = courseContent.topics.findIndex(topic => topic.id === selectedTopic.id)
+    return currentTopicIndex < courseContent.topics.length - 1
+  }, [selectedTopic, courseContent])
 
   // Calculate overall progress
   const totalTopics = courseContent?.topics.length || 0
@@ -228,6 +261,10 @@ export default function CoursePageClient({ courseId }: CoursePageClientProps) {
               options={{ loop: false }} 
               onSlideChange={handleSlideChange}
               onComplete={handleTopicComplete}
+              onNextTopic={handleNextTopic}
+              onFinishCourse={handleFinishCourse}
+              isLastTopic={isLastTopic()}
+              hasNextTopic={hasNextTopic()}
             />
           ) : (
             <div className="h-full flex items-center justify-center p-8">

@@ -9,6 +9,7 @@ export async function generateStaticParams() {
 }
 
 // Server component that wraps the client component
-export default function CoursePage({ params }: { params: { id: string } }) {
-  return <CoursePageClient courseId={params.id} />
+export default async function CoursePage({ params }: { params: Promise<{ id: string }> }) {
+  const resolvedParams = await params
+  return <CoursePageClient courseId={resolvedParams.id} />
 }

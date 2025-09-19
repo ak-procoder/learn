@@ -4,7 +4,7 @@ import React, { useCallback, useEffect, useState, useRef } from 'react'
 import { EmblaOptionsType, EmblaCarouselType } from 'embla-carousel'
 import useEmblaCarousel from 'embla-carousel-react'
 import Fade from 'embla-carousel-fade'
-import { ChevronLeft, ChevronRight, BookOpen, ChevronDown } from 'lucide-react'
+import { ChevronLeft, ChevronRight, BookOpen, ChevronDown, CheckCircle } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
@@ -15,6 +15,10 @@ type PropType = {
   options?: EmblaOptionsType
   onSlideChange?: (index: number) => void
   onComplete?: () => void
+  onNextTopic?: () => void
+  onFinishCourse?: () => void
+  isLastTopic?: boolean
+  hasNextTopic?: boolean
 }
 
 // Function to parse and format slide content
@@ -69,7 +73,7 @@ const formatSlideContent = (content: string) => {
 }
 
 const EmblaCarousel: React.FC<PropType> = (props) => {
-  const { slides, options, onSlideChange, onComplete } = props
+  const { slides, options, onSlideChange, onComplete, onNextTopic, onFinishCourse, isLastTopic = false, hasNextTopic = false } = props
   const [emblaRef, emblaApi] = useEmblaCarousel(options, [Fade()])
   const [prevBtnDisabled, setPrevBtnDisabled] = useState(true)
   const [nextBtnDisabled, setNextBtnDisabled] = useState(true)
@@ -285,15 +289,40 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
               <ChevronLeft className="h-5 w-5" />
               Previous
             </Button>
-            <Button
-              size="default"
-              onClick={scrollNext}
-              disabled={nextBtnDisabled}
-              className="gap-2 shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 rounded-xl px-6"
-            >
-              Next
-              <ChevronRight className="h-5 w-5" />
-            </Button>
+            
+            {/* Smart Next Button Logic */}
+            {nextBtnDisabled && isLastTopic ? (
+              // Last slide of last topic - show Finish Course button
+              <Button
+                size="default"
+                onClick={onFinishCourse}
+                className="gap-2 shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-r from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700 rounded-xl px-6"
+              >
+                Finish Course
+                <CheckCircle className="h-5 w-5" />
+              </Button>
+            ) : nextBtnDisabled && hasNextTopic ? (
+              // Last slide of topic but not last topic - show Next Topic button
+              <Button
+                size="default"
+                onClick={onNextTopic}
+                className="gap-2 shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-r from-blue-600 to-indigo-600 hover:from-blue-700 hover:to-indigo-700 rounded-xl px-6"
+              >
+                Next Topic
+                <ChevronRight className="h-5 w-5" />
+              </Button>
+            ) : (
+              // Regular Next button
+              <Button
+                size="default"
+                onClick={scrollNext}
+                disabled={nextBtnDisabled}
+                className="gap-2 shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 rounded-xl px-6"
+              >
+                Next
+                <ChevronRight className="h-5 w-5" />
+              </Button>
+            )}
           </div>
 
           {/* Slide Indicator */}
