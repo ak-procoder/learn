@@ -22,9 +22,39 @@ type PropType = {
 }
 
 // Function to parse and format slide content
-const formatSlideContent = (content: string) => {
-  const lines = content.split('\n')
+const formatSlideContent = (content: string | string[] | Record<string, string | string[]>) => {
   const sections: Array<{type: 'heading' | 'bullet' | 'text' | 'code', content: string, level?: number}> = []
+  
+  // Handle JSON object format
+  if (typeof content === 'object' && !Array.isArray(content)) {
+    Object.entries(content).forEach(([key, value]) => {
+      // Add section heading
+      sections.push({
+        type: 'heading',
+        content: key.charAt(0).toUpperCase() + key.slice(1),
+        level: 1
+      })
+      
+      // Handle the value (string or array)
+      if (typeof value === 'string') {
+        sections.push({
+          type: 'text',
+          content: value
+        })
+      } else if (Array.isArray(value)) {
+        value.forEach(item => {
+          sections.push({
+            type: 'bullet',
+            content: item
+          })
+        })
+      }
+    })
+    return sections
+  }
+  
+  // Handle both string and array formats (legacy support)
+  const lines = Array.isArray(content) ? content : content.split('\n')
   
   lines.forEach(line => {
     const trimmed = line.trim()
@@ -211,22 +241,22 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
                         }
                       }}
                     >
-                      <div className="space-y-2 min-h-0">
+                      <div className="space-y-4 min-h-0">
                         {formatSlideContent(slide.content).map((section, index) => (
                           <div key={index}>
                             {section.type === 'heading' && section.level === 1 && (
-                              <h3 className="text-2xl font-bold text-primary mb-4 flex items-center gap-3 pb-2 border-b border-primary/20">
+                              <h3 className="text-2xl font-bold text-primary mb-2 flex items-center gap-3 pb-2 border-b border-primary/20 mt-8 first:mt-0">
                                 <div className="w-2 h-8 bg-gradient-to-b from-primary to-secondary rounded-full shadow-sm"></div>
                                 <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">{section.content}</span>
                               </h3>
                             )}
                             {section.type === 'heading' && section.level === 2 && (
-                              <h4 className="text-xl font-semibold text-foreground mb-3 ml-6 text-secondary">
+                              <h4 className="text-xl font-semibold text-foreground mb-4 ml-6 text-secondary mt-6">
                                 {section.content}
                               </h4>
                             )}
                             {section.type === 'bullet' && (
-                              <div className="flex items-start gap-4 ml-8 mb-3 group">
+                              <div className="flex items-start gap-4 ml-10 mb-3 group">
                                 <div className="w-2 h-2 bg-gradient-to-r from-primary to-secondary rounded-full mt-2.5 shrink-0 shadow-sm group-hover:scale-125 transition-transform duration-200"></div>
                                 <p className="text-muted-foreground leading-relaxed text-base group-hover:text-foreground transition-colors duration-200">
                                   {section.content}
@@ -234,14 +264,14 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
                               </div>
                             )}
                             {section.type === 'code' && (
-                              <div className="ml-8 mb-4">
+                              <div className="ml-14 mb-4">
                                 <code className="block bg-gradient-to-r from-muted/80 to-muted/60 border border-border/30 rounded-xl p-4 text-sm font-mono text-foreground shadow-inner backdrop-blur-sm">
                                   {section.content}
                                 </code>
                               </div>
                             )}
                             {section.type === 'text' && (
-                              <p className="text-foreground leading-relaxed text-base ml-8 mb-4 bg-card/30 p-4 rounded-lg border border-border/20">
+                              <p className="text-foreground leading-relaxed text-base ml-10 mb-4 bg-card/30 p-4 rounded-lg border border-border/20">
                                 {section.content}
                               </p>
                             )}

@@ -1,7 +1,7 @@
 export interface CourseSlide {
   id: string
   title: string
-  content: string
+  content: string | string[] | Record<string, string | string[]>
   type: 'text' | 'image' | 'video'
   imageUrl?: string
   videoUrl?: string

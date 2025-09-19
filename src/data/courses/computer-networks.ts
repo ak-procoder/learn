@@ -12,31 +12,158 @@ export const computerNetworksContent: CourseContent = {
         {
           id: 'intro-1',
           title: 'What is a Computer Network?',
-          content: 'A computer network is a collection of interconnected computing devices that can communicate and share resources. These devices (nodes) include:\n\n• Computers: Desktops, laptops, servers\n• Mobile Devices: Smartphones, tablets\n• Network Equipment: Routers, switches, hubs\n• IoT Devices: Smart sensors, cameras, appliances\n\nKey Characteristics:\n• Shared communication medium\n• Protocol-based communication\n• Resource sharing capabilities\n• Distributed processing power',
+          content: {
+            "description": "A computer network is a collection of interconnected computing devices that can communicate and share resources. These devices (nodes) include:",
+            "device types": [
+              "Computers: Desktops, laptops, servers",
+              "Mobile Devices: Smartphones, tablets",
+              "Network Equipment: Routers, switches, hubs",
+              "IoT Devices: Smart sensors, cameras, appliances"
+            ],
+            "key characteristics": [
+              "Shared communication medium",
+              "Protocol-based communication",
+              "Resource sharing capabilities",
+              "Distributed processing power"
+            ]
+          },
           type: 'text'
         },
         {
           id: 'intro-2',
           title: 'Evolution of Computer Networks',
-          content: 'Historical Timeline:\n\n1960s - ARPANET: First packet-switching network\n• Funded by US Department of Defense\n• Connected universities and research institutions\n• Foundation for modern internet\n\n1970s - Ethernet: Local area networking\n• Developed by Xerox\n• Collision detection protocol\n• Still widely used today\n\n1980s - TCP/IP: Standardized protocols\n• Transmission Control Protocol\n• Internet Protocol suite\n• Enabled global internetworking\n\n1990s - World Wide Web: User-friendly internet\n• HTTP protocol\n• Web browsers\n• Commercial internet adoption',
+          content: {
+            "1960s - ARPANET": [
+              "First packet-switching network",
+              "Funded by US Department of Defense",
+              "Connected universities and research institutions",
+              "Foundation for modern internet"
+            ],
+            "1970s - Ethernet": [
+              "Local area networking",
+              "Developed by Xerox",
+              "Collision detection protocol",
+              "Still widely used today"
+            ],
+            "1980s - TCP/IP": [
+              "Standardized protocols",
+              "Transmission Control Protocol",
+              "Internet Protocol suite",
+              "Enabled global internetworking"
+            ],
+            "1990s - World Wide Web": [
+              "User-friendly internet",
+              "HTTP protocol",
+              "Web browsers",
+              "Commercial internet adoption"
+            ]
+          },
           type: 'text'
         },
         {
           id: 'intro-3',
           title: 'Network Classifications by Scale',
-          content: 'Personal Area Network (PAN)\n• Range: 1-10 meters\n• Examples: Bluetooth, USB connections\n• Use: Personal device connectivity\n\nLocal Area Network (LAN)\n• Range: Building or campus\n• Examples: Office networks, WiFi\n• High speed, low latency\n\nMetropolitan Area Network (MAN)\n• Range: City-wide coverage\n• Examples: Cable TV networks, city WiFi\n• Moderate speed and latency\n\nWide Area Network (WAN)\n• Range: Country/continent-wide\n• Examples: Internet, corporate networks\n• Variable speed, higher latency\n\nGlobal Area Network (GAN)\n• Range: Worldwide coverage\n• Examples: Satellite networks\n• Lower speed, highest latency',
+          content: {
+            "Personal Area Network (PAN)": [
+              "Range: 1-10 meters",
+              "Examples: Bluetooth, USB connections",
+              "Use: Personal device connectivity"
+            ],
+            "Local Area Network (LAN)": [
+              "Range: Building or campus",
+              "Examples: Office networks, WiFi",
+              "High speed, low latency"
+            ],
+            "Metropolitan Area Network (MAN)": [
+              "Range: City-wide coverage",
+              "Examples: Cable TV networks, city WiFi",
+              "Moderate speed and latency"
+            ],
+            "Wide Area Network (WAN)": [
+              "Range: Country/continent-wide",
+              "Examples: Internet, corporate networks",
+              "Variable speed, higher latency"
+            ],
+            "Global Area Network (GAN)": [
+              "Range: Worldwide coverage",
+              "Examples: Satellite networks",
+              "Lower speed, highest latency"
+            ]
+          },
           type: 'text'
         },
         {
           id: 'intro-4',
           title: 'Network Topologies',
-          content: 'Physical vs Logical Topology\n• Physical: How devices are physically connected\n• Logical: How data flows through the network\n\nCommon Topologies:\n\nBus Topology\n• Single cable backbone\n• All devices connected to main cable\n• Pros: Simple, cost-effective\n• Cons: Single point of failure\n\nStar Topology\n• Central hub/switch\n• All devices connected to center\n• Pros: Easy to manage, fault tolerant\n• Cons: Central point dependency\n\nRing Topology\n• Devices connected in circular fashion\n• Data travels in one direction\n• Pros: Equal access, predictable performance\n• Cons: Single break affects entire network\n\nMesh Topology\n• Multiple paths between devices\n• Full mesh: Every device connected to every other\n• Partial mesh: Some devices have multiple connections\n• Pros: Highly fault tolerant\n• Cons: Complex, expensive',
+          content: {
+            "Physical vs Logical Topology": [
+              "Physical: How devices are physically connected",
+              "Logical: How data flows through the network"
+            ],
+            "Bus Topology": [
+              "Single cable backbone",
+              "All devices connected to main cable",
+              "Pros: Simple, cost-effective",
+              "Cons: Single point of failure"
+            ],
+            "Star Topology": [
+              "Central hub/switch",
+              "All devices connected to center",
+              "Pros: Easy to manage, fault tolerant",
+              "Cons: Central point dependency"
+            ],
+            "Ring Topology": [
+              "Devices connected in circular fashion",
+              "Data travels in one direction",
+              "Pros: Equal access, predictable performance",
+              "Cons: Single break affects entire network"
+            ],
+            "Mesh Topology": [
+              "Multiple paths between devices",
+              "Full mesh: Every device connected to every other",
+              "Partial mesh: Some devices have multiple connections",
+              "Pros: Highly fault tolerant",
+              "Cons: Complex, expensive"
+            ]
+          },
           type: 'text'
         },
         {
           id: 'intro-5',
           title: 'Network Services and Applications',
-          content: 'Core Network Services:\n\nFile Sharing\n• Network File System (NFS)\n• Server Message Block (SMB)\n• File Transfer Protocol (FTP)\n\nPrint Services\n• Shared printer access\n• Print queue management\n• Remote printing capabilities\n\nEmail Services\n• Simple Mail Transfer Protocol (SMTP)\n• Post Office Protocol (POP3)\n• Internet Message Access Protocol (IMAP)\n\nWeb Services\n• HyperText Transfer Protocol (HTTP/HTTPS)\n• Web server hosting\n• Content delivery networks\n\nDatabase Services\n• Distributed database access\n• Client-server database architecture\n• Database replication and synchronization\n\nCommunication Services\n• Voice over IP (VoIP)\n• Video conferencing\n• Instant messaging\n• Social networking platforms',
+          content: {
+            "File Sharing": [
+              "Network File System (NFS)",
+              "Server Message Block (SMB)",
+              "File Transfer Protocol (FTP)"
+            ],
+            "Print Services": [
+              "Shared printer access",
+              "Print queue management",
+              "Remote printing capabilities"
+            ],
+            "Email Services": [
+              "Simple Mail Transfer Protocol (SMTP)",
+              "Post Office Protocol (POP3)",
+              "Internet Message Access Protocol (IMAP)"
+            ],
+            "Web Services": [
+              "HyperText Transfer Protocol (HTTP/HTTPS)",
+              "Web server hosting",
+              "Content delivery networks"
+            ],
+            "Database Services": [
+              "Distributed database access",
+              "Client-server database architecture",
+              "Database replication and synchronization"
+            ],
+            "Communication Services": [
+              "Voice over IP (VoIP)",
+              "Video conferencing",
+              "Instant messaging",
+              "Social networking platforms"
+            ]
+          },
           type: 'text'
         }
       ]
@@ -50,43 +177,252 @@ export const computerNetworksContent: CourseContent = {
         {
           id: 'osi-1',
           title: 'Introduction to the OSI Model',
-          content: 'Open Systems Interconnection (OSI) Model\n\nDeveloped by the International Organization for Standardization (ISO) in 1984 to standardize network communication.\n\nPurpose:\n• Provide a framework for network protocol design\n• Enable interoperability between different vendors\n• Simplify network troubleshooting\n• Facilitate network education and understanding\n\nKey Principles:\n• Layered Architecture: Each layer has specific responsibilities\n• Abstraction: Upper layers don\'t need to know lower layer details\n• Modularity: Changes in one layer don\'t affect others\n• Standardization: Common protocols at each layer\n\nBenefits:\n• Reduces complexity\n• Enables vendor independence\n• Promotes innovation\n• Simplifies troubleshooting',
+          content: {
+            "overview": "Open Systems Interconnection (OSI) Model - Developed by the International Organization for Standardization (ISO) in 1984 to standardize network communication.",
+            "purpose": [
+              "Provide a framework for network protocol design",
+              "Enable interoperability between different vendors",
+              "Simplify network troubleshooting",
+              "Facilitate network education and understanding"
+            ],
+            "key principles": [
+              "Layered Architecture: Each layer has specific responsibilities",
+              "Abstraction: Upper layers don't need to know lower layer details",
+              "Modularity: Changes in one layer don't affect others",
+              "Standardization: Common protocols at each layer"
+            ],
+            "benefits": [
+              "Reduces complexity",
+              "Enables vendor independence",
+              "Promotes innovation",
+              "Simplifies troubleshooting"
+            ]
+          },
           type: 'text'
         },
         {
           id: 'osi-2',
           title: 'Layer 1: Physical Layer',
-          content: 'Physical Layer - The Foundation\n\nPrimary Functions:\n• Transmission of raw bit streams\n• Physical medium specifications\n• Electrical and mechanical interfaces\n• Signal encoding and timing\n\nKey Concepts:\n• Bits: Binary data (0s and 1s)\n• Signaling: How bits are represented physically\n• Synchronization: Timing coordination\n• Medium: The physical path for data\n\nPhysical Media Types:\n• Copper Cables: Twisted pair, coaxial\n• Fiber Optic: Single-mode, multi-mode\n• Wireless: Radio waves, microwaves, infrared\n\nExamples:\n• Ethernet cables (Cat5e, Cat6)\n• USB ports\n• WiFi radio signals\n• Bluetooth connections\n\nDevices:\n• Hubs, repeaters, cables, connectors',
+          content: {
+            "description": "Physical Layer - The Foundation",
+            "primary functions": [
+              "Transmission of raw bit streams",
+              "Physical medium specifications",
+              "Electrical and mechanical interfaces",
+              "Signal encoding and timing"
+            ],
+            "key concepts": [
+              "Bits: Binary data (0s and 1s)",
+              "Signaling: How bits are represented physically",
+              "Synchronization: Timing coordination",
+              "Medium: The physical path for data"
+            ],
+            "physical media types": [
+              "Copper Cables: Twisted pair, coaxial",
+              "Fiber Optic: Single-mode, multi-mode",
+              "Wireless: Radio waves, microwaves, infrared"
+            ],
+            "examples": [
+              "Ethernet cables (Cat5e, Cat6)",
+              "USB ports",
+              "WiFi radio signals",
+              "Bluetooth connections"
+            ],
+            "devices": [
+              "Hubs, repeaters, cables, connectors"
+            ]
+          },
           type: 'text'
         },
         {
           id: 'osi-3',
           title: 'Layer 2: Data Link Layer',
-          content: 'Data Link Layer - Node-to-Node Communication\n\nPrimary Functions:\n• Frame formation and detection\n• Error detection and correction\n• Flow control\n• Media Access Control (MAC)\n\nKey Concepts:\n• Frames: Data units at this layer\n• MAC Addresses: Physical device identifiers\n• Error Detection: CRC, checksums\n• Flow Control: Preventing buffer overflow\n\nSub-layers:\n• LLC (Logical Link Control): Interface with network layer\n• MAC (Media Access Control): Controls access to medium\n\nProtocols:\n• Ethernet: Most common LAN protocol\n• WiFi (802.11): Wireless LAN protocol\n• PPP: Point-to-Point Protocol\n• HDLC: High-level Data Link Control\n\nError Detection Methods:\n• Parity bits\n• Cyclic Redundancy Check (CRC)\n• Checksums\n\nDevices:\n• Switches, bridges, network interface cards (NICs)',
+          content: {
+            "description": "Data Link Layer - Node-to-Node Communication",
+            "primary functions": [
+              "Frame formation and detection",
+              "Error detection and correction",
+              "Flow control",
+              "Media Access Control (MAC)"
+            ],
+            "key concepts": [
+              "Frames: Data units at this layer",
+              "MAC Addresses: Physical device identifiers",
+              "Error Detection: CRC, checksums",
+              "Flow Control: Preventing buffer overflow"
+            ],
+            "sub-layers": [
+              "LLC (Logical Link Control): Interface with network layer",
+              "MAC (Media Access Control): Controls access to medium"
+            ],
+            "protocols": [
+              "Ethernet: Most common LAN protocol",
+              "WiFi (802.11): Wireless LAN protocol",
+              "PPP: Point-to-Point Protocol",
+              "HDLC: High-level Data Link Control"
+            ],
+            "error detection methods": [
+              "Parity bits",
+              "Cyclic Redundancy Check (CRC)",
+              "Checksums"
+            ],
+            "devices": [
+              "Switches, bridges, network interface cards (NICs)"
+            ]
+          },
           type: 'text'
         },
         {
           id: 'osi-4',
           title: 'Layer 3: Network Layer',
-          content: 'Network Layer - End-to-End Routing\n\nPrimary Functions:\n• Logical addressing (IP addresses)\n• Path determination and routing\n• Packet forwarding\n• Fragmentation and reassembly\n\nKey Concepts:\n• IP Addresses: Logical network identifiers\n• Routing: Finding best path to destination\n• Packets: Data units at this layer\n• Subnetting: Dividing networks into smaller segments\n\nInternet Protocol (IP):\n• IPv4: 32-bit addresses (4.3 billion addresses)\n• IPv6: 128-bit addresses (virtually unlimited)\n• Address Classes: A, B, C, D, E\n• Private vs Public: RFC 1918 private ranges\n\nRouting Protocols:\n• Static Routing: Manually configured routes\n• Dynamic Routing: Automatically learned routes\n  - RIP: Routing Information Protocol\n  - OSPF: Open Shortest Path First\n  - BGP: Border Gateway Protocol\n\nOther Protocols:\n• ICMP: Internet Control Message Protocol\n• ARP: Address Resolution Protocol\n• DHCP: Dynamic Host Configuration Protocol\n\nDevices:\n• Routers, layer 3 switches',
+          content: {
+            "description": "Network Layer - End-to-End Routing",
+            "primary functions": [
+              "Logical addressing (IP addresses)",
+              "Path determination and routing",
+              "Packet forwarding",
+              "Fragmentation and reassembly"
+            ],
+            "key concepts": [
+              "IP Addresses: Logical network identifiers",
+              "Routing: Finding best path to destination",
+              "Packets: Data units at this layer",
+              "Subnetting: Dividing networks into smaller segments"
+            ],
+            "Internet Protocol (IP)": [
+              "IPv4: 32-bit addresses (4.3 billion addresses)",
+              "IPv6: 128-bit addresses (virtually unlimited)",
+              "Address Classes: A, B, C, D, E",
+              "Private vs Public: RFC 1918 private ranges"
+            ],
+            "routing protocols": [
+              "Static Routing: Manually configured routes",
+              "RIP: Routing Information Protocol",
+              "OSPF: Open Shortest Path First",
+              "BGP: Border Gateway Protocol"
+            ],
+            "other protocols": [
+              "ICMP: Internet Control Message Protocol",
+              "ARP: Address Resolution Protocol",
+              "DHCP: Dynamic Host Configuration Protocol"
+            ],
+            "devices": [
+              "Routers, layer 3 switches"
+            ]
+          },
           type: 'text'
         },
         {
           id: 'osi-5',
           title: 'Layer 4: Transport Layer',
-          content: 'Transport Layer - Reliable Data Transfer\n\nPrimary Functions:\n• End-to-end communication\n• Segmentation and reassembly\n• Flow control\n• Error recovery\n• Port addressing\n\nKey Protocols:\n\nTCP (Transmission Control Protocol)\n• Connection-oriented: Establishes session before data transfer\n• Reliable: Guarantees delivery and order\n• Flow Control: Prevents receiver overflow\n• Error Recovery: Retransmits lost packets\n• Use Cases: Web browsing, email, file transfer\n\nUDP (User Datagram Protocol)\n• Connectionless: No session establishment\n• Unreliable: No delivery guarantee\n• Fast: Lower overhead than TCP\n• Use Cases: Video streaming, online gaming, DNS\n\nPort Numbers:\n• Well-known Ports: 0-1023 (HTTP:80, HTTPS:443, FTP:21)\n• Registered Ports: 1024-49151\n• Dynamic Ports: 49152-65535\n\nTCP Features:\n• Three-way handshake (SYN, SYN-ACK, ACK)\n• Sequence numbers\n• Acknowledgments\n• Window size control\n• Congestion control',
+          content: {
+            "description": "Transport Layer - Reliable Data Transfer",
+            "primary functions": [
+              "End-to-end communication",
+              "Segmentation and reassembly",
+              "Flow control",
+              "Error recovery",
+              "Port addressing"
+            ],
+            "TCP (Transmission Control Protocol)": [
+              "Connection-oriented: Establishes session before data transfer",
+              "Reliable: Guarantees delivery and order",
+              "Flow Control: Prevents receiver overflow",
+              "Error Recovery: Retransmits lost packets",
+              "Use Cases: Web browsing, email, file transfer"
+            ],
+            "UDP (User Datagram Protocol)": [
+              "Connectionless: No session establishment",
+              "Unreliable: No delivery guarantee",
+              "Fast: Lower overhead than TCP",
+              "Use Cases: Video streaming, online gaming, DNS"
+            ],
+            "port numbers": [
+              "Well-known Ports: 0-1023 (HTTP:80, HTTPS:443, FTP:21)",
+              "Registered Ports: 1024-49151",
+              "Dynamic Ports: 49152-65535"
+            ],
+            "TCP features": [
+              "Three-way handshake (SYN, SYN-ACK, ACK)",
+              "Sequence numbers",
+              "Acknowledgments",
+              "Window size control",
+              "Congestion control"
+            ]
+          },
           type: 'text'
         },
         {
           id: 'osi-6',
           title: 'Layer 5-7: Session, Presentation, and Application',
-          content: 'Session Layer (Layer 5)\n• Functions: Dialog control, session management\n• Services: Full-duplex, half-duplex, simplex\n• Examples: NetBIOS, RPC, SQL sessions\n• Features: Checkpointing, recovery, synchronization\n\nPresentation Layer (Layer 6)\n• Functions: Data formatting, encryption, compression\n• Services: Character encoding, data compression\n• Examples: SSL/TLS, JPEG, MPEG, ASCII, EBCDIC\n• Features: Data translation, encryption/decryption\n\nApplication Layer (Layer 7)\n• Functions: Network service interface for applications\n• Services: User interface, application protocols\n• Examples: HTTP, HTTPS, FTP, SMTP, DNS, DHCP\n\nCommon Application Protocols:\n• HTTP/HTTPS: Web browsing (ports 80/443)\n• FTP: File transfer (ports 20/21)\n• SMTP: Email sending (port 25)\n• POP3/IMAP: Email retrieval (ports 110/143)\n• DNS: Domain name resolution (port 53)\n• Telnet: Remote terminal access (port 23)\n• SSH: Secure remote access (port 22)\n\nNote: In practical TCP/IP implementations, layers 5-7 are often combined into a single application layer.',
+          content: {
+            "Session Layer (Layer 5)": [
+              "Functions: Dialog control, session management",
+              "Services: Full-duplex, half-duplex, simplex",
+              "Examples: NetBIOS, RPC, SQL sessions",
+              "Features: Checkpointing, recovery, synchronization"
+            ],
+            "Presentation Layer (Layer 6)": [
+              "Functions: Data formatting, encryption, compression",
+              "Services: Character encoding, data compression",
+              "Examples: SSL/TLS, JPEG, MPEG, ASCII, EBCDIC",
+              "Features: Data translation, encryption/decryption"
+            ],
+            "Application Layer (Layer 7)": [
+              "Functions: Network service interface for applications",
+              "Services: User interface, application protocols",
+              "Examples: HTTP, HTTPS, FTP, SMTP, DNS, DHCP"
+            ],
+            "common application protocols": [
+              "HTTP/HTTPS: Web browsing (ports 80/443)",
+              "FTP: File transfer (ports 20/21)",
+              "SMTP: Email sending (port 25)",
+              "POP3/IMAP: Email retrieval (ports 110/143)",
+              "DNS: Domain name resolution (port 53)",
+              "Telnet: Remote terminal access (port 23)",
+              "SSH: Secure remote access (port 22)"
+            ],
+            "note": "In practical TCP/IP implementations, layers 5-7 are often combined into a single application layer."
+          },
           type: 'text'
         },
         {
           id: 'osi-7',
           title: 'OSI Model in Practice',
-          content: 'Data Encapsulation Process:\n\nSending Data (Top-Down):\n1. Application: User data created\n2. Presentation: Data formatted/encrypted\n3. Session: Session established\n4. Transport: Segments created (TCP/UDP headers added)\n5. Network: Packets created (IP headers added)\n6. Data Link: Frames created (Ethernet headers added)\n7. Physical: Bits transmitted over medium\n\nReceiving Data (Bottom-Up):\n1. Physical: Bits received\n2. Data Link: Frame headers processed\n3. Network: Packet headers processed\n4. Transport: Segment headers processed\n5. Session: Session managed\n6. Presentation: Data decrypted/formatted\n7. Application: Data delivered to application\n\nTroubleshooting with OSI Model:\n• Physical Issues: Cable problems, signal interference\n• Data Link Issues: Switch problems, MAC conflicts\n• Network Issues: Routing problems, IP conflicts\n• Transport Issues: Port blocks, firewall rules\n• Application Issues: Protocol misconfigurations\n\nReal-World Example - Web Browsing:\n• Application: HTTP request created\n• Transport: TCP segment with port 80\n• Network: IP packet with destination address\n• Data Link: Ethernet frame with MAC addresses\n• Physical: Electrical signals on cable',
+          content: {
+            "sending data (top-down)": [
+              "Application: User data created",
+              "Presentation: Data formatted/encrypted",
+              "Session: Session established",
+              "Transport: Segments created (TCP/UDP headers added)",
+              "Network: Packets created (IP headers added)",
+              "Data Link: Frames created (Ethernet headers added)",
+              "Physical: Bits transmitted over medium"
+            ],
+            "receiving data (bottom-up)": [
+              "Physical: Bits received",
+              "Data Link: Frame headers processed",
+              "Network: Packet headers processed",
+              "Transport: Segment headers processed",
+              "Session: Session managed",
+              "Presentation: Data decrypted/formatted",
+              "Application: Data delivered to application"
+            ],
+            "troubleshooting with OSI model": [
+              "Physical Issues: Cable problems, signal interference",
+              "Data Link Issues: Switch problems, MAC conflicts",
+              "Network Issues: Routing problems, IP conflicts",
+              "Transport Issues: Port blocks, firewall rules",
+              "Application Issues: Protocol misconfigurations"
+            ],
+            "real-world example - web browsing": [
+              "Application: HTTP request created",
+              "Transport: TCP segment with port 80",
+              "Network: IP packet with destination address",
+              "Data Link: Ethernet frame with MAC addresses",
+              "Physical: Electrical signals on cable"
+            ]
+          },
           type: 'text'
         }
       ]
@@ -100,37 +436,224 @@ export const computerNetworksContent: CourseContent = {
         {
           id: 'tcp-1',
           title: 'TCP/IP Model Overview',
-          content: 'TCP/IP Protocol Suite\n\nThe foundation of the internet and most modern networks, developed by DARPA in the 1970s.\n\nTCP/IP vs OSI Model:\n• Application Layer: Combines OSI layers 5-7\n• Transport Layer: Equivalent to OSI layer 4\n• Internet Layer: Equivalent to OSI layer 3\n• Network Access Layer: Combines OSI layers 1-2\n\nKey Advantages:\n• Proven: Battle-tested on the internet\n• Scalable: Supports billions of devices\n• Flexible: Works over various physical networks\n• Open Standards: Not vendor-specific\n\nCore Protocols:\n• IP: Internet Protocol (addressing and routing)\n• TCP: Transmission Control Protocol (reliable transport)\n• UDP: User Datagram Protocol (fast transport)\n• ICMP: Internet Control Message Protocol (error reporting)\n• ARP: Address Resolution Protocol (MAC address resolution)',
+          content: {
+            "description": "TCP/IP Protocol Suite - The foundation of the internet and most modern networks, developed by DARPA in the 1970s.",
+            "TCP/IP vs OSI Model": [
+              "Application Layer: Combines OSI layers 5-7",
+              "Transport Layer: Equivalent to OSI layer 4",
+              "Internet Layer: Equivalent to OSI layer 3",
+              "Network Access Layer: Combines OSI layers 1-2"
+            ],
+            "key advantages": [
+              "Proven: Battle-tested on the internet",
+              "Scalable: Supports billions of devices",
+              "Flexible: Works over various physical networks",
+              "Open Standards: Not vendor-specific"
+            ],
+            "core protocols": [
+              "IP: Internet Protocol (addressing and routing)",
+              "TCP: Transmission Control Protocol (reliable transport)",
+              "UDP: User Datagram Protocol (fast transport)",
+              "ICMP: Internet Control Message Protocol (error reporting)",
+              "ARP: Address Resolution Protocol (MAC address resolution)"
+            ]
+          },
           type: 'text'
         },
         {
           id: 'tcp-2',
           title: 'Internet Protocol (IP) Addressing',
-          content: 'IPv4 Addressing\n\nAddress Structure:\n• 32-bit addresses (4 bytes)\n• Dotted decimal notation (e.g., 192.168.1.1)\n• Network and host portions\n• Subnet mask defines network/host boundary\n\nAddress Classes:\n• Class A: 1.0.0.0 - 126.255.255.255 (16M hosts/network)\n• Class B: 128.0.0.0 - 191.255.255.255 (65K hosts/network)\n• Class C: 192.0.0.0 - 223.255.255.255 (254 hosts/network)\n• Class D: 224.0.0.0 - 239.255.255.255 (Multicast)\n• Class E: 240.0.0.0 - 255.255.255.255 (Experimental)\n\nSpecial Addresses:\n• Loopback: 127.0.0.1 (localhost)\n• Private Networks: 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16\n• APIPA: 169.254.0.0/16 (Automatic Private IP)\n• Broadcast: 255.255.255.255 (limited broadcast)\n\nSubnet Masks:\n• Define network and host portions\n• CIDR notation (e.g., /24 = 255.255.255.0)\n• Enable subnetting for efficient address use',
+          content: {
+            "IPv4 addressing": "IPv4 addressing uses 32-bit addresses (4 bytes) in dotted decimal notation (e.g., 192.168.1.1).",
+            "address structure": [
+              "32-bit addresses (4 bytes)",
+              "Dotted decimal notation (e.g., 192.168.1.1)",
+              "Network and host portions",
+              "Subnet mask defines network/host boundary"
+            ],
+            "address classes": [
+              "Class A: 1.0.0.0 - 126.255.255.255 (16M hosts/network)",
+              "Class B: 128.0.0.0 - 191.255.255.255 (65K hosts/network)",
+              "Class C: 192.0.0.0 - 223.255.255.255 (254 hosts/network)",
+              "Class D: 224.0.0.0 - 239.255.255.255 (Multicast)",
+              "Class E: 240.0.0.0 - 255.255.255.255 (Experimental)"
+            ],
+            "special addresses": [
+              "Loopback: 127.0.0.1 (localhost)",
+              "Private Networks: 10.0.0.0/8, 172.16.0.0/12, 192.168.0.0/16",
+              "APIPA: 169.254.0.0/16 (Automatic Private IP)",
+              "Broadcast: 255.255.255.255 (limited broadcast)"
+            ],
+            "subnet masks": [
+              "Define network and host portions",
+              "CIDR notation (e.g., /24 = 255.255.255.0)",
+              "Enable subnetting for efficient address use"
+            ]
+          },
           type: 'text'
         },
         {
           id: 'tcp-3',
           title: 'Subnetting and VLSM',
-          content: 'Subnetting Fundamentals\n\nWhy Subnet?\n• Efficient address utilization\n• Improved network performance\n• Enhanced security through segmentation\n• Easier network management\n\nSubnetting Process:\n1. Determine number of subnets needed\n2. Determine hosts per subnet\n3. Calculate subnet mask\n4. Identify subnet ranges\n\nExample: 192.168.1.0/24 into 4 subnets\n• Need 2 bits for 4 subnets (2² = 4)\n• New mask: /26 (255.255.255.192)\n• Subnets:\n  - 192.168.1.0/26 (hosts: 1-62)\n  - 192.168.1.64/26 (hosts: 65-126)\n  - 192.168.1.128/26 (hosts: 129-190)\n  - 192.168.1.192/26 (hosts: 193-254)\n\nVLSM (Variable Length Subnet Masking):\n• Different subnet sizes for different needs\n• More efficient address utilization\n• Example: /30 for point-to-point links (2 hosts)\n• /28 for small departments (14 hosts)',
+          content: {
+            "subnetting fundamentals": "Subnetting involves dividing a network into smaller, more manageable subnetworks.",
+            "why subnet": [
+              "Efficient address utilization",
+              "Improved network performance",
+              "Enhanced security through segmentation",
+              "Easier network management"
+            ],
+            "subnetting process": [
+              "1. Determine number of subnets needed",
+              "2. Determine hosts per subnet",
+              "3. Calculate subnet mask",
+              "4. Identify subnet ranges"
+            ],
+            "example: 192.168.1.0/24 into 4 subnets": [
+              "Need 2 bits for 4 subnets (2² = 4)",
+              "New mask: /26 (255.255.255.192)",
+              "192.168.1.0/26 (hosts: 1-62)",
+              "192.168.1.64/26 (hosts: 65-126)",
+              "192.168.1.128/26 (hosts: 129-190)",
+              "192.168.1.192/26 (hosts: 193-254)"
+            ],
+            "VLSM (Variable Length Subnet Masking)": [
+              "Different subnet sizes for different needs",
+              "More efficient address utilization",
+              "Example: /30 for point-to-point links (2 hosts)",
+              "/28 for small departments (14 hosts)"
+            ]
+          },
           type: 'text'
         },
         {
           id: 'tcp-4',
           title: 'IPv6 - Next Generation IP',
-          content: 'IPv6 Overview\n\nWhy IPv6?\n• IPv4 address exhaustion\n• Improved security features\n• Better quality of service\n• Simplified header structure\n• Native mobility support\n\nKey Features:\n• 128-bit addresses: 340 undecillion addresses\n• Hierarchical addressing: Efficient routing\n• No NAT required: End-to-end connectivity\n• Built-in security: IPSec mandatory\n• Auto-configuration: SLAAC support\n\nAddress Types:\n• Unicast: One-to-one communication\n  - Global unicast (2000::/3)\n  - Link-local (fe80::/10)\n  - Unique local (fc00::/7)\n• Multicast: One-to-many (ff00::/8)\n• Anycast: One-to-nearest\n\nAddress Notation:\n• Hexadecimal separated by colons\n• Example: 2001:0db8:85a3:0000:0000:8a2e:0370:7334\n• Compression: 2001:db8:85a3::8a2e:370:7334\n\nTransition Mechanisms:\n• Dual stack (IPv4 and IPv6)\n• Tunneling (6to4, Teredo)\n• Translation (NAT64)',
+          content: {
+            "IPv6 overview": "IPv6 addresses the limitations of IPv4 with 128-bit addresses and enhanced features.",
+            "why IPv6": [
+              "IPv4 address exhaustion",
+              "Improved security features",
+              "Better quality of service",
+              "Simplified header structure",
+              "Native mobility support"
+            ],
+            "key features": [
+              "128-bit addresses: 340 undecillion addresses",
+              "Hierarchical addressing: Efficient routing",
+              "No NAT required: End-to-end connectivity",
+              "Built-in security: IPSec mandatory",
+              "Auto-configuration: SLAAC support"
+            ],
+            "address types": [
+              "Unicast: One-to-one communication",
+              "- Global unicast (2000::/3)",
+              "- Link-local (fe80::/10)",
+              "- Unique local (fc00::/7)",
+              "Multicast: One-to-many (ff00::/8)",
+              "Anycast: One-to-nearest"
+            ],
+            "address notation": [
+              "Hexadecimal separated by colons",
+              "Example: 2001:0db8:85a3:0000:0000:8a2e:0370:7334",
+              "Compression: 2001:db8:85a3::8a2e:370:7334"
+            ],
+            "transition mechanisms": [
+              "Dual stack (IPv4 and IPv6)",
+              "Tunneling (6to4, Teredo)",
+              "Translation (NAT64)"
+            ]
+          },
           type: 'text'
         },
         {
           id: 'tcp-5',
           title: 'TCP - Reliable Transport',
-          content: 'TCP Characteristics\n\nConnection-Oriented:\n• Three-way handshake establishment\n• Four-way handshake termination\n• Maintains connection state\n\nReliability Features:\n• Sequence Numbers: Order packets correctly\n• Acknowledgments: Confirm receipt\n• Retransmission: Resend lost packets\n• Checksums: Detect corruption\n\nFlow Control:\n• Window Size: Controls data flow rate\n• Sliding Window: Efficient data transfer\n• Zero Window: Stop transmission when buffer full\n\nCongestion Control:\n• Slow Start: Gradually increase sending rate\n• Congestion Avoidance: Linear increase\n• Fast Retransmit: Quick loss detection\n• Fast Recovery: Efficient recovery\n\nTCP Header Fields:\n• Source/Destination ports (16 bits each)\n• Sequence number (32 bits)\n• Acknowledgment number (32 bits)\n• Window size (16 bits)\n• Flags: SYN, ACK, FIN, RST, PSH, URG\n\nCommon TCP Applications:\n• HTTP/HTTPS (web browsing)\n• FTP (file transfer)\n• SMTP (email)\n• SSH (secure shell)\n• Telnet (remote terminal)',
+          content: {
+            "TCP characteristics": "TCP provides reliable, connection-oriented communication with comprehensive error recovery.",
+            "connection-oriented": [
+              "Three-way handshake establishment",
+              "Four-way handshake termination",
+              "Maintains connection state"
+            ],
+            "reliability features": [
+              "Sequence Numbers: Order packets correctly",
+              "Acknowledgments: Confirm receipt",
+              "Retransmission: Resend lost packets",
+              "Checksums: Detect corruption"
+            ],
+            "flow control": [
+              "Window Size: Controls data flow rate",
+              "Sliding Window: Efficient data transfer",
+              "Zero Window: Stop transmission when buffer full"
+            ],
+            "congestion control": [
+              "Slow Start: Gradually increase sending rate",
+              "Congestion Avoidance: Linear increase",
+              "Fast Retransmit: Quick loss detection",
+              "Fast Recovery: Efficient recovery"
+            ],
+            "TCP header fields": [
+              "Source/Destination ports (16 bits each)",
+              "Sequence number (32 bits)",
+              "Acknowledgment number (32 bits)",
+              "Window size (16 bits)",
+              "Flags: SYN, ACK, FIN, RST, PSH, URG"
+            ],
+            "common TCP applications": [
+              "HTTP/HTTPS (web browsing)",
+              "FTP (file transfer)",
+              "SMTP (email)",
+              "SSH (secure shell)",
+              "Telnet (remote terminal)"
+            ]
+          },
           type: 'text'
         },
         {
           id: 'tcp-6',
           title: 'UDP and Other Transport Protocols',
-          content: 'UDP (User Datagram Protocol)\n\nCharacteristics:\n• Connectionless: No session establishment\n• Unreliable: No delivery guarantee\n• Fast: Minimal overhead\n• Simple: Basic error detection only\n\nUDP Header (8 bytes):\n• Source port (2 bytes)\n• Destination port (2 bytes)\n• Length (2 bytes)\n• Checksum (2 bytes)\n\nWhen to Use UDP:\n• Real-time applications (video, audio)\n• Simple request-response (DNS)\n• Broadcast/multicast traffic\n• Applications handling their own reliability\n\nUDP Applications:\n• DNS: Domain name resolution\n• DHCP: IP address assignment\n• SNMP: Network management\n• VoIP: Voice communication\n• Gaming: Real-time multiplayer\n• Video Streaming: Live broadcasts\n\nOther Transport Protocols:\n• SCTP: Stream Control Transmission Protocol\n  - Multi-homing support\n  - Multiple streams\n  - Message-oriented\n• DCCP: Datagram Congestion Control Protocol\n  - Unreliable but congestion-controlled\n• QUIC: Quick UDP Internet Connections\n  - Google-developed\n  - HTTP/3 foundation\n  - Reduced latency',
+          content: {
+            "UDP (User Datagram Protocol)": "UDP provides fast, connectionless communication with minimal overhead.",
+            "UDP characteristics": [
+              "Connectionless: No session establishment",
+              "Unreliable: No delivery guarantee",
+              "Fast: Minimal overhead",
+              "Simple: Basic error detection only"
+            ],
+            "UDP header (8 bytes)": [
+              "Source port (2 bytes)",
+              "Destination port (2 bytes)",
+              "Length (2 bytes)",
+              "Checksum (2 bytes)"
+            ],
+            "when to use UDP": [
+              "Real-time applications (video, audio)",
+              "Simple request-response (DNS)",
+              "Broadcast/multicast traffic",
+              "Applications handling their own reliability"
+            ],
+            "UDP applications": [
+              "DNS: Domain name resolution",
+              "DHCP: IP address assignment",
+              "SNMP: Network management",
+              "VoIP: Voice communication",
+              "Gaming: Real-time multiplayer",
+              "Video Streaming: Live broadcasts"
+            ],
+            "other transport protocols": [
+              "SCTP: Stream Control Transmission Protocol",
+              "- Multi-homing support",
+              "- Multiple streams",
+              "- Message-oriented",
+              "DCCP: Datagram Congestion Control Protocol",
+              "- Unreliable but congestion-controlled",
+              "QUIC: Quick UDP Internet Connections",
+              "- Google-developed",
+              "- HTTP/3 foundation",
+              "- Reduced latency"
+            ]
+          },
           type: 'text'
         }
       ]
@@ -144,31 +667,183 @@ export const computerNetworksContent: CourseContent = {
         {
           id: 'devices-1',
           title: 'Network Infrastructure Overview',
-          content: 'Network Device Categories:\n\nLayer 1 Devices (Physical)\n• Hubs, repeaters, cables, connectors\n• Signal amplification and regeneration\n\nLayer 2 Devices (Data Link)\n• Switches, bridges, access points\n• Frame forwarding based on MAC addresses\n\nLayer 3 Devices (Network)\n• Routers, layer 3 switches\n• Packet routing based on IP addresses\n\nLayer 4-7 Devices (Application)\n• Firewalls, load balancers, proxies\n• Application-aware processing\n\nHybrid Devices:\n• Most modern devices operate at multiple layers\n• Example: Layer 3 switches combine switching and routing',
+          content: {
+            "network device categories": "Network devices are classified by the OSI layer at which they primarily operate.",
+            "Layer 1 Devices (Physical)": [
+              "Hubs, repeaters, cables, connectors",
+              "Signal amplification and regeneration"
+            ],
+            "Layer 2 Devices (Data Link)": [
+              "Switches, bridges, access points",
+              "Frame forwarding based on MAC addresses"
+            ],
+            "Layer 3 Devices (Network)": [
+              "Routers, layer 3 switches",
+              "Packet routing based on IP addresses"
+            ],
+            "Layer 4-7 Devices (Application)": [
+              "Firewalls, load balancers, proxies",
+              "Application-aware processing"
+            ],
+            "hybrid devices": [
+              "Most modern devices operate at multiple layers",
+              "Example: Layer 3 switches combine switching and routing"
+            ]
+          },
           type: 'text'
         },
         {
           id: 'devices-2',
           title: 'Switches - Layer 2 Intelligence',
-          content: 'Switch Operation:\n\nMAC Address Learning:\n1. Receive frame on a port\n2. Learn source MAC address\n3. Add MAC-to-port mapping to table\n4. Forward frame based on destination MAC\n\nForwarding Decisions:\n• Known Unicast: Forward to specific port\n• Unknown Unicast: Flood to all ports except source\n• Broadcast: Forward to all ports except source\n• Multicast: Forward to registered ports\n\nSwitch Types:\n• Unmanaged: Basic plug-and-play operation\n• Managed: Configuration, VLANs, monitoring\n• Layer 3: Routing capabilities added\n\nAdvanced Features:\n• VLANs: Virtual network segmentation\n• STP: Spanning Tree Protocol (loop prevention)\n• Port Mirroring: Traffic analysis\n• QoS: Quality of Service prioritization\n• PoE: Power over Ethernet\n\nPerformance Metrics:\n• Switching Capacity: Total throughput\n• Forwarding Rate: Packets per second\n• MAC Address Table Size: Learning capacity',
+          content: {
+            "switch operation": "Switches learn MAC addresses and forward frames intelligently within the local network.",
+            "MAC address learning": [
+              "1. Receive frame on a port",
+              "2. Learn source MAC address",
+              "3. Add MAC-to-port mapping to table",
+              "4. Forward frame based on destination MAC"
+            ],
+            "forwarding decisions": [
+              "Known Unicast: Forward to specific port",
+              "Unknown Unicast: Flood to all ports except source",
+              "Broadcast: Forward to all ports except source",
+              "Multicast: Forward to registered ports"
+            ],
+            "switch types": [
+              "Unmanaged: Basic plug-and-play operation",
+              "Managed: Configuration, VLANs, monitoring",
+              "Layer 3: Routing capabilities added"
+            ],
+            "advanced features": [
+              "VLANs: Virtual network segmentation",
+              "STP: Spanning Tree Protocol (loop prevention)",
+              "Port Mirroring: Traffic analysis",
+              "QoS: Quality of Service prioritization",
+              "PoE: Power over Ethernet"
+            ],
+            "performance metrics": [
+              "Switching Capacity: Total throughput",
+              "Forwarding Rate: Packets per second",
+              "MAC Address Table Size: Learning capacity"
+            ]
+          },
           type: 'text'
         },
         {
           id: 'devices-3',
           title: 'Routers - Layer 3 Intelligence',
-          content: 'Router Functions:\n\nPrimary Responsibilities:\n• Path Selection: Choose best route to destination\n• Packet Forwarding: Move packets between networks\n• Network Segmentation: Separate broadcast domains\n• Protocol Translation: Convert between different protocols\n\nRouting Table Components:\n• Destination Network: Target network address\n• Next Hop: IP address of next router\n• Interface: Outgoing port\n• Metric: Cost or preference\n• Administrative Distance: Route reliability\n\nRouting Types:\n• Static Routing: Manually configured routes\n  - Pros: Predictable, secure, low overhead\n  - Cons: Not scalable, manual maintenance\n• Dynamic Routing: Automatically learned routes\n  - Pros: Scalable, adaptive, automatic updates\n  - Cons: Complex, overhead, potential security risks\n\nRouter Components:\n• CPU: Process routing protocols\n• RAM: Store routing tables and running config\n• NVRAM: Store startup configuration\n• Flash: Store operating system\n• Interfaces: Connect to networks',
+          content: {
+            "router functions": "Routers operate at the network layer to connect different networks and make intelligent forwarding decisions.",
+            "primary responsibilities": [
+              "Path Selection: Choose best route to destination",
+              "Packet Forwarding: Move packets between networks",
+              "Network Segmentation: Separate broadcast domains",
+              "Protocol Translation: Convert between different protocols"
+            ],
+            "routing table components": [
+              "Destination Network: Target network address",
+              "Next Hop: IP address of next router",
+              "Interface: Outgoing port",
+              "Metric: Cost or preference",
+              "Administrative Distance: Route reliability"
+            ],
+            "routing types": [
+              "Static Routing: Manually configured routes",
+              "- Pros: Predictable, secure, low overhead",
+              "- Cons: Not scalable, manual maintenance",
+              "Dynamic Routing: Automatically learned routes",
+              "- Pros: Scalable, adaptive, automatic updates",
+              "- Cons: Complex, overhead, potential security risks"
+            ],
+            "router components": [
+              "CPU: Process routing protocols",
+              "RAM: Store routing tables and running config",
+              "NVRAM: Store startup configuration",
+              "Flash: Store operating system",
+              "Interfaces: Connect to networks"
+            ]
+          },
           type: 'text'
         },
         {
           id: 'devices-4',
           title: 'VLANs and Inter-VLAN Routing',
-          content: 'Virtual LANs (VLANs)\n\nVLAN Benefits:\n• Logical Segmentation: Group users by function, not location\n• Broadcast Control: Limit broadcast domains\n• Security: Isolate sensitive traffic\n• Flexibility: Easy reconfiguration\n• Cost Reduction: Reduce need for physical changes\n\nVLAN Types:\n• Data VLAN: User traffic\n• Voice VLAN: VoIP traffic\n• Management VLAN: Switch management\n• Native VLAN: Untagged traffic on trunks\n\nVLAN Implementation:\n• Access Ports: Belong to single VLAN\n• Trunk Ports: Carry multiple VLANs\n• 802.1Q Tagging: VLAN identification standard\n\nInter-VLAN Routing:\n• Router-on-a-Stick: Single router interface with subinterfaces\n• Layer 3 Switch: Built-in routing capabilities\n• Dedicated Router: Separate router for each VLAN\n\nVLAN Configuration Example:\n```\n! Create VLAN\nvlan 10\n name Sales\nvlan 20\n name Marketing\n\n! Assign ports\ninterface fa0/1\n switchport mode access\n switchport access vlan 10\n```',
+          content: {
+            "Virtual LANs (VLANs)": "VLANs provide logical network segmentation independent of physical topology.",
+            "VLAN benefits": [
+              "Logical Segmentation: Group users by function, not location",
+              "Broadcast Control: Limit broadcast domains",
+              "Security: Isolate sensitive traffic",
+              "Flexibility: Easy reconfiguration",
+              "Cost Reduction: Reduce need for physical changes"
+            ],
+            "VLAN types": [
+              "Data VLAN: User traffic",
+              "Voice VLAN: VoIP traffic",
+              "Management VLAN: Switch management",
+              "Native VLAN: Untagged traffic on trunks"
+            ],
+            "VLAN implementation": [
+              "Access Ports: Belong to single VLAN",
+              "Trunk Ports: Carry multiple VLANs",
+              "802.1Q Tagging: VLAN identification standard"
+            ],
+            "inter-VLAN routing": [
+              "Router-on-a-Stick: Single router interface with subinterfaces",
+              "Layer 3 Switch: Built-in routing capabilities",
+              "Dedicated Router: Separate router for each VLAN"
+            ],
+            "VLAN configuration example": [
+              "! Create VLAN",
+              "vlan 10",
+              " name Sales",
+              "vlan 20",
+              " name Marketing",
+              "",
+              "! Assign ports",
+              "interface fa0/1",
+              " switchport mode access",
+              " switchport access vlan 10"
+            ]
+          },
           type: 'text'
         },
         {
           id: 'devices-5',
           title: 'Wireless Networking Infrastructure',
-          content: 'Wireless LAN Components:\n\nAccess Points (APs):\n• Bridge between wireless and wired networks\n• Provide radio coverage for client devices\n• Handle authentication and encryption\n\nWireless Controllers:\n• Centralized management of multiple APs\n• Consistent policy enforcement\n• Seamless roaming support\n\n802.11 Standards:\n• 802.11a: 5 GHz, 54 Mbps\n• 802.11b: 2.4 GHz, 11 Mbps\n• 802.11g: 2.4 GHz, 54 Mbps\n• 802.11n: 2.4/5 GHz, 600 Mbps (MIMO)\n• 802.11ac: 5 GHz, 6.9 Gbps (Wave 2)\n• 802.11ax (WiFi 6): 2.4/5 GHz, 9.6 Gbps\n\nSecurity Methods:\n• WEP: Wired Equivalent Privacy (deprecated)\n• WPA: WiFi Protected Access\n• WPA2: AES encryption (current standard)\n• WPA3: Enhanced security features\n• Enterprise: 802.1X authentication\n\nFrequency Bands:\n• 2.4 GHz: Longer range, more interference\n• 5 GHz: Higher speed, shorter range\n• 6 GHz: WiFi 6E, least congested',
+          content: {
+            "wireless LAN components": "Wireless networks require specialized equipment to provide radio frequency connectivity.",
+            "Access Points (APs)": [
+              "Bridge between wireless and wired networks",
+              "Provide radio coverage for client devices",
+              "Handle authentication and encryption"
+            ],
+            "wireless controllers": [
+              "Centralized management of multiple APs",
+              "Consistent policy enforcement",
+              "Seamless roaming support"
+            ],
+            "802.11 standards": [
+              "802.11a: 5 GHz, 54 Mbps",
+              "802.11b: 2.4 GHz, 11 Mbps",
+              "802.11g: 2.4 GHz, 54 Mbps",
+              "802.11n: 2.4/5 GHz, 600 Mbps (MIMO)",
+              "802.11ac: 5 GHz, 6.9 Gbps (Wave 2)",
+              "802.11ax (WiFi 6): 2.4/5 GHz, 9.6 Gbps"
+            ],
+            "security methods": [
+              "WEP: Wired Equivalent Privacy (deprecated)",
+              "WPA: WiFi Protected Access",
+              "WPA2: AES encryption (current standard)",
+              "WPA3: Enhanced security features",
+              "Enterprise: 802.1X authentication"
+            ],
+            "frequency bands": [
+              "2.4 GHz: Longer range, more interference",
+              "5 GHz: Higher speed, shorter range",
+              "6 GHz: WiFi 6E, least congested"
+            ]
+          },
           type: 'text'
         }
       ]
@@ -182,19 +857,121 @@ export const computerNetworksContent: CourseContent = {
         {
           id: 'routing-1',
           title: 'Routing Protocol Classification',
-          content: 'Distance Vector Protocols:\n\nCharacteristics:\n• Share routing table with neighbors\n• Use hop count or metrics\n• Periodic updates\n• Simple to configure\n\nExamples:\n• RIP (Routing Information Protocol)\n  - Maximum 15 hops\n  - Updates every 30 seconds\n  - Simple metric (hop count)\n• EIGRP (Enhanced Interior Gateway Routing Protocol)\n  - Cisco proprietary\n  - Composite metric\n  - Fast convergence\n\nLink State Protocols:\n\nCharacteristics:\n• Maintain topology database\n• Flood link state advertisements\n• Calculate shortest path tree\n• Fast convergence\n\nExamples:\n• OSPF (Open Shortest Path First)\n  - Dijkstra algorithm\n  - Area-based hierarchy\n  - Cost-based metric\n• IS-IS (Intermediate System to Intermediate System)\n  - Similar to OSPF\n  - Used in large service provider networks',
+          content: {
+            "distance vector protocols": "Distance vector protocols share routing information with immediate neighbors based on distance metrics.",
+            "distance vector characteristics": [
+              "Share routing table with neighbors",
+              "Use hop count or metrics",
+              "Periodic updates",
+              "Simple to configure"
+            ],
+            "distance vector examples": [
+              "RIP (Routing Information Protocol)",
+              "- Maximum 15 hops",
+              "- Updates every 30 seconds",
+              "- Simple metric (hop count)",
+              "EIGRP (Enhanced Interior Gateway Routing Protocol)",
+              "- Cisco proprietary",
+              "- Composite metric",
+              "- Fast convergence"
+            ],
+            "link state protocols": "Link state protocols maintain a complete topology database for intelligent path selection.",
+            "link state characteristics": [
+              "Maintain topology database",
+              "Flood link state advertisements",
+              "Calculate shortest path tree",
+              "Fast convergence"
+            ],
+            "link state examples": [
+              "OSPF (Open Shortest Path First)",
+              "- Dijkstra algorithm",
+              "- Area-based hierarchy",
+              "- Cost-based metric",
+              "IS-IS (Intermediate System to Intermediate System)",
+              "- Similar to OSPF",
+              "- Used in large service provider networks"
+            ]
+          },
           type: 'text'
         },
         {
           id: 'routing-2',
           title: 'OSPF - Open Shortest Path First',
-          content: 'OSPF Overview:\n\nKey Features:\n• Link State Protocol: Maintains complete topology\n• Hierarchical Design: Areas reduce complexity\n• Fast Convergence: Rapid response to changes\n• Load Balancing: Equal-cost path support\n• Authentication: Secure routing updates\n\nOSPF Areas:\n• Area 0: Backbone area (mandatory)\n• Standard Areas: Connect to backbone\n• Stub Areas: No external routes\n• NSSA: Not-So-Stubby Areas\n\nLSA Types:\n• Type 1: Router LSA\n• Type 2: Network LSA\n• Type 3: Summary LSA\n• Type 4: ASBR Summary LSA\n• Type 5: External LSA\n\nOSPF Process:\n1. Neighbor Discovery: Hello packets\n2. Database Synchronization: LSA exchange\n3. SPF Calculation: Dijkstra algorithm\n4. Routing Table Update: Install best paths\n\nMetric Calculation:\n• Cost = Reference Bandwidth / Interface Bandwidth\n• Default reference: 100 Mbps\n• Lower cost = preferred path',
+          content: {
+            "OSPF overview": "OSPF is a link-state routing protocol that provides fast convergence and scalable hierarchical design.",
+            "key features": [
+              "Link State Protocol: Maintains complete topology",
+              "Hierarchical Design: Areas reduce complexity",
+              "Fast Convergence: Rapid response to changes",
+              "Load Balancing: Equal-cost path support",
+              "Authentication: Secure routing updates"
+            ],
+            "OSPF areas": [
+              "Area 0: Backbone area (mandatory)",
+              "Standard Areas: Connect to backbone",
+              "Stub Areas: No external routes",
+              "NSSA: Not-So-Stubby Areas"
+            ],
+            "LSA types": [
+              "Type 1: Router LSA",
+              "Type 2: Network LSA",
+              "Type 3: Summary LSA",
+              "Type 4: ASBR Summary LSA",
+              "Type 5: External LSA"
+            ],
+            "OSPF process": [
+              "1. Neighbor Discovery: Hello packets",
+              "2. Database Synchronization: LSA exchange",
+              "3. SPF Calculation: Dijkstra algorithm",
+              "4. Routing Table Update: Install best paths"
+            ],
+            "metric calculation": [
+              "Cost = Reference Bandwidth / Interface Bandwidth",
+              "Default reference: 100 Mbps",
+              "Lower cost = preferred path"
+            ]
+          },
           type: 'text'
         },
         {
           id: 'routing-3',
           title: 'BGP - Border Gateway Protocol',
-          content: 'BGP Overview:\n\nPurpose:\n• Inter-domain routing: Between different organizations\n• Policy-based routing: Business relationships\n• Path vector protocol: AS path information\n• Internet backbone: Core internet routing\n\nBGP Concepts:\n• Autonomous System (AS): Administrative domain\n• AS Numbers: 16-bit or 32-bit identifiers\n• BGP Sessions: TCP connections between peers\n• Path Attributes: Routing decision factors\n\nBGP Peer Types:\n• eBGP: External BGP (between different AS)\n• iBGP: Internal BGP (within same AS)\n• Route Reflectors: iBGP scalability\n• Confederations: AS subdivision\n\nPath Selection Process:\n1. Weight: Cisco proprietary (highest preferred)\n2. Local Preference: AS-wide preference\n3. Origin: IGP > EGP > Incomplete\n4. AS Path Length: Shorter preferred\n5. MED: Multi-Exit Discriminator\n6. Neighbor Type: eBGP > iBGP\n7. IGP Metric: Lowest to BGP next hop\n\nBGP Applications:\n• Internet service providers\n• Enterprise multi-homing\n• Content delivery networks\n• Cloud service providers',
+          content: {
+            "BGP overview": "BGP is the protocol that powers the internet, enabling routing between different autonomous systems.",
+            "purpose": [
+              "Inter-domain routing: Between different organizations",
+              "Policy-based routing: Business relationships",
+              "Path vector protocol: AS path information",
+              "Internet backbone: Core internet routing"
+            ],
+            "BGP concepts": [
+              "Autonomous System (AS): Administrative domain",
+              "AS Numbers: 16-bit or 32-bit identifiers",
+              "BGP Sessions: TCP connections between peers",
+              "Path Attributes: Routing decision factors"
+            ],
+            "BGP peer types": [
+              "eBGP: External BGP (between different AS)",
+              "iBGP: Internal BGP (within same AS)",
+              "Route Reflectors: iBGP scalability",
+              "Confederations: AS subdivision"
+            ],
+            "path selection process": [
+              "1. Weight: Cisco proprietary (highest preferred)",
+              "2. Local Preference: AS-wide preference",
+              "3. Origin: IGP > EGP > Incomplete",
+              "4. AS Path Length: Shorter preferred",
+              "5. MED: Multi-Exit Discriminator",
+              "6. Neighbor Type: eBGP > iBGP",
+              "7. IGP Metric: Lowest to BGP next hop"
+            ],
+            "BGP applications": [
+              "Internet service providers",
+              "Enterprise multi-homing",
+              "Content delivery networks",
+              "Cloud service providers"
+            ]
+          },
           type: 'text'
         }
       ]
@@ -208,7 +985,39 @@ export const computerNetworksContent: CourseContent = {
         {
           id: 'security-1',
           title: 'Network Security Fundamentals',
-          content: 'CIA Triad:\n\nConfidentiality:\n• Information accessible only to authorized users\n• Encryption, access controls, authentication\n\nIntegrity:\n• Data remains accurate and unmodified\n• Digital signatures, checksums, hashing\n\nAvailability:\n• Systems and data accessible when needed\n• Redundancy, backups, DDoS protection\n\nAdditional Principles:\n• Authentication: Verify user identity\n• Authorization: Grant appropriate permissions\n• Accounting: Log and monitor activities\n• Non-repudiation: Prevent denial of actions\n\nDefense in Depth:\n• Multiple layers of security controls\n• Physical, network, host, application, data layers\n• Redundant protection mechanisms\n• Fail-safe design principles\n\nRisk Management:\n• Risk = Threat × Vulnerability × Impact\n• Risk assessment and analysis\n• Risk mitigation strategies\n• Residual risk acceptance',
+          content: {
+            "CIA triad": "The foundation of information security consisting of Confidentiality, Integrity, and Availability.",
+            "confidentiality": [
+              "Information accessible only to authorized users",
+              "Encryption, access controls, authentication"
+            ],
+            "integrity": [
+              "Data remains accurate and unmodified",
+              "Digital signatures, checksums, hashing"
+            ],
+            "availability": [
+              "Systems and data accessible when needed",
+              "Redundancy, backups, DDoS protection"
+            ],
+            "additional principles": [
+              "Authentication: Verify user identity",
+              "Authorization: Grant appropriate permissions",
+              "Accounting: Log and monitor activities",
+              "Non-repudiation: Prevent denial of actions"
+            ],
+            "defense in depth": [
+              "Multiple layers of security controls",
+              "Physical, network, host, application, data layers",
+              "Redundant protection mechanisms",
+              "Fail-safe design principles"
+            ],
+            "risk management": [
+              "Risk = Threat × Vulnerability × Impact",
+              "Risk assessment and analysis",
+              "Risk mitigation strategies",
+              "Residual risk acceptance"
+            ]
+          },
           type: 'text'
         },
         {
@@ -240,7 +1049,45 @@ export const computerNetworksContent: CourseContent = {
         {
           id: 'troubleshooting-1',
           title: 'Troubleshooting Methodology',
-          content: 'Systematic Approach:\n\n1. Problem Identification:\n• Gather symptoms and user reports\n• Define problem scope and impact\n• Establish baseline measurements\n• Document initial observations\n\n2. Information Gathering:\n• Network topology and configuration\n• Recent changes or maintenance\n• Error logs and monitoring data\n• Environmental factors\n\n3. Hypothesis Development:\n• List possible causes\n• Prioritize based on probability\n• Consider OSI layer implications\n• Apply Occam\'s razor principle\n\n4. Testing and Isolation:\n• Test one variable at a time\n• Use divide-and-conquer approach\n• Isolate network segments\n• Validate test results\n\n5. Solution Implementation:\n• Plan implementation steps\n• Consider impact on operations\n• Implement during maintenance windows\n• Document changes made\n\n6. Verification and Documentation:\n• Verify problem resolution\n• Monitor for recurring issues\n• Update documentation\n• Conduct post-incident review',
+          content: {
+            "systematic approach": "Network troubleshooting requires a methodical, step-by-step approach to identify and resolve issues efficiently.",
+            "1. problem identification": [
+              "Gather symptoms and user reports",
+              "Define problem scope and impact",
+              "Establish baseline measurements",
+              "Document initial observations"
+            ],
+            "2. information gathering": [
+              "Network topology and configuration",
+              "Recent changes or maintenance",
+              "Error logs and monitoring data",
+              "Environmental factors"
+            ],
+            "3. hypothesis development": [
+              "List possible causes",
+              "Prioritize based on probability",
+              "Consider OSI layer implications",
+              "Apply Occam's razor principle"
+            ],
+            "4. testing and isolation": [
+              "Test one variable at a time",
+              "Use divide-and-conquer approach",
+              "Isolate network segments",
+              "Validate test results"
+            ],
+            "5. solution implementation": [
+              "Plan implementation steps",
+              "Consider impact on operations",
+              "Implement during maintenance windows",
+              "Document changes made"
+            ],
+            "6. verification and documentation": [
+              "Verify problem resolution",
+              "Monitor for recurring issues",
+              "Update documentation",
+              "Conduct post-incident review"
+            ]
+          },
           type: 'text'
         },
         {
@@ -272,7 +1119,47 @@ export const computerNetworksContent: CourseContent = {
         {
           id: 'advanced-1',
           title: 'Software-Defined Networking (SDN)',
-          content: 'SDN Overview:\n\nTraditional vs SDN:\n• Traditional: Distributed control plane in each device\n• SDN: Centralized control plane with programmable interfaces\n\nSDN Architecture:\n\nApplication Layer:\n• Business applications\n• Network services\n• Orchestration platforms\n\nControl Layer:\n• SDN Controller: Centralized brain\n• Network operating system\n• Global network view\n\nInfrastructure Layer:\n• OpenFlow Switches: Programmable forwarding\n• Flow tables and actions\n• Statistical information\n\nSDN Benefits:\n• Centralized Management: Single point of control\n• Programmability: Custom applications\n• Flexibility: Dynamic network changes\n• Cost Reduction: Commodity hardware\n• Innovation: Rapid service deployment\n\nOpenFlow Protocol:\n• Communication between controller and switches\n• Flow-based forwarding\n• Granular traffic control\n• Match-action paradigm\n\nSDN Use Cases:\n• Data center networking\n• Campus networks\n• WAN optimization\n• Network function virtualization',
+          content: {
+            "SDN overview": "Software-Defined Networking separates the control plane from the data plane, enabling centralized network management.",
+            "traditional vs SDN": [
+              "Traditional: Distributed control plane in each device",
+              "SDN: Centralized control plane with programmable interfaces"
+            ],
+            "application layer": [
+              "Business applications",
+              "Network services",
+              "Orchestration platforms"
+            ],
+            "control layer": [
+              "SDN Controller: Centralized brain",
+              "Network operating system",
+              "Global network view"
+            ],
+            "infrastructure layer": [
+              "OpenFlow Switches: Programmable forwarding",
+              "Flow tables and actions",
+              "Statistical information"
+            ],
+            "SDN benefits": [
+              "Centralized Management: Single point of control",
+              "Programmability: Custom applications",
+              "Flexibility: Dynamic network changes",
+              "Cost Reduction: Commodity hardware",
+              "Innovation: Rapid service deployment"
+            ],
+            "OpenFlow protocol": [
+              "Communication between controller and switches",
+              "Flow-based forwarding",
+              "Granular traffic control",
+              "Match-action paradigm"
+            ],
+            "SDN use cases": [
+              "Data center networking",
+              "Campus networks",
+              "WAN optimization",
+              "Network function virtualization"
+            ]
+          },
           type: 'text'
         },
         {
