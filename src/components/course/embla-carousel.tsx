@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useCallback, useEffect, useState } from 'react'
+import React, { useCallback, useEffect, useState, useRef } from 'react'
 import { EmblaOptionsType, EmblaCarouselType } from 'embla-carousel'
 import useEmblaCarousel from 'embla-carousel-react'
 import Fade from 'embla-carousel-fade'
@@ -78,6 +78,7 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
   const [scrollProgress, setScrollProgress] = useState(0)
   const [isContentScrollable, setIsContentScrollable] = useState(false)
   const [showScrollIndicator, setShowScrollIndicator] = useState(true)
+  const hasCompletedRef = useRef(false) // Use ref to avoid dependency issues
 
   const scrollPrev = useCallback(
     () => emblaApi && emblaApi.scrollPrev(),
@@ -128,8 +129,9 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
     // Notify parent of slide change
     onSlideChange?.(newIndex)
     
-    // Check if this is the last slide and call onComplete
-    if (newIndex === slides.length - 1) {
+    // Check if this is the last slide and call onComplete (only once)
+    if (newIndex === slides.length - 1 && !hasCompletedRef.current) {
+      hasCompletedRef.current = true
       onComplete?.()
     }
   }, [onSlideChange, onComplete, slides.length])
@@ -166,6 +168,12 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
       document.removeEventListener('keydown', handleKeyDown)
     }
   }, [emblaApi, onInit, onSelect, onScroll])
+
+  // Reset completion state when slides change (new topic selected)
+  useEffect(() => {
+    hasCompletedRef.current = false
+    setSelectedIndex(0)
+  }, [slides])
 
   return (
     <div className="embla h-full flex flex-col bg-gradient-to-br from-background/50 to-primary/5">

@@ -32,16 +32,18 @@ const nextConfig: NextConfig = {
     ],
   },
   
-  // Webpack configuration for better performance
-  webpack: (config, { isServer }) => {
-    if (!isServer) {
-      config.resolve.fallback = {
-        fs: false,
-        net: false,
-        tls: false,
-      };
-    }
-    return config;
+  // Turbopack configuration (replaces webpack config when using --turbopack)
+  turbopack: {
+    rules: {
+      '*.svg': {
+        loaders: ['@svgr/webpack'],
+        as: '*.js',
+      },
+    },
+    resolveAlias: {
+      // Ensure proper module resolution in turbopack
+      '@': './src',
+    },
   },
 };
 
