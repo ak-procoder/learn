@@ -1,0 +1,41 @@
+{
+  "id": "routing-3",
+  "title": "BGP - Border Gateway Protocol",
+  "content": {
+    "BGP overview": "BGP is the protocol that powers the internet, enabling routing between different autonomous systems.",
+    "purpose": [
+      "Inter-domain routing: Between different organizations",
+      "Policy-based routing: Business relationships",
+      "Path vector protocol: AS path information",
+      "Internet backbone: Core internet routing"
+    ],
+    "BGP concepts": [
+      "Autonomous System (AS): Administrative domain",
+      "AS Numbers: 16-bit or 32-bit identifiers",
+      "BGP Sessions: TCP connections between peers",
+      "Path Attributes: Routing decision factors"
+    ],
+    "BGP peer types": [
+      "eBGP: External BGP (between different AS)",
+      "iBGP: Internal BGP (within same AS)",
+      "Route Reflectors: iBGP scalability",
+      "Confederations: AS subdivision"
+    ],
+    "path selection process": [
+      "1. Weight: Cisco proprietary (highest preferred)",
+      "2. Local Preference: AS-wide preference",
+      "3. Origin: IGP > EGP > Incomplete",
+      "4. AS Path Length: Shorter preferred",
+      "5. MED: Multi-Exit Discriminator",
+      "6. Neighbor Type: eBGP > iBGP",
+      "7. IGP Metric: Lowest to BGP next hop"
+    ],
+    "BGP applications": [
+      "Internet service providers",
+      "Enterprise multi-homing",
+      "Content delivery networks",
+      "Cloud service providers"
+    ]
+  },
+  "type": "text"
+}

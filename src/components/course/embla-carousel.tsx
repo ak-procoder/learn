@@ -13,12 +13,16 @@ import { CourseSlide } from '@/data/types/course-types'
 type PropType = {
   slides: CourseSlide[]
   options?: EmblaOptionsType
+  initialSlide?: number
   onSlideChange?: (index: number) => void
   onComplete?: () => void
   onNextTopic?: () => void
+  onPreviousTopic?: () => void
   onFinishCourse?: () => void
   isLastTopic?: boolean
+  isFirstTopic?: boolean
   hasNextTopic?: boolean
+  hasPreviousTopic?: boolean
 }
 
 // Function to parse and format slide content
@@ -103,11 +107,24 @@ const formatSlideContent = (content: string | string[] | Record<string, string |
 }
 
 const EmblaCarousel: React.FC<PropType> = (props) => {
-  const { slides, options, onSlideChange, onComplete, onNextTopic, onFinishCourse, isLastTopic = false, hasNextTopic = false } = props
+  const { 
+    slides, 
+    options, 
+    initialSlide = 0,
+    onSlideChange, 
+    onComplete, 
+    onNextTopic, 
+    onPreviousTopic,
+    onFinishCourse, 
+    isLastTopic = false, 
+    isFirstTopic = false,
+    hasNextTopic = false,
+    hasPreviousTopic = false
+  } = props
   const [emblaRef, emblaApi] = useEmblaCarousel(options, [Fade()])
   const [prevBtnDisabled, setPrevBtnDisabled] = useState(true)
   const [nextBtnDisabled, setNextBtnDisabled] = useState(true)
-  const [selectedIndex, setSelectedIndex] = useState(0)
+  const [selectedIndex, setSelectedIndex] = useState(initialSlide)
   const [scrollSnaps, setScrollSnaps] = useState<number[]>([])
   const [scrollProgress, setScrollProgress] = useState(0)
   const [isContentScrollable, setIsContentScrollable] = useState(false)
@@ -202,6 +219,14 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
       document.removeEventListener('keydown', handleKeyDown)
     }
   }, [emblaApi, onInit, onSelect, onScroll])
+
+  // Handle initial slide positioning
+  useEffect(() => {
+    if (!emblaApi || initialSlide === 0) return
+    
+    // Scroll to the initial slide without animation
+    emblaApi.scrollTo(initialSlide, false)
+  }, [emblaApi, initialSlide])
 
   // Reset completion state when slides change (new topic selected)
   useEffect(() => {
@@ -309,16 +334,31 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
         <div className="flex items-center justify-between max-w-5xl mx-auto">
           {/* Navigation Buttons */}
           <div className="flex items-center gap-4">
-            <Button
-              variant="outline"
-              size="default"
-              onClick={scrollPrev}
-              disabled={prevBtnDisabled}
-              className="gap-2 shadow-lg hover:shadow-xl transition-all duration-300 border-primary/20 hover:border-primary/40 hover:bg-primary/5 rounded-xl px-6"
-            >
-              <ChevronLeft className="h-5 w-5" />
-              Previous
-            </Button>
+            {/* Smart Previous Button Logic */}
+            {prevBtnDisabled && hasPreviousTopic ? (
+              // First slide of topic but not first topic - show Previous Topic button
+              <Button
+                variant="outline"
+                size="default"
+                onClick={onPreviousTopic}
+                className="gap-2 shadow-lg hover:shadow-xl transition-all duration-300 bg-gradient-to-r from-purple-600 to-violet-600 hover:from-purple-700 hover:to-violet-700 text-white border-purple-500 rounded-xl px-6"
+              >
+                <ChevronLeft className="h-5 w-5" />
+                Previous Topic
+              </Button>
+            ) : (
+              // Regular Previous button
+              <Button
+                variant="outline"
+                size="default"
+                onClick={scrollPrev}
+                disabled={prevBtnDisabled}
+                className="gap-2 shadow-lg hover:shadow-xl transition-all duration-300 border-primary/20 hover:border-primary/40 hover:bg-primary/5 rounded-xl px-6"
+              >
+                <ChevronLeft className="h-5 w-5" />
+                Previous
+              </Button>
+            )}
             
             {/* Smart Next Button Logic */}
             {nextBtnDisabled && isLastTopic ? (
@@ -373,21 +413,6 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
                 complete
               </div>
             </div>
-          </div>
-
-          {/* Dot Navigation */}
-          <div className="flex items-center gap-3">
-            {scrollSnaps.map((_, index) => (
-              <button
-                key={index}
-                className={`w-4 h-4 rounded-full transition-all duration-300 hover:scale-125 shadow-md ${
-                  index === selectedIndex
-                    ? 'bg-gradient-to-r from-primary to-secondary shadow-xl ring-2 ring-primary/40 scale-110'
-                    : 'bg-muted-foreground/40 hover:bg-gradient-to-r hover:from-primary/50 hover:to-secondary/50'
-                }`}
-                onClick={() => scrollTo(index)}
-              />
-            ))}
           </div>
         </div>
       </div>

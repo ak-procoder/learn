@@ -1,0 +1,40 @@
+{
+  "id": "tcp-4",
+  "title": "IPv6 - Next Generation IP",
+  "content": {
+    "IPv6 overview": "IPv6 addresses the limitations of IPv4 with 128-bit addresses and enhanced features.",
+    "why IPv6": [
+      "IPv4 address exhaustion",
+      "Improved security features",
+      "Better quality of service",
+      "Simplified header structure",
+      "Native mobility support"
+    ],
+    "key features": [
+      "128-bit addresses: 340 undecillion addresses",
+      "Hierarchical addressing: Efficient routing",
+      "No NAT required: End-to-end connectivity",
+      "Built-in security: IPSec mandatory",
+      "Auto-configuration: SLAAC support"
+    ],
+    "address types": [
+      "Unicast: One-to-one communication",
+      "- Global unicast (2000::/3)",
+      "- Link-local (fe80::/10)",
+      "- Unique local (fc00::/7)",
+      "Multicast: One-to-many (ff00::/8)",
+      "Anycast: One-to-nearest"
+    ],
+    "address notation": [
+      "Hexadecimal separated by colons",
+      "Example: 2001:0db8:85a3:0000:0000:8a2e:0370:7334",
+      "Compression: 2001:db8:85a3::8a2e:370:7334"
+    ],
+    "transition mechanisms": [
+      "Dual stack (IPv4 and IPv6)",
+      "Tunneling (6to4, Teredo)",
+      "Translation (NAT64)"
+    ]
+  },
+  "type": "text"
+}

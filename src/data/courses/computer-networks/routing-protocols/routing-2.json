@@ -1,0 +1,39 @@
+{
+  "id": "routing-2",
+  "title": "OSPF - Open Shortest Path First",
+  "content": {
+    "OSPF overview": "OSPF is a link-state routing protocol that provides fast convergence and scalable hierarchical design.",
+    "key features": [
+      "Link State Protocol: Maintains complete topology",
+      "Hierarchical Design: Areas reduce complexity",
+      "Fast Convergence: Rapid response to changes",
+      "Load Balancing: Equal-cost path support",
+      "Authentication: Secure routing updates"
+    ],
+    "OSPF areas": [
+      "Area 0: Backbone area (mandatory)",
+      "Standard Areas: Connect to backbone",
+      "Stub Areas: No external routes",
+      "NSSA: Not-So-Stubby Areas"
+    ],
+    "LSA types": [
+      "Type 1: Router LSA",
+      "Type 2: Network LSA",
+      "Type 3: Summary LSA",
+      "Type 4: ASBR Summary LSA",
+      "Type 5: External LSA"
+    ],
+    "OSPF process": [
+      "1. Neighbor Discovery: Hello packets",
+      "2. Database Synchronization: LSA exchange",
+      "3. SPF Calculation: Dijkstra algorithm",
+      "4. Routing Table Update: Install best paths"
+    ],
+    "metric calculation": [
+      "Cost = Reference Bandwidth / Interface Bandwidth",
+      "Default reference: 100 Mbps",
+      "Lower cost = preferred path"
+    ]
+  },
+  "type": "text"
+}

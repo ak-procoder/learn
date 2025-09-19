@@ -1,0 +1,37 @@
+{
+  "id": "intro-5",
+  "title": "Network Classifications by Geographic Scope",
+  "content": {
+    "Personal Area Network (PAN)": [
+      "Range: 1-10 meters around an individual",
+      "Technologies: Bluetooth, USB, FireWire, Zigbee",
+      "Applications: Smartphone to smartwatch, laptop to mouse",
+      "Characteristics: Low power, short range, personal devices"
+    ],
+    "Local Area Network (LAN)": [
+      "Range: Building or campus (up to a few kilometers)",
+      "Technologies: Ethernet, WiFi (802.11), Token Ring",
+      "Applications: Office networks, home networks, school labs",
+      "Characteristics: High speed, low latency, shared resources"
+    ],
+    "Metropolitan Area Network (MAN)": [
+      "Range: City or metropolitan area (10-50 km)",
+      "Technologies: Fiber optic, cable TV networks, WiMAX",
+      "Applications: City-wide WiFi, cable internet, metro Ethernet",
+      "Characteristics: Medium speed, moderate latency"
+    ],
+    "Wide Area Network (WAN)": [
+      "Range: Country, continent, or global",
+      "Technologies: MPLS, Frame Relay, ATM, satellite",
+      "Applications: Internet backbone, corporate networks",
+      "Characteristics: Variable speed, higher latency, expensive"
+    ],
+    "comparison factors": [
+      "Cost: PAN < LAN < MAN < WAN",
+      "Speed: LAN > PAN > MAN > WAN",
+      "Latency: PAN < LAN < MAN < WAN",
+      "Complexity: PAN < LAN < MAN < WAN"
+    ]
+  },
+  "type": "text"
+}

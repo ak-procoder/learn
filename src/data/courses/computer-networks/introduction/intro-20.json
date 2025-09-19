@@ -1,0 +1,37 @@
+{
+  "id": "intro-20",
+  "title": "Network Virtualization Concepts",
+  "content": {
+    "virtualization fundamentals": [
+      "Definition: Abstracting physical network resources",
+      "Purpose: Flexibility, isolation, resource optimization",
+      "Benefits: Reduced costs, simplified management, rapid deployment",
+      "Challenges: Complexity, performance overhead, security"
+    ],
+    "virtual LANs (VLANs)": [
+      "Concept: Logical segmentation of physical networks",
+      "Benefits: Broadcast domain control, security isolation",
+      "Implementation: IEEE 802.1Q tagging",
+      "Applications: Department separation, guest networks"
+    ],
+    "virtual private networks (VPNs)": [
+      "Concept: Secure tunnels over public networks",
+      "Types: Site-to-site, remote access, client-to-site",
+      "Protocols: IPSec, SSL/TLS, PPTP, L2TP",
+      "Applications: Remote work, branch connectivity"
+    ],
+    "network function virtualization (NFV)": [
+      "Concept: Network services as software",
+      "Benefits: Flexibility, cost reduction, rapid deployment",
+      "Examples: Virtual firewalls, load balancers, routers",
+      "Challenges: Performance, reliability, management"
+    ],
+    "software-defined networking (SDN)": [
+      "Concept: Centralized network control plane",
+      "Benefits: Programmability, agility, centralized management",
+      "Components: Controller, southbound/northbound APIs",
+      "Applications: Data centers, campus networks, WANs"
+    ]
+  },
+  "type": "text"
+}

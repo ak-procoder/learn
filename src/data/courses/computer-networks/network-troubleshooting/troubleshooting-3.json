@@ -1,0 +1,6 @@
+{
+  "id": "troubleshooting-3",
+  "title": "Common Network Problems",
+  "content": "Connectivity Issues:\n\nPhysical Layer Problems:\n• Cable damage or disconnection\n• Port failures\n• Power issues\n• Environmental interference\n• Symptoms: No link lights, intermittent connectivity\n• Tools: Cable testers, link lights, loopback tests\n\nConfiguration Problems:\n• Incorrect IP addressing\n• Subnet mask mismatches\n• Default gateway issues\n• VLAN misconfigurations\n• Symptoms: Can't reach certain networks\n• Tools: ipconfig, route tables, VLAN verification\n\nPerformance Issues:\n\nBandwidth Limitations:\n• Insufficient capacity for traffic load\n• Quality of Service (QoS) issues\n• Bandwidth competing applications\n• Symptoms: Slow file transfers, video stuttering\n• Tools: Bandwidth monitors, traffic analyzers\n\nLatency Problems:\n• Network congestion\n• Routing inefficiencies\n• Processing delays\n• Symptoms: High ping times, application timeouts\n• Tools: ping, traceroute, latency monitors\n\nDNS Issues:\n• DNS server failures\n• Incorrect DNS records\n• DNS cache problems\n• Symptoms: Can't resolve domain names\n• Tools: nslookup, dig, DNS troubleshooting",
+  "type": "text"
+}

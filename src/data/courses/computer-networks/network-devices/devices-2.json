@@ -1,0 +1,37 @@
+{
+  "id": "devices-2",
+  "title": "Switches - Layer 2 Intelligence",
+  "content": {
+    "switch operation": "Switches learn MAC addresses and forward frames intelligently within the local network.",
+    "MAC address learning": [
+      "1. Receive frame on a port",
+      "2. Learn source MAC address",
+      "3. Add MAC-to-port mapping to table",
+      "4. Forward frame based on destination MAC"
+    ],
+    "forwarding decisions": [
+      "Known Unicast: Forward to specific port",
+      "Unknown Unicast: Flood to all ports except source",
+      "Broadcast: Forward to all ports except source",
+      "Multicast: Forward to registered ports"
+    ],
+    "switch types": [
+      "Unmanaged: Basic plug-and-play operation",
+      "Managed: Configuration, VLANs, monitoring",
+      "Layer 3: Routing capabilities added"
+    ],
+    "advanced features": [
+      "VLANs: Virtual network segmentation",
+      "STP: Spanning Tree Protocol (loop prevention)",
+      "Port Mirroring: Traffic analysis",
+      "QoS: Quality of Service prioritization",
+      "PoE: Power over Ethernet"
+    ],
+    "performance metrics": [
+      "Switching Capacity: Total throughput",
+      "Forwarding Rate: Packets per second",
+      "MAC Address Table Size: Learning capacity"
+    ]
+  },
+  "type": "text"
+}

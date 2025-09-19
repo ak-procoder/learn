@@ -2,9 +2,9 @@ import { CourseContent, CourseTopic } from './types/course-types'
 
 // Course registry - add new courses here
 const courseRegistry = {
-  'computer-networks': () => import('./courses/computer-networks').then(m => m.computerNetworksContent),
+  'computer-networks': () => import('./courses/computer-networks-dynamic').then(m => m.loadComputerNetworksContent()),
   // Future courses can be added here:
-  'web-development': () => import('./courses/web-development').then(m => m.webDevelopmentContent),
+  // 'web-development': () => import('./courses/web-development').then(m => m.webDevelopmentContent),
   // 'database-fundamentals': () => import('./courses/database-fundamentals').then(m => m.databaseFundamentalsContent),
 }
 

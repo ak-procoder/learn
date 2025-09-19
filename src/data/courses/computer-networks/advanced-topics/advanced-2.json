@@ -1,0 +1,6 @@
+{
+  "id": "advanced-2",
+  "title": "Network Function Virtualization (NFV)",
+  "content": "NFV Fundamentals:\n\nConcept:\n• Replace dedicated hardware appliances\n• Run network functions as software\n• Deploy on standard servers\n• Dynamic scaling and orchestration\n\nVirtual Network Functions (VNFs):\n• Virtual Firewalls: Security services\n• Virtual Load Balancers: Traffic distribution\n• Virtual Routers: Routing functions\n• Virtual WAN Optimizers: Performance enhancement\n\nNFV Architecture:\n\nNFV Infrastructure (NFVI):\n• Hardware Resources: Compute, storage, network\n• Virtualization Layer: Hypervisors, containers\n• Virtual Resources: VMs, virtual networks\n\nVNF Manager (VNFM):\n• VNF lifecycle management\n• Scaling and healing\n• Configuration management\n\nNFV Orchestrator (NFVO):\n• Service orchestration\n• Resource allocation\n• End-to-end service management\n\nBenefits:\n• Reduced CAPEX: Lower hardware costs\n• Faster Service Deployment: Software-based provisioning\n• Scalability: Dynamic resource allocation\n• Vendor Independence: Multi-vendor environments\n• Energy Efficiency: Optimized resource utilization",
+  "type": "text"
+}

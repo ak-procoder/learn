@@ -1,0 +1,77 @@
+{
+  "id": "computer-networks",
+  "title": "Computer Networks",
+  "description": "Comprehensive course covering networking fundamentals, protocols, security, and modern technologies",
+  "difficulty": "intermediate",
+  "estimatedDuration": "20 hours",
+  "topics": [
+    {
+      "id": "introduction",
+      "title": "Introduction to Computer Networks",
+      "description": "Comprehensive foundation of computer networking fundamentals for college students",
+      "duration": "180 min",
+      "slideCount": 30
+    },
+    {
+      "id": "osi-model", 
+      "title": "OSI Reference Model",
+      "description": "Comprehensive deep dive into the 7-layer OSI model with detailed protocols, examples, and practical applications",
+      "duration": "240 min",
+      "slideCount": 30
+    },
+    {
+      "id": "tcp-ip",
+      "title": "TCP/IP Protocol Suite", 
+      "description": "In-depth study of TCP/IP stack, addressing, routing, transport protocols, and application layer protocols",
+      "duration": "300 min",
+      "slideCount": 35
+    },
+    {
+      "id": "network-devices",
+      "title": "Network Devices and Infrastructure",
+      "description": "Comprehensive study of hubs, switches, routers, firewalls, load balancers, and modern network appliances", 
+      "duration": "240 min",
+      "slideCount": 30
+    },
+    {
+      "id": "routing-protocols",
+      "title": "Routing Protocols",
+      "description": "Detailed coverage of RIP, OSPF, BGP, static routing, dynamic routing, and routing algorithms",
+      "duration": "270 min", 
+      "slideCount": 32
+    },
+    {
+      "id": "network-security",
+      "title": "Network Security",
+      "description": "Extensive coverage of threats, vulnerabilities, encryption, firewalls, VPNs, IDS/IPS, and security best practices",
+      "duration": "300 min",
+      "slideCount": 35
+    },
+    {
+      "id": "troubleshooting", 
+      "title": "Network Troubleshooting",
+      "description": "Comprehensive guide to diagnostic tools, methodology, common issues, performance optimization, and maintenance",
+      "duration": "240 min",
+      "slideCount": 30
+    },
+    {
+      "id": "advanced-topics",
+      "title": "Advanced Networking Topics", 
+      "description": "In-depth coverage of SDN, cloud networking, virtualization, QoS, and emerging technologies",
+      "duration": "300 min",
+      "slideCount": 35
+    }
+  ],
+  "prerequisites": [
+    "Basic understanding of computers and operating systems",
+    "Familiarity with internet usage",
+    "Basic mathematics and logical thinking"
+  ],
+  "learningOutcomes": [
+    "Understand networking fundamentals and the OSI model",
+    "Configure and troubleshoot TCP/IP networks", 
+    "Implement network security best practices",
+    "Design and manage network infrastructure",
+    "Analyze and optimize network performance"
+  ]
+}

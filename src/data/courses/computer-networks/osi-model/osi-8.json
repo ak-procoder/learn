@@ -1,0 +1,42 @@
+{
+  "id": "osi-8",
+  "title": "Layer 2: Ethernet and Frame Structure",
+  "content": {
+    "ethernet overview": [
+      "Most widely used LAN technology",
+      "Developed by Xerox, standardized as IEEE 802.3",
+      "CSMA/CD: Carrier Sense Multiple Access with Collision Detection",
+      "Evolved from shared medium to switched architecture"
+    ],
+    "ethernet frame structure": [
+      "Preamble: 7 bytes of alternating 1s and 0s for synchronization",
+      "Start Frame Delimiter (SFD): 1 byte (10101011) marks frame start",
+      "Destination MAC: 6 bytes destination address",
+      "Source MAC: 6 bytes source address",
+      "Length/Type: 2 bytes (length for 802.3, type for Ethernet II)",
+      "Data: 46-1500 bytes payload",
+      "Frame Check Sequence (FCS): 4 bytes CRC for error detection"
+    ],
+    "ethernet standards evolution": [
+      "10BASE5: 10 Mbps thick coaxial (obsolete)",
+      "10BASE2: 10 Mbps thin coaxial (obsolete)",
+      "10BASE-T: 10 Mbps twisted pair",
+      "100BASE-TX: Fast Ethernet 100 Mbps",
+      "1000BASE-T: Gigabit Ethernet 1 Gbps",
+      "10GBASE-T: 10 Gigabit Ethernet"
+    ],
+    "CSMA/CD operation": [
+      "Carrier Sense: Listen before transmitting",
+      "Multiple Access: Shared medium with multiple devices",
+      "Collision Detection: Detect simultaneous transmissions",
+      "Backoff Algorithm: Random delay after collision"
+    ],
+    "modern ethernet": [
+      "Full-duplex operation: No collisions in switched networks",
+      "Auto-negotiation: Automatic speed and duplex configuration",
+      "Power over Ethernet (PoE): Power delivery over data cables",
+      "Energy Efficient Ethernet (EEE): Power saving features"
+    ]
+  },
+  "type": "text"
+}

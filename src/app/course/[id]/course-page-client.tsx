@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect, useCallback } from 'react'
-import { ArrowLeft, Clock, BookOpen, ChevronRight, Settings, CheckCircle, Menu, X } from 'lucide-react'
+import { ArrowLeft, BookOpen, ChevronRight, Settings, CheckCircle, Menu, X } from 'lucide-react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
@@ -26,6 +26,7 @@ export default function CoursePageClient({ courseId }: CoursePageClientProps) {
   const [isLoading, setIsLoading] = useState(true)
   const [completedTopics, setCompletedTopics] = useState<Set<string>>(new Set())
   const [sidebarOpen, setSidebarOpen] = useState(false)
+  const [initialSlideIndex, setInitialSlideIndex] = useState(0)
   const router = useRouter()
 
   const course = courses.find(c => c.id === courseId)
@@ -57,6 +58,7 @@ export default function CoursePageClient({ courseId }: CoursePageClientProps) {
   const handleTopicSelect = (topic: CourseTopic) => {
     setSelectedTopic(topic)
     setCurrentSlides(topic.slides)
+    setInitialSlideIndex(0) // Always start from first slide when selecting from sidebar
   }
 
   // const handleSlideChange = (index: number) => {
@@ -80,6 +82,21 @@ export default function CoursePageClient({ courseId }: CoursePageClientProps) {
       const nextTopic = courseContent.topics[nextTopicIndex]
       setSelectedTopic(nextTopic)
       setCurrentSlides(nextTopic.slides)
+      setInitialSlideIndex(0) // Start from first slide for next topic
+    }
+  }, [selectedTopic, courseContent])
+
+  const handlePreviousTopic = useCallback(() => {
+    if (!selectedTopic || !courseContent) return
+    
+    const currentTopicIndex = courseContent.topics.findIndex(topic => topic.id === selectedTopic.id)
+    const previousTopicIndex = currentTopicIndex - 1
+    
+    if (previousTopicIndex >= 0) {
+      const previousTopic = courseContent.topics[previousTopicIndex]
+      setSelectedTopic(previousTopic)
+      setCurrentSlides(previousTopic.slides)
+      setInitialSlideIndex(previousTopic.slides.length - 1) // Start from last slide for previous topic
     }
   }, [selectedTopic, courseContent])
 
@@ -94,11 +111,25 @@ export default function CoursePageClient({ courseId }: CoursePageClientProps) {
     return currentTopicIndex === courseContent.topics.length - 1
   }, [selectedTopic, courseContent])
 
+  // Helper function to check if current topic is the first topic
+  const isFirstTopic = useCallback(() => {
+    if (!selectedTopic || !courseContent) return false
+    const currentTopicIndex = courseContent.topics.findIndex(topic => topic.id === selectedTopic.id)
+    return currentTopicIndex === 0
+  }, [selectedTopic, courseContent])
+
   // Helper function to check if there's a next topic
   const hasNextTopic = useCallback(() => {
     if (!selectedTopic || !courseContent) return false
     const currentTopicIndex = courseContent.topics.findIndex(topic => topic.id === selectedTopic.id)
     return currentTopicIndex < courseContent.topics.length - 1
+  }, [selectedTopic, courseContent])
+
+  // Helper function to check if there's a previous topic
+  const hasPreviousTopic = useCallback(() => {
+    if (!selectedTopic || !courseContent) return false
+    const currentTopicIndex = courseContent.topics.findIndex(topic => topic.id === selectedTopic.id)
+    return currentTopicIndex > 0
   }, [selectedTopic, courseContent])
 
   // Calculate overall progress
@@ -195,15 +226,15 @@ export default function CoursePageClient({ courseId }: CoursePageClientProps) {
 
       {/* Main Content - Responsive Layout */}
       <div className="relative flex h-[calc(100vh-6rem)] lg:h-[calc(100vh-8rem)]">
-        {/* Sidebar - Responsive */}
+        {/* Sidebar - 35% width for 13" screens */}
         <aside className={`${
           sidebarOpen ? 'translate-x-0' : '-translate-x-full'
-        } xl:translate-x-0 fixed xl:relative z-50 xl:z-auto w-80 xl:w-[20%] 2xl:w-[18%] h-full border-r border-border/20 bg-gradient-to-b from-card/95 to-card/98 xl:from-card/50 xl:to-card/80 backdrop-blur-sm overflow-y-auto transition-transform duration-300 ease-in-out`}>
-          <div className="p-3 lg:p-6">
-            <div className="mb-4 lg:mb-8">
-              <div className="flex items-center justify-between xl:justify-start mb-4">
-                <h2 className="font-bold text-foreground flex items-center gap-3 text-base lg:text-lg">
-                  <div className="p-1.5 lg:p-2 bg-gradient-to-br from-primary to-secondary rounded-lg shadow-lg">
+        } xl:translate-x-0 fixed xl:relative z-50 xl:z-auto w-72 xl:w-[35%] 2xl:w-[30%] h-full border-r border-border/20 bg-gradient-to-b from-card/95 to-card/98 xl:from-card/50 xl:to-card/80 backdrop-blur-sm overflow-y-auto transition-transform duration-300 ease-in-out`}>
+          <div className="p-3 lg:p-5">
+            <div className="mb-4 lg:mb-6">
+              <div className="flex items-center justify-between xl:justify-start mb-3">
+                <h2 className="font-bold text-foreground flex items-center gap-2 text-sm lg:text-lg">
+                  <div className="p-1.5 lg:p-2 bg-gradient-to-br from-primary to-secondary rounded-lg shadow-sm">
                     <BookOpen className="h-4 w-4 lg:h-5 lg:w-5 text-primary-foreground" />
                   </div>
                   <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Course Topics</span>
@@ -212,22 +243,22 @@ export default function CoursePageClient({ courseId }: CoursePageClientProps) {
                   variant="ghost"
                   size="sm"
                   onClick={() => setSidebarOpen(false)}
-                  className="xl:hidden hover:bg-secondary/10 rounded-xl"
+                  className="xl:hidden hover:bg-secondary/10 rounded-lg p-1"
                 >
-                  <X className="h-4 w-4" />
+                  <X className="h-3 w-3" />
                 </Button>
               </div>
-              <p className="text-xs lg:text-sm text-muted-foreground mb-4 bg-card/50 p-2 lg:p-3 rounded-lg">
-                {completedCount}/{totalTopics} topics completed • {courseContent?.topics.length} topics available
+              <p className="text-xs lg:text-sm text-muted-foreground mb-3 bg-card/50 p-2 lg:p-3 rounded-lg">
+                {completedCount}/{totalTopics} topics completed • {courseContent?.topics.length} available
               </p>
             </div>
-            <div className="space-y-3 lg:space-y-4">
+            <div className="space-y-1 lg:space-y-2">
               {courseContent?.topics.map((topic, index) => (
                 <Card 
                   key={topic.id}
-                  className={`cursor-pointer transition-all duration-300 hover:shadow-xl hover:scale-[1.02] group ${
+                  className={`cursor-pointer transition-all duration-200 hover:shadow-md group ${
                     selectedTopic?.id === topic.id
-                      ? 'ring-2 ring-primary bg-gradient-to-r from-primary/10 to-secondary/5 shadow-xl border-primary/30'
+                      ? 'ring-1 ring-primary bg-gradient-to-r from-primary/8 to-secondary/4 shadow-md border-primary/30'
                       : 'hover:bg-card/80 hover:border-primary/20 bg-card/40 backdrop-blur-sm'
                   }`}
                   onClick={() => {
@@ -235,10 +266,10 @@ export default function CoursePageClient({ courseId }: CoursePageClientProps) {
                     setSidebarOpen(false) // Close sidebar on mobile after selection
                   }}
                 >
-                  <CardContent className="p-3 lg:p-5">
-                    <div className="flex items-start justify-between mb-2 lg:mb-3">
-                      <div className="flex items-center gap-2 lg:gap-3">
-                        <Badge variant="outline" className={`text-xs px-2 lg:px-3 py-1 font-semibold ${
+                  <CardContent className="p-2 lg:p-3">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-2 lg:gap-3 flex-1 min-w-0">
+                        <Badge variant="outline" className={`text-xs px-2 lg:px-3 py-0.5 lg:py-1 font-medium flex-shrink-0 ${
                           selectedTopic?.id === topic.id
                             ? 'bg-primary text-primary-foreground border-primary'
                             : 'bg-muted text-muted-foreground'
@@ -246,34 +277,21 @@ export default function CoursePageClient({ courseId }: CoursePageClientProps) {
                           {index + 1}
                         </Badge>
                         {completedTopics.has(topic.id) && (
-                          <div className="flex items-center justify-center w-5 h-5 lg:w-6 lg:h-6 bg-gradient-to-r from-secondary to-accent rounded-full shadow-md">
-                            <CheckCircle className="h-3 w-3 lg:h-4 lg:w-4 text-white" />
+                          <div className="flex items-center justify-center w-4 h-4 lg:w-5 lg:h-5 bg-gradient-to-r from-secondary to-accent rounded-full flex-shrink-0">
+                            <CheckCircle className="h-2.5 w-2.5 lg:h-3 lg:w-3 text-white" />
                           </div>
                         )}
+                        <h3 className={`font-semibold text-xs lg:text-sm truncate transition-colors duration-200 ${
+                          selectedTopic?.id === topic.id 
+                            ? 'text-primary' 
+                            : 'text-foreground group-hover:text-primary'
+                        }`}>
+                          {topic.title}
+                        </h3>
                       </div>
-                      <ChevronRight className={`h-4 w-4 lg:h-5 lg:w-5 transition-all duration-300 ${
+                      <ChevronRight className={`h-3 w-3 lg:h-4 lg:w-4 transition-all duration-200 flex-shrink-0 ml-2 ${
                         selectedTopic?.id === topic.id ? 'rotate-90 text-primary' : 'text-muted-foreground group-hover:text-primary'
                       }`} />
-                    </div>
-                    <h3 className={`font-semibold text-xs lg:text-sm mb-1 lg:mb-2 line-clamp-1 leading-tight transition-colors duration-200 ${
-                      selectedTopic?.id === topic.id 
-                        ? 'text-primary' 
-                        : 'text-foreground group-hover:text-primary'
-                    }`}>
-                      {topic.title}
-                    </h3>
-                    <p className="text-xs text-muted-foreground line-clamp-2 mb-2 lg:mb-3 leading-relaxed">
-                      {topic.description}
-                    </p>
-                    <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-1 lg:gap-2 text-xs text-muted-foreground bg-background/50 px-1.5 lg:px-2 py-1 rounded-md">
-                        <Clock className="h-3 w-3" />
-                        <span className="font-medium">{topic.duration}</span>
-                      </div>
-                      <div className="flex items-center gap-1 lg:gap-2 text-xs text-muted-foreground bg-background/50 px-1.5 lg:px-2 py-1 rounded-md">
-                        <BookOpen className="h-3 w-3" />
-                        <span className="font-medium">{topic.slides.length} slides</span>
-                      </div>
                     </div>
                   </CardContent>
                 </Card>
@@ -290,18 +308,23 @@ export default function CoursePageClient({ courseId }: CoursePageClientProps) {
           />
         )}
 
-        {/* Slide Area - Responsive width */}
-        <main className="flex-1 xl:flex-none xl:w-[80%] 2xl:w-[82%] bg-gradient-to-br from-background to-muted/10 relative">
+        {/* Slide Area - 65% width for 13" screens */}
+        <main className="flex-1 xl:flex-none xl:w-[65%] 2xl:w-[70%] bg-gradient-to-br from-background to-muted/10 relative">
           {currentSlides.length > 0 ? (
             <EmblaCarousel 
+              key={`${selectedTopic?.id}-${initialSlideIndex}`} // Force remount when topic or initial slide changes
               slides={currentSlides} 
               options={{ loop: false }} 
+              initialSlide={initialSlideIndex}
               // onSlideChange={handleSlideChange}
               onComplete={handleTopicComplete}
               onNextTopic={handleNextTopic}
+              onPreviousTopic={handlePreviousTopic}
               onFinishCourse={handleFinishCourse}
               isLastTopic={isLastTopic()}
+              isFirstTopic={isFirstTopic()}
               hasNextTopic={hasNextTopic()}
+              hasPreviousTopic={hasPreviousTopic()}
             />
           ) : (
             <div className="h-full flex items-center justify-center p-4 lg:p-8">
