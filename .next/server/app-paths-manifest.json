@@ -1,0 +1,5 @@
+{
+  "/browse-courses/page": "app/browse-courses/page.js",
+  "/course/[id]/page": "app/course/[id]/page.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js"
+}
