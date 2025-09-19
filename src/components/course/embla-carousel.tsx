@@ -186,12 +186,12 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
         <div className="embla__container h-full">
           {slides.map((slide) => (
             <div className="embla__slide h-full" key={slide.id}>
-              <div className="embla__slide__content h-full p-8 flex flex-col">
+              <div className="embla__slide__content h-full p-4 flex flex-col">
                 <div className="max-w-5xl mx-auto w-full h-full flex flex-col">
                   <Card className="h-full border border-border/20 shadow-2xl bg-gradient-to-br from-card/90 via-card to-card/95 backdrop-blur-xl flex flex-col">
-                    <CardHeader className="flex-shrink-0 pb-6 bg-gradient-to-r from-primary/5 via-secondary/5 to-accent/5 rounded-t-lg border-b border-border/10">
+                    <CardHeader className="flex-shrink-0 pb-1 bg-gradient-to-r from-primary/5 via-secondary/5 to-accent/5 rounded-t-lg border-b border-border/10">
                       <div className="flex items-center gap-4 mb-3">
-                        <div className="p-3 bg-gradient-to-br from-primary to-secondary rounded-xl shadow-lg">
+                        <div className="p-1 bg-gradient-to-br from-primary to-secondary rounded-xl shadow-lg">
                           <BookOpen className="h-6 w-6 text-primary-foreground" />
                         </div>
                         <Badge variant="secondary" className="text-sm font-semibold bg-gradient-to-r from-accent/20 to-accent/10 text-accent-foreground border-accent/30 px-3 py-1">
@@ -211,7 +211,7 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
                         }
                       }}
                     >
-                      <div className="space-y-8 min-h-0">
+                      <div className="space-y-2 min-h-0">
                         {formatSlideContent(slide.content).map((section, index) => (
                           <div key={index}>
                             {section.type === 'heading' && section.level === 1 && (
@@ -249,13 +249,13 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
                         ))}
                       </div>
                       
-                      {/* Scroll Indicator */}
+                      {/* Scroll Indicator
                       {isContentScrollable && showScrollIndicator && (
                         <div className="absolute bottom-4 right-4 flex items-center gap-2 bg-primary/90 text-primary-foreground px-3 py-2 rounded-lg shadow-lg animate-bounce">
                           <ChevronDown className="h-4 w-4" />
                           <span className="text-sm font-medium">Scroll for more</span>
                         </div>
-                      )}
+                      )} */}
                     </CardContent>
                   </Card>
                 </div>

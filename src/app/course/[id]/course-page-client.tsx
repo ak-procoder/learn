@@ -1,13 +1,14 @@
 "use client"
 
 import { useState, useEffect, useCallback } from 'react'
-import { ArrowLeft, Clock, BookOpen, ChevronRight, Settings, CheckCircle } from 'lucide-react'
+import { ArrowLeft, Clock, BookOpen, ChevronRight, Settings, CheckCircle, Menu, X } from 'lucide-react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
+import { Navbar } from '@/components/layout/navbar'
 import { courses } from '@/data/courses'
 import { getCourseContent } from '@/data/course-loader'
 import { CourseTopic, CourseSlide, CourseContent } from '@/data/types/course-types'
@@ -24,6 +25,7 @@ export default function CoursePageClient({ courseId }: CoursePageClientProps) {
   const [courseContent, setCourseContent] = useState<CourseContent | null>(null)
   const [isLoading, setIsLoading] = useState(true)
   const [completedTopics, setCompletedTopics] = useState<Set<string>>(new Set())
+  const [sidebarOpen, setSidebarOpen] = useState(false)
   const router = useRouter()
 
   const course = courses.find(c => c.id === courseId)
@@ -57,10 +59,10 @@ export default function CoursePageClient({ courseId }: CoursePageClientProps) {
     setCurrentSlides(topic.slides)
   }
 
-  const handleSlideChange = (index: number) => {
-    // Slide change handler - can be used for tracking progress
-    console.log(`Slide changed to: ${index}`)
-  }
+  // const handleSlideChange = (index: number) => {
+  //   // Slide change handler - can be used for tracking progress
+  //   // console.log(`Slide changed to: ${index}`)
+  // }
 
   const handleTopicComplete = () => {
     if (selectedTopic) {
@@ -135,67 +137,91 @@ export default function CoursePageClient({ courseId }: CoursePageClientProps) {
     <div className="min-h-screen bg-gradient-to-br from-background via-background/50 to-primary/5">
       {/* Header */}
       <header className="border-b border-border/20 bg-card/80 backdrop-blur-xl supports-[backdrop-filter]:bg-card/60 sticky top-16 z-40 shadow-lg shadow-primary/5">
-        <div className="container mx-auto px-4 py-6">
+        <div className="container mx-auto px-2 lg:px-4 py-1 lg:py-3">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-6">
-              <Button variant="ghost" size="sm" asChild className="gap-2 hover:bg-secondary/10 rounded-xl transition-all duration-200">
+            <div className="flex items-center gap-2 lg:gap-6">
+              <Button variant="ghost" size="sm" asChild className="gap-1 lg:gap-2 hover:bg-secondary/10 rounded-xl transition-all duration-200 text-xs lg:text-sm">
                 <Link href="/browse-courses">
-                  <ArrowLeft className="h-4 w-4" />
-                  Back to Courses
+                  <ArrowLeft className="h-3 w-3 lg:h-4 lg:w-4" />
+                  <span className="hidden sm:inline">Back to Courses</span>
+                  <span className="sm:hidden">Back</span>
                 </Link>
               </Button>
-              <div className="h-8 w-px bg-gradient-to-b from-primary/20 to-secondary/20" />
+              <div className="h-6 lg:h-8 w-px bg-gradient-to-b from-primary/20 to-secondary/20" />
+              {/* Sidebar toggle for smaller screens */}
+              <Button
+                variant="ghost"
+                size="sm"
+                onClick={() => setSidebarOpen(!sidebarOpen)}
+                className="xl:hidden gap-1 hover:bg-secondary/10 rounded-xl transition-all duration-200 text-xs lg:text-sm"
+              >
+                {sidebarOpen ? <X className="h-3 w-3 lg:h-4 lg:w-4" /> : <Menu className="h-3 w-3 lg:h-4 lg:w-4" />}
+                <span className="hidden sm:inline">Topics</span>
+              </Button>
+              <div className="xl:hidden h-6 lg:h-8 w-px bg-gradient-to-b from-primary/20 to-secondary/20" />
               <div>
-                <h1 className="font-bold text-foreground text-xl bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">{course.title}</h1>
-                <p className="text-sm text-muted-foreground font-medium">Computer Networking Course</p>
+                <h1 className="font-bold text-foreground text-sm lg:text-xl bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">{course.title}</h1>
+                <p className="text-xs lg:text-sm text-muted-foreground font-medium hidden lg:block">Computer Networking Course</p>
               </div>
             </div>
-            <div className="flex items-center gap-4">
-              <Card className="px-6 py-3 bg-gradient-to-r from-primary/10 via-secondary/5 to-accent/10 border-primary/20 shadow-lg backdrop-blur-sm">
-                <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2 lg:gap-4">
+              <Card className="px-2 lg:px-6 py-1 lg:py-3 bg-gradient-to-r from-primary/10 via-secondary/5 to-accent/10 border-primary/20 shadow-lg backdrop-blur-sm">
+                <div className="flex items-center gap-2 lg:gap-4">
                   <div className="text-center">
-                    <div className="text-lg font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                    <div className="text-sm lg:text-lg font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
                       {completedCount}/{totalTopics}
                     </div>
-                    <div className="text-xs text-muted-foreground font-medium">Topics</div>
+                    <div className="text-xs lg:text-xs text-muted-foreground font-medium hidden lg:block">Topics</div>
                   </div>
-                  <div className="w-20 h-3 bg-muted/50 rounded-full overflow-hidden shadow-inner">
+                  <div className="w-12 lg:w-20 h-2 lg:h-3 bg-muted/50 rounded-full overflow-hidden shadow-inner">
                     <div 
                       className="h-full bg-gradient-to-r from-primary via-secondary to-accent transition-all duration-700 ease-out rounded-full shadow-sm"
                       style={{ width: `${overallProgress}%` }}
                     />
                   </div>
                   <div className="text-center">
-                    <div className="text-lg font-bold text-primary">
+                    <div className="text-sm lg:text-lg font-bold text-primary">
                       {Math.round(overallProgress)}%
                     </div>
-                    <div className="text-xs text-muted-foreground font-medium">Complete</div>
+                    <div className="text-xs lg:text-xs text-muted-foreground font-medium hidden lg:block">Complete</div>
                   </div>
                 </div>
               </Card>
-              <Badge variant="outline" className="bg-accent/10 border-accent/30 text-accent-foreground font-semibold px-3 py-1">{course.level}</Badge>
+              <Badge variant="outline" className="bg-accent/10 border-accent/30 text-accent-foreground font-semibold px-2 lg:px-3 py-1 text-xs lg:text-sm">{course.level}</Badge>
             </div>
           </div>
         </div>
       </header>
 
-      {/* Main Content - Three Column Layout */}
-      <div className="flex h-[calc(100vh-8rem)]">
-        {/* Sidebar - 20% */}
-        <aside className="w-[20%] border-r border-border/20 bg-gradient-to-b from-card/50 to-card/80 backdrop-blur-sm overflow-y-auto">
-          <div className="p-6">
-            <div className="mb-8">
-              <h2 className="font-bold text-foreground mb-4 flex items-center gap-3 text-lg">
-                <div className="p-2 bg-gradient-to-br from-primary to-secondary rounded-lg shadow-lg">
-                  <BookOpen className="h-5 w-5 text-primary-foreground" />
-                </div>
-                <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Course Topics</span>
-              </h2>
-              <p className="text-sm text-muted-foreground mb-4 bg-card/50 p-3 rounded-lg">
+      {/* Main Content - Responsive Layout */}
+      <div className="relative flex h-[calc(100vh-6rem)] lg:h-[calc(100vh-8rem)]">
+        {/* Sidebar - Responsive */}
+        <aside className={`${
+          sidebarOpen ? 'translate-x-0' : '-translate-x-full'
+        } xl:translate-x-0 fixed xl:relative z-50 xl:z-auto w-80 xl:w-[20%] 2xl:w-[18%] h-full border-r border-border/20 bg-gradient-to-b from-card/95 to-card/98 xl:from-card/50 xl:to-card/80 backdrop-blur-sm overflow-y-auto transition-transform duration-300 ease-in-out`}>
+          <div className="p-3 lg:p-6">
+            <div className="mb-4 lg:mb-8">
+              <div className="flex items-center justify-between xl:justify-start mb-4">
+                <h2 className="font-bold text-foreground flex items-center gap-3 text-base lg:text-lg">
+                  <div className="p-1.5 lg:p-2 bg-gradient-to-br from-primary to-secondary rounded-lg shadow-lg">
+                    <BookOpen className="h-4 w-4 lg:h-5 lg:w-5 text-primary-foreground" />
+                  </div>
+                  <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Course Topics</span>
+                </h2>
+                <Button
+                  variant="ghost"
+                  size="sm"
+                  onClick={() => setSidebarOpen(false)}
+                  className="xl:hidden hover:bg-secondary/10 rounded-xl"
+                >
+                  <X className="h-4 w-4" />
+                </Button>
+              </div>
+              <p className="text-xs lg:text-sm text-muted-foreground mb-4 bg-card/50 p-2 lg:p-3 rounded-lg">
                 {completedCount}/{totalTopics} topics completed • {courseContent?.topics.length} topics available
               </p>
             </div>
-            <div className="space-y-4">
+            <div className="space-y-3 lg:space-y-4">
               {courseContent?.topics.map((topic, index) => (
                 <Card 
                   key={topic.id}
@@ -204,12 +230,15 @@ export default function CoursePageClient({ courseId }: CoursePageClientProps) {
                       ? 'ring-2 ring-primary bg-gradient-to-r from-primary/10 to-secondary/5 shadow-xl border-primary/30'
                       : 'hover:bg-card/80 hover:border-primary/20 bg-card/40 backdrop-blur-sm'
                   }`}
-                  onClick={() => handleTopicSelect(topic)}
+                  onClick={() => {
+                    handleTopicSelect(topic)
+                    setSidebarOpen(false) // Close sidebar on mobile after selection
+                  }}
                 >
-                  <CardContent className="p-5">
-                    <div className="flex items-start justify-between mb-3">
-                      <div className="flex items-center gap-3">
-                        <Badge variant="outline" className={`text-xs px-3 py-1 font-semibold ${
+                  <CardContent className="p-3 lg:p-5">
+                    <div className="flex items-start justify-between mb-2 lg:mb-3">
+                      <div className="flex items-center gap-2 lg:gap-3">
+                        <Badge variant="outline" className={`text-xs px-2 lg:px-3 py-1 font-semibold ${
                           selectedTopic?.id === topic.id
                             ? 'bg-primary text-primary-foreground border-primary'
                             : 'bg-muted text-muted-foreground'
@@ -217,31 +246,31 @@ export default function CoursePageClient({ courseId }: CoursePageClientProps) {
                           {index + 1}
                         </Badge>
                         {completedTopics.has(topic.id) && (
-                          <div className="flex items-center justify-center w-6 h-6 bg-gradient-to-r from-secondary to-accent rounded-full shadow-md">
-                            <CheckCircle className="h-4 w-4 text-white" />
+                          <div className="flex items-center justify-center w-5 h-5 lg:w-6 lg:h-6 bg-gradient-to-r from-secondary to-accent rounded-full shadow-md">
+                            <CheckCircle className="h-3 w-3 lg:h-4 lg:w-4 text-white" />
                           </div>
                         )}
                       </div>
-                      <ChevronRight className={`h-5 w-5 transition-all duration-300 ${
+                      <ChevronRight className={`h-4 w-4 lg:h-5 lg:w-5 transition-all duration-300 ${
                         selectedTopic?.id === topic.id ? 'rotate-90 text-primary' : 'text-muted-foreground group-hover:text-primary'
                       }`} />
                     </div>
-                    <h3 className={`font-semibold text-sm mb-2 line-clamp-1 leading-tight transition-colors duration-200 ${
+                    <h3 className={`font-semibold text-xs lg:text-sm mb-1 lg:mb-2 line-clamp-1 leading-tight transition-colors duration-200 ${
                       selectedTopic?.id === topic.id 
                         ? 'text-primary' 
                         : 'text-foreground group-hover:text-primary'
                     }`}>
                       {topic.title}
                     </h3>
-                    <p className="text-xs text-muted-foreground line-clamp-2 mb-3 leading-relaxed">
+                    <p className="text-xs text-muted-foreground line-clamp-2 mb-2 lg:mb-3 leading-relaxed">
                       {topic.description}
                     </p>
                     <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2 text-xs text-muted-foreground bg-background/50 px-2 py-1 rounded-md">
+                      <div className="flex items-center gap-1 lg:gap-2 text-xs text-muted-foreground bg-background/50 px-1.5 lg:px-2 py-1 rounded-md">
                         <Clock className="h-3 w-3" />
                         <span className="font-medium">{topic.duration}</span>
                       </div>
-                      <div className="flex items-center gap-2 text-xs text-muted-foreground bg-background/50 px-2 py-1 rounded-md">
+                      <div className="flex items-center gap-1 lg:gap-2 text-xs text-muted-foreground bg-background/50 px-1.5 lg:px-2 py-1 rounded-md">
                         <BookOpen className="h-3 w-3" />
                         <span className="font-medium">{topic.slides.length} slides</span>
                       </div>
@@ -253,13 +282,21 @@ export default function CoursePageClient({ courseId }: CoursePageClientProps) {
           </div>
         </aside>
 
-        {/* Slide Area - 50% */}
-        <main className="w-[50%] bg-gradient-to-br from-background to-muted/10 relative">
+        {/* Overlay for mobile sidebar */}
+        {sidebarOpen && (
+          <div 
+            className="fixed inset-0 bg-black/50 z-40 xl:hidden"
+            onClick={() => setSidebarOpen(false)}
+          />
+        )}
+
+        {/* Slide Area - Responsive width */}
+        <main className="flex-1 xl:flex-none xl:w-[80%] 2xl:w-[82%] bg-gradient-to-br from-background to-muted/10 relative">
           {currentSlides.length > 0 ? (
             <EmblaCarousel 
               slides={currentSlides} 
               options={{ loop: false }} 
-              onSlideChange={handleSlideChange}
+              // onSlideChange={handleSlideChange}
               onComplete={handleTopicComplete}
               onNextTopic={handleNextTopic}
               onFinishCourse={handleFinishCourse}
@@ -267,19 +304,19 @@ export default function CoursePageClient({ courseId }: CoursePageClientProps) {
               hasNextTopic={hasNextTopic()}
             />
           ) : (
-            <div className="h-full flex items-center justify-center p-8">
+            <div className="h-full flex items-center justify-center p-4 lg:p-8">
               <Card className="text-center max-w-md bg-gradient-to-br from-background to-muted/20 shadow-lg">
-                <CardContent className="p-8">
-                  <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
-                    <BookOpen className="h-8 w-8 text-primary" />
+                <CardContent className="p-6 lg:p-8">
+                  <div className="w-12 h-12 lg:w-16 lg:h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <BookOpen className="h-6 w-6 lg:h-8 lg:w-8 text-primary" />
                   </div>
-                  <h3 className="text-xl font-semibold text-foreground mb-3">
+                  <h3 className="text-lg lg:text-xl font-semibold text-foreground mb-3">
                     Ready to Learn?
                   </h3>
-                  <p className="text-muted-foreground mb-4">
+                  <p className="text-sm lg:text-base text-muted-foreground mb-4">
                     Select a topic from the sidebar to begin your networking journey
                   </p>
-                  <Badge variant="secondary" className="text-sm">
+                  <Badge variant="secondary" className="text-xs lg:text-sm">
                     {courseContent.topics.length} topics available
                   </Badge>
                 </CardContent>
@@ -288,8 +325,8 @@ export default function CoursePageClient({ courseId }: CoursePageClientProps) {
           )}
         </main>
 
-        {/* Placeholder Area - 30% */}
-        <aside className="w-[30%] border-l bg-gradient-to-br from-muted/10 to-muted/30 p-6">
+        {/* Learning Tools Area - Hidden on smaller screens */}
+        <aside className="hidden 2xl:block w-[18%] border-l bg-gradient-to-br from-muted/10 to-muted/30 p-6">
           <Card className="h-full bg-gradient-to-br from-background to-muted/20 shadow-lg">
             <CardHeader>
               <h3 className="font-semibold text-foreground flex items-center gap-2">
@@ -301,21 +338,15 @@ export default function CoursePageClient({ courseId }: CoursePageClientProps) {
             </CardHeader>
             <CardContent className="space-y-4">
               <Card className="p-4 bg-primary/5 border-primary/20">
-                <h4 className="font-medium text-foreground mb-2">📝 Take Notes</h4>
+                <h4 className="font-medium text-foreground mb-2">📝 AI Integration</h4>
                 <p className="text-sm text-muted-foreground">
-                  Jot down important concepts as you learn
+                  Coming Soon !!!
                 </p>
               </Card>
               <Card className="p-4 bg-green-500/5 border-green-500/20">
                 <h4 className="font-medium text-foreground mb-2">🎯 Practice</h4>
                 <p className="text-sm text-muted-foreground">
-                  Test your knowledge with exercises
-                </p>
-              </Card>
-              <Card className="p-4 bg-blue-500/5 border-blue-500/20">
-                <h4 className="font-medium text-foreground mb-2">💬 Discuss</h4>
-                <p className="text-sm text-muted-foreground">
-                  Join the community discussions
+                  Coming Soon !!!
                 </p>
               </Card>
             </CardContent>
