@@ -27,3 +27,8 @@ jobs:
           FOLDER: out # The directory where your assets are generated
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # GitHub will automatically add this - you don't need to bother getting a token
           MESSAGE: "Build: ({sha}) {msg}" # The commit message
+          NAME: "github-actions[bot]" # The name you want to appear as the committer
+          EMAIL: "41898282+github-actions[bot]@users.noreply.github.com"  # The email you want to appear as the committer\
+          FORCE: true # Whether to force push or not
+          CLEAN: true # Whether to remove all files before pushing
+          
