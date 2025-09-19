@@ -1,0 +1,123 @@
+name: Deploy to Hostinger
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  workflow_dispatch: # Allow manual deployment
+
+env:
+  NODE_VERSION: '22'
+
+jobs:
+  # Build Job
+  build:
+    runs-on: ubuntu-latest
+    name: Build Next.js Application
+    
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+      
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+        cache: 'npm'
+        
+    - name: Install Dependencies
+      run: npm ci
+      
+    - name: Build Application
+      run: npm run build
+      env:
+        NODE_ENV: production
+        
+    - name: Upload Build Artifacts
+      uses: actions/upload-artifact@v4
+      with:
+        name: nextjs-build
+        path: |
+          .next/
+          out/
+          public/
+          package.json
+          next.config.ts
+        retention-days: 1
+
+  # Deploy Job - Only runs on main branch pushes
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    name: Deploy to Hostinger
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    
+    steps:
+    - name: Checkout Repository
+      uses: actions/checkout@v4
+      
+    - name: Download Build Artifacts
+      uses: actions/download-artifact@v4
+      with:
+        name: nextjs-build
+        
+    - name: Setup Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+        
+    - name: Install Dependencies
+      run: npm ci --only=production
+      
+    - name: Deploy via FTP
+      uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+      with:
+        server: ${{ secrets.HOSTINGER_FTP_SERVER }}
+        username: ${{ secrets.HOSTINGER_FTP_USERNAME }}
+        password: ${{ secrets.HOSTINGER_FTP_PASSWORD }}
+        local-dir: ./out/
+        server-dir: /public_html/
+        exclude: |
+          **/.git*
+          **/.git*/**
+          **/node_modules/**
+          **/.env*
+          **/README.md
+          **/.github/**
+          
+    # Alternative: Deploy via SFTP (more secure)
+    # - name: Deploy via SFTP
+    #   uses: wlixcc/SFTP-Deploy-Action@v1.2.4
+    #   with:
+    #     server: ${{ secrets.HOSTINGER_SFTP_HOST }}
+    #     username: ${{ secrets.HOSTINGER_SFTP_USERNAME }}
+    #     password: ${{ secrets.HOSTINGER_SFTP_PASSWORD }}
+    #     port: ${{ secrets.HOSTINGER_SFTP_PORT || 22 }}
+    #     local_path: './out/*'
+    #     remote_path: '/public_html/'
+    #     sftpArgs: '-o ConnectTimeout=5'
+
+  # Test Deployment Job
+  test-deployment:
+    needs: deploy
+    runs-on: ubuntu-latest
+    name: Test Deployment
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    
+    steps:
+    - name: Test Website Accessibility
+      run: |
+        echo "Testing website accessibility..."
+        # Add your domain here once deployed
+        # curl -f -s -S -L --max-time 10 https://yourdomain.com || exit 1
+        echo "Deployment test would run here"
+        
+    - name: Notify Deployment Status
+      if: always()
+      run: |
+        if [ "${{ job.status }}" == "success" ]; then
+          echo "✅ Deployment successful!"
+        else
+          echo "❌ Deployment failed!"
+        fi

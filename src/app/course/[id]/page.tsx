@@ -194,7 +194,7 @@ export default function CoursePage() {
                         selectedTopic?.id === topic.id ? 'rotate-90 text-primary' : 'text-muted-foreground group-hover:text-primary'
                       }`} />
                     </div>
-                    <h3 className={`font-semibold text-sm mb-2 line-clamp-2 leading-tight transition-colors duration-200 ${
+                    <h3 className={`font-semibold text-sm mb-2 line-clamp-1 leading-tight transition-colors duration-200 ${
                       selectedTopic?.id === topic.id 
                         ? 'text-primary' 
                         : 'text-foreground group-hover:text-primary'
