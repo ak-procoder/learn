@@ -1,23 +1,12 @@
 "use client"
 
 import { useState, useMemo } from "react"
-import { Search, Filter } from "lucide-react"
+import { Search } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { courses, courseCategories, getCoursesbyCategory } from "@/data/courses"
+import { courses, getCoursesbyCategory } from "@/data/courses"
 import { CourseCard } from "@/components/courses/course-card"
-
-const filterOptions = [
-  { label: 'All Courses', value: 'all' }
-]
-
-const levelOptions = [
-  { label: 'All Levels', value: 'all' },
-  { label: 'Beginner', value: 'Beginner' },
-  { label: 'Intermediate', value: 'Intermediate' },
-  { label: 'Advanced', value: 'Advanced' },
-]
 
 export default function BrowseCoursesPage() {
   const [selectedCategory, setSelectedCategory] = useState('All Courses')
