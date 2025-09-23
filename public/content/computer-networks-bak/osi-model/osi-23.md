@@ -1,0 +1,50 @@
+---
+id: osi-23
+title: OSI Model Data Flow and Encapsulation
+type: text
+---
+
+
+## Sending process (top-down)
+
+- **Application**: User data created (email, web page, file)
+- **Presentation**: Data formatted, encrypted, compressed
+- **Session**: Session header added, dialog control established
+- **Transport**: Segment header added (TCP/UDP), port numbers
+- **Network**: Packet header added (IP), logical addressing
+- **Data Link**: Frame header added (Ethernet), physical addressing
+- **Physical**: Bits transmitted over physical medium
+
+## Receiving process (bottom-up)
+
+- **Physical**: Bits received from physical medium
+- **Data Link**: Frame header processed, error checking
+- **Network**: Packet header processed, routing decisions
+- **Transport**: Segment header processed, flow control
+- **Session**: Session management, synchronization
+- **Presentation**: Data decrypted, decompressed, formatted
+- **Application**: Data delivered to receiving application
+
+## Encapsulation terminology
+
+- **Application/Presentation/Session**: Data or message
+- **Transport**: Segments (TCP) or Datagrams (UDP)
+- **Network**: Packets or Datagrams
+- **Data Link**: Frames
+- **Physical**: Bits or symbols
+
+## Header information
+
+- Each layer adds control information
+- Headers contain addressing and control data
+- Trailers may be added (e.g., FCS in Ethernet)
+- Overhead increases with each layer
+- Headers removed during decapsulation
+
+## Practical example - web browsing
+
+- **Application**: HTTP GET request for web page
+- **Transport**: TCP segment with destination port 80
+- **Network**: IP packet with web server's IP address
+- **Data Link**: Ethernet frame with router's MAC address
+- **Physical**: Electrical signals on network cable

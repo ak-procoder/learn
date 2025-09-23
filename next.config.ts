@@ -39,11 +39,24 @@ const nextConfig: NextConfig = {
         loaders: ['@svgr/webpack'],
         as: '*.js',
       },
+      '*.md': {
+        loaders: ['raw-loader'],
+        as: '*.js',
+      },
     },
     resolveAlias: {
       // Ensure proper module resolution in turbopack
       '@': './src',
     },
+  },
+  
+  // Webpack configuration for non-turbopack builds
+  webpack: (config) => {
+    config.module.rules.push({
+      test: /\.md$/,
+      use: 'raw-loader',
+    });
+    return config;
   },
 };
 

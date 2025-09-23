@@ -1,0 +1,48 @@
+---
+id: osi-18
+title: "Layer 4: UDP (User Datagram Protocol)"
+type: text
+---
+
+
+## U D P characteristics
+
+- **Connectionless**: No session establishment required
+- **Unreliable**: No delivery guarantees
+- **Fast**: Minimal overhead and processing
+- **Message-oriented**: Preserves message boundaries
+- **No flow control**: Sender transmits at any rate
+- **No congestion control**: Network congestion not managed
+
+## U D P header structure
+
+- **Source Port**: 16 bits (sending application)
+- **Destination Port**: 16 bits (receiving application)
+- **Length**: 16 bits (UDP header + data)
+- **Checksum**: 16 bits (optional error detection)
+- **Total header size**: Only 8 bytes (vs 20+ for TCP)
+
+## U D P advantages
+
+- **Lower overhead**: Smaller headers and no state
+- **Faster transmission**: No connection setup/teardown
+- **Broadcast/multicast support**: One-to-many communication
+- **Real-time applications**: No retransmission delays
+- **Simple implementation**: Less complex than TCP
+
+## U D P applications
+
+- **DNS**: Domain Name System queries
+- **DHCP**: Dynamic Host Configuration Protocol
+- **SNMP**: Simple Network Management Protocol
+- **Video streaming**: Real-time media delivery
+- **Online gaming**: Low-latency interactive applications
+- **VoIP**: Voice over IP communications
+
+## When to use  U D P
+
+- Speed more important than reliability
+- Application handles its own error recovery
+- One-to-many communication required
+- Real-time constraints exist
+- Simple request-response transactions

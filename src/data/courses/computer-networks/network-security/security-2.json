@@ -1,6 +1,0 @@
-{
-  "id": "security-2",
-  "title": "Common Network Threats",
-  "content": "Passive Attacks:\n\nEavesdropping/Sniffing:\n• Capture and analyze network traffic\n• Tools: Wireshark, tcpdump\n• Mitigation: Encryption, switched networks\n\nTraffic Analysis:\n• Study communication patterns\n• Infer sensitive information\n• Mitigation: VPNs, traffic padding\n\nActive Attacks:\n\nMan-in-the-Middle (MITM):\n• Intercept and modify communications\n• ARP spoofing, DNS hijacking\n• Mitigation: Certificate validation, encrypted channels\n\nDenial of Service (DoS):\n• Volumetric: Bandwidth exhaustion\n• Protocol: TCP SYN flood, ping of death\n• Application: Slowloris, HTTP flood\n• Distributed (DDoS): Botnet-based attacks\n\nSpoofing Attacks:\n• IP Spoofing: Fake source addresses\n• MAC Spoofing: Duplicate MAC addresses\n• DNS Spoofing: Redirect domain queries\n• Email Spoofing: Fake sender addresses\n\nInjection Attacks:\n• SQL injection\n• Command injection\n• Cross-site scripting (XSS)",
-  "type": "text"
-}

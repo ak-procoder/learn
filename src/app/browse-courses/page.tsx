@@ -5,7 +5,7 @@ import { Search } from "lucide-react"
 
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { courses, getCoursesbyCategory } from "@/data/courses"
+import { courses, getCoursesbyCategory } from "@/lib/courses/courses"
 import { CourseCard } from "@/components/courses/course-card"
 
 export default function BrowseCoursesPage() {

@@ -9,11 +9,11 @@ import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
 import { Card, CardContent, CardHeader } from '@/components/ui/card'
 import { Navbar } from '@/components/layout/navbar'
-import { courses } from '@/data/courses'
-import { getCourseContent } from '@/data/course-loader'
+import { courses } from '@/lib/courses/courses'
+import { getCourseContent } from '@/lib/courses/course-loader'
 import { CourseTopic, CourseSlide, CourseContent } from '@/data/types/course-types'
-import EmblaCarousel from '@/components/course/embla-carousel'
-import '../../../components/course/embla.css'
+import EmblaCarousel from '@/components/course/embla-carousel/embla-carousel'
+import '../../../components/course/embla-carousel/embla.css'
 
 interface CoursePageClientProps {
   courseId: string

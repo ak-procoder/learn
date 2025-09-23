@@ -1,4 +1,4 @@
-import { courses } from '@/data/courses'
+import { courses } from '@/lib/courses/courses'
 import CoursePageClient from './course-page-client'
 
 // Generate static params for all course IDs - this runs at build time
