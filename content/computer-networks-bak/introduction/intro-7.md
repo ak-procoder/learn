@@ -1,0 +1,34 @@
+---
+id: intro-7
+title: Network Classifications by Ownership and Access
+type: text
+---
+
+
+## Public networks
+
+- **Definition**: Networks accessible to the general public
+- **Examples**: Internet, public WiFi, cellular networks
+- **Characteristics**: Open access, shared infrastructure
+- **Considerations**: Security concerns, performance variability
+
+## Private networks
+
+- **Definition**: Networks owned and operated by organizations
+- **Examples**: Corporate LANs, government networks
+- **Characteristics**: Restricted access, controlled environment
+- **Benefits**: Better security, predictable performance
+
+## Hybrid networks
+
+- **Definition**: Combination of public and private elements
+- **Examples**: VPN over internet, cloud services
+- **Characteristics**: Cost-effective, flexible connectivity
+- **Applications**: Remote work, branch office connections
+
+## Community networks
+
+- **Definition**: Shared networks for specific groups
+- **Examples**: Campus networks, residential complexes
+- **Characteristics**: Semi-private, shared costs
+- **Benefits**: Better service than public, lower cost than private

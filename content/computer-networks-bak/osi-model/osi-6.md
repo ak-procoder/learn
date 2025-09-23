@@ -1,0 +1,40 @@
+---
+id: osi-6
+title: "Layer 2: Data Link Layer - Fundamentals"
+type: text
+---
+
+
+## Layer 2 definition
+
+Data Link Layer - Provides node-to-node communication and handles errors that may occur at the physical layer.
+
+## Primary functions
+
+- **Framing**: Organizing bits into frames
+- **Physical addressing**: MAC address resolution
+- **Flow control**: Managing data transmission rate
+- **Error detection**: Identifying transmission errors
+- **Error correction**: Fixing detected errors
+- **Access control**: Managing shared medium access
+
+## Framing methods
+
+- **Character-oriented**: Use special characters as delimiters
+- **Bit-oriented**: Use bit patterns as frame boundaries
+- **Length-based**: Specify frame length in header
+- **Time-based**: Fixed time slots for frames
+
+## Flow control mechanisms
+
+- **Stop-and-wait**: Send one frame, wait for ACK
+- **Sliding window**: Multiple outstanding frames
+- **Credit-based**: Receiver grants transmission credits
+- **Rate-based**: Control transmission rate
+
+## Error detection methods
+
+- **Parity bits**: Simple odd/even checking
+- **Checksums**: Mathematical sum verification
+- **Cyclic Redundancy Check (CRC)**: Polynomial division
+- **Hamming codes**: Single-bit error detection/correction

@@ -1,0 +1,40 @@
+---
+id: intro-10
+title: Network Transmission Media
+type: text
+---
+
+
+## Guided media overview
+
+- **Definition**: Physical pathways that guide electromagnetic signals
+- **Characteristics**: Predictable path, higher security, limited distance
+- **Types**: Twisted pair, coaxial cable, fiber optic
+
+## Twisted pair cable
+
+- **Structure**: Pairs of copper wires twisted together
+- **Types**: Unshielded (UTP), Shielded (STP)
+- **Categories**: Cat5e (1 Gbps), Cat6 (10 Gbps), Cat6a, Cat7
+- **Applications**: Ethernet, telephone, most LANs
+
+## Coaxial cable
+
+- **Structure**: Central conductor, insulation, shield, outer jacket
+- **Advantages**: Higher bandwidth than twisted pair, less interference
+- **Applications**: Cable TV, cable internet, early Ethernet
+- **Standards**: RG-58 (thin Ethernet), RG-8 (thick Ethernet)
+
+## Fiber optic cable
+
+- **Structure**: Glass or plastic core, cladding, protective coating
+- **Types**: Single-mode (long distance), Multi-mode (shorter distance)
+- **Advantages**: Highest bandwidth, no electromagnetic interference
+- **Applications**: Internet backbone, high-speed LANs, long distance
+
+## Unguided media
+
+- **Radio waves**: Omnidirectional, penetrate walls, affected by weather
+- **Microwaves**: Line-of-sight, high frequency, terrestrial/satellite
+- **Infrared**: Short range, line-of-sight, high security
+- **Applications**: WiFi, cellular, Bluetooth, satellite communications
