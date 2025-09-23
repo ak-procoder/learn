@@ -3,6 +3,7 @@ import { CourseSlide } from '@/data/types/course-types';
 import { join } from 'path';
 
 // Server-side fs import
+// eslint-disable-next-line @typescript-eslint/no-require-imports
 const fs = typeof window === 'undefined' ? require('fs/promises') : null;
 
 /**
@@ -14,7 +15,7 @@ export interface MarkdownFileMetadata {
   id: string;
   title: string;
   type: 'text' | 'quiz' | 'exercise';
-  [key: string]: any;
+  [key: string]: string | number | boolean | undefined;
 }
 
 /**

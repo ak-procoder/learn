@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { CourseSlide } from '@/data/types/course-types';
 import { loadTopicSlidesDynamic } from '@/lib/courses/computer-networks-dynamic';
 import { Button } from '@/components/ui/button';
@@ -33,7 +33,7 @@ export default function DynamicMarkdownDemo() {
     }
   };
 
-  const isMarkdownContent = (content: any): content is { markdown: string } => {
+  const isMarkdownContent = (content: unknown): content is { markdown: string } => {
     return typeof content === 'object' && content !== null && 'markdown' in content;
   };
 

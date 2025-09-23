@@ -3,7 +3,7 @@
 import React, { useCallback, useEffect, useState, useRef } from 'react'
 import { EmblaOptionsType, EmblaCarouselType } from 'embla-carousel'
 import useEmblaCarousel from 'embla-carousel-react'
-import { ChevronLeft, ChevronRight, BookOpen, ChevronDown, CheckCircle } from 'lucide-react'
+import { ChevronLeft, ChevronRight, BookOpen, CheckCircle } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
@@ -33,7 +33,7 @@ const numberWithinRange = (number: number, min: number, max: number): number =>
   Math.min(Math.max(number, min), max)
 
 // Function to check if content is markdown
-const isMarkdownContent = (content: any): content is { markdown: string } => {
+const isMarkdownContent = (content: unknown): content is { markdown: string } => {
   return typeof content === 'object' && content !== null && 'markdown' in content && typeof content.markdown === 'string'
 }
 
@@ -195,7 +195,6 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
     onPreviousTopic,
     onFinishCourse, 
     isLastTopic = false, 
-    isFirstTopic = false,
     hasNextTopic = false,
     hasPreviousTopic = false
   } = props
@@ -203,17 +202,13 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
   const [prevBtnDisabled, setPrevBtnDisabled] = useState(true)
   const [nextBtnDisabled, setNextBtnDisabled] = useState(true)
   const [selectedIndex, setSelectedIndex] = useState(initialSlide)
-  const [scrollSnaps, setScrollSnaps] = useState<number[]>([])
   const [scrollProgress, setScrollProgress] = useState(0)
-  const [isContentScrollable, setIsContentScrollable] = useState(false)
-  const [showScrollIndicator, setShowScrollIndicator] = useState(true)
   const hasCompletedRef = useRef(false) // Use ref to avoid dependency issues
   const parallaxNodesRef = useRef<HTMLDivElement[]>([])
 
   const setParallaxValues = useCallback((emblaApi: EmblaCarouselType) => {
     const engine = emblaApi.internalEngine()
     const scrollProgress = emblaApi.scrollProgress()
-    const slidesInView = emblaApi.slidesInView()
 
     emblaApi.scrollSnapList().forEach((scrollSnap, snapIndex) => {
       let diffToTarget = scrollSnap - scrollProgress
@@ -260,34 +255,23 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
     [emblaApi]
   )
 
-  const scrollTo = useCallback(
-    (index: number) => emblaApi && emblaApi.scrollTo(index),
-    [emblaApi]
-  )
-
   // Function to check if content is scrollable
   const checkScrollable = useCallback((element: HTMLElement | null) => {
+    // This function can be used in the future if scroll indicator is needed
     if (element) {
       const isScrollable = element.scrollHeight > element.clientHeight
-      setIsContentScrollable(isScrollable)
-      if (isScrollable) {
-        setShowScrollIndicator(true)
-        // Hide scroll indicator after 3 seconds
-        setTimeout(() => setShowScrollIndicator(false), 3000)
-      }
+      console.log('Content scrollable:', isScrollable)
     }
   }, [])
 
-  // Handle scroll events to hide indicator when user scrolls
+  // Handle scroll events
   const handleScroll = useCallback((e: React.UIEvent<HTMLDivElement>) => {
+    // This can be used for future scroll handling
     const target = e.target as HTMLDivElement
-    if (target.scrollTop > 20) {
-      setShowScrollIndicator(false)
-    }
+    console.log('Scroll position:', target.scrollTop)
   }, [])
 
   const onInit = useCallback((emblaApi: EmblaCarouselType) => {
-    setScrollSnaps(emblaApi.scrollSnapList())
     setParallaxValues(emblaApi)
   }, [setParallaxValues])
 
