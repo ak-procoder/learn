@@ -18,8 +18,27 @@ const page = () => {
             Contribute, learn, and help others grow through collaborative education.
           </p>
           <div className="flex gap-4 justify-center flex-wrap">
-            <Button asChild variant="outline" size="lg" className="text-lg px-8">
-              <Link href="/browse-courses">Browse Learning</Link>
+            <Button 
+              asChild 
+              variant="outline" 
+              size="lg" 
+              className="text-lg px-8 transition-all duration-500 group border-0 relative overflow-hidden"
+              style={{
+                background: 'linear-gradient(to right, #A9FF6820, #FF898920)',
+              }}
+            >
+              <Link href="/browse-courses" className="flex items-center gap-2 relative z-10">
+                <div 
+                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10"
+                  style={{
+                    background: 'linear-gradient(to right, #A9FF6840, #FF898940)',
+                  }}
+                />
+                <BookOpen className="h-5 w-5 group-hover:text-black transition-colors duration-300" />
+                <span className="font-semibold bg-gradient-to-r from-[#4dc9e6] to-[#210CAE] bg-clip-text text-transparent group-hover:text-black transition-all duration-300">
+                  Browse Learning
+                </span>
+              </Link>
             </Button>
           </div>
         </div>

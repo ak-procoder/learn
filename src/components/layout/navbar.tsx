@@ -2,6 +2,7 @@
 
 import * as React from "react"
 import Link from "next/link"
+import { usePathname } from "next/navigation"
 import { 
   Menu, 
   GraduationCap
@@ -19,10 +20,11 @@ import {
 
 export function Navbar() {
   const [isOpen, setIsOpen] = React.useState(false)
+  const pathname = usePathname()
 
   return (
     <header className="sticky top-0 z-50 w-full border-b border-border/20 bg-card/80 backdrop-blur-xl supports-[backdrop-filter]:bg-card/60 shadow-lg shadow-primary/5">
-      <div className="container flex h-16 max-w-screen-2xl items-center">
+      <div className="container pl-4 flex h-16 max-w-screen-2xl items-center">
         {/* Logo */}
         <div className="mr-4 hidden md:flex">
           <Link href="/" className="mr-6 flex items-center space-x-3 group">
@@ -85,14 +87,16 @@ export function Navbar() {
           {/* Navigation items will be added here */}
         </nav>
 
-        {/* Take me Home Button */}
-        <div className="flex items-center">
-          <Button asChild className="bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 text-primary-foreground font-semibold px-6 py-2 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
-            <Link href="/" className="flex items-center gap-2">
-              <span>Take me Home</span>
-            </Link>
-          </Button>
-        </div>
+        {/* Take me Home Button - Only show when not on home page */}
+        {pathname !== "/" && (
+          <div className="flex items-center">
+            <Button asChild className="bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 text-primary-foreground font-semibold px-6 py-2 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
+              <Link href="/" className="flex items-center gap-2">
+                <span>Take me Home</span>
+              </Link>
+            </Button>
+          </div>
+        )}
       </div>
     </header>
   )
