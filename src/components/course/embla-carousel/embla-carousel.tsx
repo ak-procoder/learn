@@ -467,9 +467,9 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
                   if (node) parallaxNodesRef.current[index] = node;
                 }}
               >
-                <div className={cn("embla__slide__content h-full flex flex-col", styles.padding)}>
-                  <div className="max-w-5xl mx-auto w-full h-full flex flex-col">
-                    <Card className={cn("h-full border border-border/20 shadow-2xl bg-gradient-to-br from-card/90 via-card to-card/95 backdrop-blur-xl flex flex-col", styles.cardHeight)}>
+                <div className={cn("embla__slide__content h-full flex flex-col w-full", styles.padding)}>
+                  <div className="w-full max-w-full sm:max-w-3xl md:max-w-4xl lg:max-w-5xl xl:max-w-6xl mx-auto h-full flex flex-col">
+                    <Card className={cn("h-full border border-border/20 shadow-2xl bg-gradient-to-br from-card/90 via-card to-card/95 backdrop-blur-xl flex flex-col w-full", styles.cardHeight)}>
                       <CardHeader className="flex-shrink-0 pb-1 bg-gradient-to-r from-primary/5 via-secondary/5 to-accent/5 rounded-t-lg border-b border-border/10">
                         <div className={cn("flex items-center mb-3", styles.spacing)}>
                           <div className="p-1 bg-gradient-to-br from-primary to-secondary rounded-xl shadow-lg">
