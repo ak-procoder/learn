@@ -28,13 +28,7 @@
   flex-direction: column;
 }
 
-.embla__slide__parallax {
-  height: 100%;
-  width: 100%;
-  max-width: 100vw;
-  position: relative;
-  overflow: hidden;
-}
+/* Parallax styles removed - using default carousel implementation */
 
 .embla__slide__content {
   display: flex;

@@ -111,7 +111,11 @@ type PropType = {
   hasPreviousTopic?: boolean
 }
 
-// Default carousel implementation (no parallax)
+// Parallax parameters
+const PARALLAX_FACTOR = 0
+
+const numberWithinRange = (number: number, min: number, max: number): number =>
+  Math.min(Math.max(number, min), max)
 
 // Function to check if content is markdown
 const isMarkdownContent = (content: unknown): content is { markdown: string } => {
@@ -306,6 +310,46 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
   const [selectedIndex, setSelectedIndex] = useState(initialSlide)
   const [scrollProgress, setScrollProgress] = useState(0)
   const hasCompletedRef = useRef(false) // Use ref to avoid dependency issues
+  const parallaxNodesRef = useRef<HTMLDivElement[]>([])
+
+  const setParallaxValues = useCallback((emblaApi: EmblaCarouselType) => {
+    const engine = emblaApi.internalEngine()
+    const scrollProgress = emblaApi.scrollProgress()
+
+    emblaApi.scrollSnapList().forEach((scrollSnap, snapIndex) => {
+      let diffToTarget = scrollSnap - scrollProgress
+      const slidesInSnap = engine.slideRegistry[snapIndex]
+
+      slidesInSnap.forEach((slideIndex) => {
+        if (engine.options.loop) {
+          engine.slideLooper.loopPoints.forEach((loopItem) => {
+            const target = loopItem.target()
+
+            if (slideIndex === loopItem.index && target !== 0) {
+              const sign = Math.sign(target)
+
+              if (sign === -1) {
+                diffToTarget = scrollSnap - (1 + scrollProgress)
+              }
+              if (sign === 1) {
+                diffToTarget = scrollSnap + (1 - scrollProgress)
+              }
+            }
+          })
+        }
+
+        const translate = diffToTarget * (-1 * PARALLAX_FACTOR) * 100
+        const parallaxNode = parallaxNodesRef.current[slideIndex]
+        if (parallaxNode) {
+          parallaxNode.style.transform = `translate3d(${numberWithinRange(
+            translate,
+            -100,
+            100
+          )}%, 0px, 0px)`
+        }
+      })
+    })
+  }, [])
 
   const scrollPrev = useCallback(
     () => emblaApi && emblaApi.scrollPrev(),
@@ -321,21 +365,21 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
   const checkScrollable = useCallback((element: HTMLElement | null) => {
     // This function can be used in the future if scroll indicator is needed
     if (element) {
-      const _isScrollable = element.scrollHeight > element.clientHeight
-      // console.log('Content scrollable:', _isScrollable)
+      const isScrollable = element.scrollHeight > element.clientHeight
+      // console.log('Content scrollable:', isScrollable)
     }
   }, [])
 
   // Handle scroll events
   const handleScroll = useCallback((e: React.UIEvent<HTMLDivElement>) => {
     // This can be used for future scroll handling
-    const _target = e.target as HTMLDivElement
-    // console.log('Scroll position:', _target.scrollTop)
+    const target = e.target as HTMLDivElement
+    // console.log('Scroll position:', target.scrollTop)
   }, [])
 
-  const onInit = useCallback((_emblaApi: EmblaCarouselType) => {
-    // Default carousel initialization (no parallax)
-  }, [])
+  const onInit = useCallback((emblaApi: EmblaCarouselType) => {
+    setParallaxValues(emblaApi)
+  }, [setParallaxValues])
 
   const onSelect = useCallback((emblaApi: EmblaCarouselType) => {
     const newIndex = emblaApi.selectedScrollSnap()
@@ -356,7 +400,8 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
   const onScroll = useCallback((emblaApi: EmblaCarouselType) => {
     const progress = Math.max(0, Math.min(1, emblaApi.scrollProgress()))
     setScrollProgress(progress * 100)
-  }, [])
+    setParallaxValues(emblaApi)
+  }, [setParallaxValues])
 
   useEffect(() => {
     if (!emblaApi) return
@@ -417,11 +462,17 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
       {/* Main Carousel - Takes available space minus controls */}
       <div className="embla__viewport flex-1" ref={emblaRef}>
         <div className="embla__container h-full">
-          {slides.map((slide) => (
+          {slides.map((slide, index) => (
             <div className="embla__slide flex-1 min-h-0" key={slide.id}>
-              <div className={cn("embla__slide__content flex flex-col w-full h-full", styles.padding)}>
-                <div className="w-full max-w-full sm:max-w-3xl md:max-w-4xl lg:max-w-5xl xl:max-w-6xl mx-auto flex-1 flex flex-col">
-                  <Card className={cn("flex-1 border border-border/20 shadow-2xl bg-gradient-to-br from-card/90 via-card to-card/95 backdrop-blur-xl flex flex-col w-full", styles.cardHeight)}>
+              <div 
+                className="embla__slide__parallax h-full"
+                ref={(node) => {
+                  if (node) parallaxNodesRef.current[index] = node;
+                }}
+              >
+                <div className={cn("embla__slide__content flex flex-col w-full h-full", styles.padding)}>
+                  <div className="w-full max-w-full sm:max-w-3xl md:max-w-4xl lg:max-w-5xl xl:max-w-6xl mx-auto flex-1 flex flex-col">
+                    <Card className={cn("flex-1 border border-border/20 shadow-2xl bg-gradient-to-br from-card/90 via-card to-card/95 backdrop-blur-xl flex flex-col w-full", styles.cardHeight)}>
                       <CardHeader className="flex-shrink-0 pb-1 bg-gradient-to-r from-primary/5 via-secondary/5 to-accent/5 rounded-t-lg border-b border-border/10">
                         <div className={cn("flex items-center mb-3", styles.spacing)}>
                           <div className="p-1 bg-gradient-to-br from-primary to-secondary rounded-xl shadow-lg">
@@ -498,6 +549,7 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
                     </CardContent>
                   </Card>
                 </div>
+              </div>
               </div>
             </div>
           ))}
