@@ -3,6 +3,7 @@
   overflow: hidden;
   width: 100%;
   max-width: 100vw;
+  position: relative;
 }
 
 .embla__viewport {
@@ -23,10 +24,12 @@
   max-width: 100vw;
   position: relative;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .embla__slide__parallax {
-  height: 120%;
+  height: 100%;
   width: 100%;
   max-width: 100vw;
   position: relative;
@@ -35,8 +38,7 @@
 
 .embla__slide__content {
   display: flex;
-  align-items: center;
-  justify-content: center;
+  flex-direction: column;
   height: 100%;
   width: 100%;
   max-width: 100vw;
@@ -125,6 +127,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  z-index: 10;
+  min-height: 4rem;
 }
 
 .embla__dots {

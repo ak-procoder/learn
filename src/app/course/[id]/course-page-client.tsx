@@ -1,16 +1,17 @@
 "use client"
 
 import { useState, useEffect, useCallback } from 'react'
-import { ArrowLeft, BookOpen, ChevronRight, Settings, CheckCircle, Menu, X } from 'lucide-react'
+import { ArrowLeft, BookOpen, ChevronRight, CheckCircle, Menu, X } from 'lucide-react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
-import { Card, CardContent, CardHeader } from '@/components/ui/card'
+import { Card, CardContent } from '@/components/ui/card'
 import { courses } from '@/lib/courses/courses'
 import { getCourseContent } from '@/lib/courses/course-loader'
 import { CourseTopic, CourseSlide, CourseContent } from '@/data/types/course-types'
+import { preloadNextTopic } from '@/lib/courses/dynamic-markdown-loader'
 import EmblaCarousel from '@/components/course/embla-carousel/embla-carousel'
 import '../../../components/course/embla-carousel/embla.css'
 
@@ -29,6 +30,18 @@ export default function CoursePageClient({ courseId }: CoursePageClientProps) {
   const router = useRouter()
 
   const course = courses.find(c => c.id === courseId)
+
+  // Topic metadata for preloading (computer-networks specific)
+  const topicMetaMap = new Map([
+    ['introduction', { slidePattern: 'intro-{n}.md', slideCount: 30 }],
+    ['osi-model', { slidePattern: 'osi-{n}.md', slideCount: 30 }],
+    ['tcp-ip', { slidePattern: 'tcp-{n}.md', slideCount: 30 }],
+    ['network-devices', { slidePattern: 'devices-{n}.md', slideCount: 20 }],
+    ['routing-protocols', { slidePattern: 'routing-{n}.md', slideCount: 20 }],
+    ['network-security', { slidePattern: 'security-{n}.md', slideCount: 25 }],
+    ['troubleshooting', { slidePattern: 'troubleshooting-{n}.md', slideCount: 15 }],
+    ['advanced-topics', { slidePattern: 'advanced-{n}.md', slideCount: 15 }]
+  ])
 
   useEffect(() => {
     const loadCourseContent = async () => {
@@ -58,6 +71,11 @@ export default function CoursePageClient({ courseId }: CoursePageClientProps) {
     setSelectedTopic(topic)
     setCurrentSlides(topic.slides)
     setInitialSlideIndex(0) // Always start from first slide when selecting from sidebar
+    
+    // Preload next topic slides in background
+    if (courseContent) {
+      preloadNextTopic(courseContent, topic.id, topicMetaMap)
+    }
   }
 
   // const handleSlideChange = (index: number) => {
@@ -82,8 +100,11 @@ export default function CoursePageClient({ courseId }: CoursePageClientProps) {
       setSelectedTopic(nextTopic)
       setCurrentSlides(nextTopic.slides)
       setInitialSlideIndex(0) // Start from first slide for next topic
+      
+      // Preload next topic after this one
+      preloadNextTopic(courseContent, nextTopic.id, topicMetaMap)
     }
-  }, [selectedTopic, courseContent])
+  }, [selectedTopic, courseContent, topicMetaMap])
 
   const handlePreviousTopic = useCallback(() => {
     if (!selectedTopic || !courseContent) return
@@ -307,7 +328,7 @@ export default function CoursePageClient({ courseId }: CoursePageClientProps) {
           />
         )}
 
-        {/* Slide Area - 65% width for 13" screens */}
+        {/* Slide Area - Full remaining width */}
         <main className="flex-1 xl:flex-none xl:w-[65%] 2xl:w-[70%] bg-gradient-to-br from-background to-muted/10 relative">
           {currentSlides.length > 0 ? (
             <EmblaCarousel 
@@ -346,34 +367,6 @@ export default function CoursePageClient({ courseId }: CoursePageClientProps) {
             </div>
           )}
         </main>
-
-        {/* Learning Tools Area - Hidden on smaller screens */}
-        <aside className="hidden 2xl:block w-[18%] border-l bg-gradient-to-br from-muted/10 to-muted/30 p-6">
-          <Card className="h-full bg-gradient-to-br from-background to-muted/20 shadow-lg">
-            <CardHeader>
-              <h3 className="font-semibold text-foreground flex items-center gap-2">
-                <div className="p-2 bg-primary/10 rounded-lg">
-                  <Settings className="h-4 w-4 text-primary" />
-                </div>
-                Learning Tools
-              </h3>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <Card className="p-4 bg-primary/5 border-primary/20">
-                <h4 className="font-medium text-foreground mb-2">📝 AI Integration</h4>
-                <p className="text-sm text-muted-foreground">
-                  Coming Soon !!!
-                </p>
-              </Card>
-              <Card className="p-4 bg-green-500/5 border-green-500/20">
-                <h4 className="font-medium text-foreground mb-2">🎯 Practice</h4>
-                <p className="text-sm text-muted-foreground">
-                  Coming Soon !!!
-                </p>
-              </Card>
-            </CardContent>
-          </Card>
-        </aside>
       </div>
     </div>
   )

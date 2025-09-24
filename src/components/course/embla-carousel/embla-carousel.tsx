@@ -71,7 +71,8 @@ const getResponsiveStyles = (breakpoint: Breakpoint) => ({
     titleSize: 'text-xl sm:text-2xl',
     contentSize: 'text-sm',
     padding: 'p-3 sm:p-4',
-    cardHeight: 'min-h-[70vh]',
+    cardHeight: 'h-[70vh]', // Fixed height instead of min-height
+    contentMaxHeight: 'max-h-[50vh]', // Content area max height for scrolling
     buttonSize: 'min-h-[44px] min-w-[44px] px-3',
     spacing: 'gap-3'
   },
@@ -79,7 +80,8 @@ const getResponsiveStyles = (breakpoint: Breakpoint) => ({
     titleSize: 'text-2xl md:text-3xl',
     contentSize: 'text-base',
     padding: 'p-4 md:p-6',
-    cardHeight: 'min-h-[75vh]',
+    cardHeight: 'h-[75vh]', // Fixed height instead of min-height
+    contentMaxHeight: 'max-h-[55vh]', // Content area max height for scrolling
     buttonSize: 'min-h-[48px] min-w-[48px] px-4',
     spacing: 'gap-4'
   },
@@ -87,7 +89,8 @@ const getResponsiveStyles = (breakpoint: Breakpoint) => ({
     titleSize: 'text-3xl lg:text-4xl',
     contentSize: 'text-lg',
     padding: 'p-6 lg:p-8',
-    cardHeight: 'min-h-[80vh]',
+    cardHeight: 'h-[80vh]', // Fixed height instead of min-height
+    contentMaxHeight: 'max-h-[60vh]', // Content area max height for scrolling
     buttonSize: 'min-h-[52px] min-w-[52px] px-6',
     spacing: 'gap-6'
   }
@@ -456,20 +459,20 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
 
   return (
     <div className="embla h-full flex flex-col bg-gradient-to-br from-background/50 to-primary/5">
-      {/* Main Carousel */}
+      {/* Main Carousel - Takes available space minus controls */}
       <div className="embla__viewport flex-1" ref={emblaRef}>
         <div className="embla__container h-full">
           {slides.map((slide, index) => (
-            <div className="embla__slide h-full" key={slide.id}>
+            <div className="embla__slide flex-1 min-h-0" key={slide.id}>
               <div 
                 className="embla__slide__parallax h-full"
                 ref={(node) => {
                   if (node) parallaxNodesRef.current[index] = node;
                 }}
               >
-                <div className={cn("embla__slide__content h-full flex flex-col w-full", styles.padding)}>
-                  <div className="w-full max-w-full sm:max-w-3xl md:max-w-4xl lg:max-w-5xl xl:max-w-6xl mx-auto h-full flex flex-col">
-                    <Card className={cn("h-full border border-border/20 shadow-2xl bg-gradient-to-br from-card/90 via-card to-card/95 backdrop-blur-xl flex flex-col w-full", styles.cardHeight)}>
+                <div className={cn("embla__slide__content flex flex-col w-full h-full", styles.padding)}>
+                  <div className="w-full max-w-full sm:max-w-3xl md:max-w-4xl lg:max-w-5xl xl:max-w-6xl mx-auto flex-1 flex flex-col">
+                    <Card className={cn("flex-1 border border-border/20 shadow-2xl bg-gradient-to-br from-card/90 via-card to-card/95 backdrop-blur-xl flex flex-col w-full", styles.cardHeight)}>
                       <CardHeader className="flex-shrink-0 pb-1 bg-gradient-to-r from-primary/5 via-secondary/5 to-accent/5 rounded-t-lg border-b border-border/10">
                         <div className={cn("flex items-center mb-3", styles.spacing)}>
                           <div className="p-1 bg-gradient-to-br from-primary to-secondary rounded-xl shadow-lg">
@@ -484,7 +487,8 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
                       </CardTitle>
                     </CardHeader>
                     <CardContent 
-                      className={cn("flex-1 overflow-y-auto embla__slide__scrollable relative", styles.padding)}
+                      className={cn("flex-1 overflow-y-auto embla__slide__scrollable relative", styles.padding, styles.contentMaxHeight)}
+                      tabIndex={0}
                       onScroll={handleScroll}
                       ref={(el) => {
                         if (el) {
@@ -492,7 +496,7 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
                         }
                       }}
                     >
-                      <div className="space-y-4 min-h-0">
+                      <div className="space-y-4 min-h-0 pb-8">
                         {/* Render markdown content if available */}
                         {isMarkdownContent(slide.content) ? (
                           <ResponsiveContent content={slide.content.markdown} breakpoint={breakpoint} />
@@ -564,8 +568,8 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
       {/* Navigation Hints */}
       <NavigationHints breakpoint={breakpoint} capabilities={capabilities} />
 
-      {/* Controls */}
-      <div className={cn("embla__controls border-t border-border/20 bg-gradient-to-r from-card/80 via-card/90 to-card/80 backdrop-blur-xl shadow-lg", styles.padding)}>
+      {/* Controls - Fixed height at bottom */}
+      <div className={cn("embla__controls flex-shrink-0 border-t border-border/20 bg-gradient-to-r from-card/95 via-card/98 to-card/95 backdrop-blur-xl shadow-lg", styles.padding)}>
         <div className="flex items-center justify-between max-w-5xl mx-auto">
           {/* Navigation Buttons */}
           <div className={cn("flex items-center", styles.spacing)}>
