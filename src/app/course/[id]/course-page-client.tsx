@@ -191,13 +191,13 @@ export default function CoursePageClient({ courseId }: CoursePageClientProps) {
         <div className="container mx-auto px-2 lg:px-4 py-1 lg:py-3">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-2 lg:gap-6">
-              <Button variant="ghost" size="sm" asChild className="gap-1 lg:gap-2 hover:bg-secondary/10 rounded-xl transition-all duration-200 text-xs lg:text-sm">
-                <Link href="/browse-courses">
-                  <ArrowLeft className="h-3 w-3 lg:h-4 lg:w-4" />
-                  <span className="hidden sm:inline">Back to Courses</span>
-                  <span className="sm:hidden">Back</span>
-                </Link>
-              </Button>
+              {/*<Button variant="ghost" size="sm" asChild className="gap-1 lg:gap-2 hover:bg-secondary/10 rounded-xl transition-all duration-200 text-xs lg:text-sm">*/}
+              {/*  <Link href="/browse-courses">*/}
+              {/*    <ArrowLeft className="h-3 w-3 lg:h-4 lg:w-4" />*/}
+              {/*    <span className="hidden sm:inline">Back to Courses</span>*/}
+              {/*    <span className="sm:hidden">Back</span>*/}
+              {/*  </Link>*/}
+              {/*</Button>*/}
               <div className="h-6 lg:h-8 w-px bg-gradient-to-b from-primary/20 to-secondary/20" />
               {/* Sidebar toggle for smaller screens */}
               <Button
