@@ -341,13 +341,13 @@ export async function preloadTopicSlides(
  * @param topicMetaMap - Map of topic metadata for loading patterns
  */
 export function preloadNextTopic(
-  courseContent: any,
+  courseContent: { topics: { id: string }[] } | null,
   currentTopicId: string,
   topicMetaMap: Map<string, { slidePattern: string; slideCount: number }>
 ): void {
   if (!courseContent?.topics) return
 
-  const currentIndex = courseContent.topics.findIndex((topic: any) => topic.id === currentTopicId)
+  const currentIndex = courseContent.topics.findIndex((topic) => topic.id === currentTopicId)
   const nextIndex = currentIndex + 1
 
   if (nextIndex < courseContent.topics.length) {

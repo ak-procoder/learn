@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useCallback } from 'react'
+import { useState, useEffect, useCallback, useMemo } from 'react'
 import { ArrowLeft, BookOpen, ChevronRight, CheckCircle, Menu, X } from 'lucide-react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
@@ -32,7 +32,7 @@ export default function CoursePageClient({ courseId }: CoursePageClientProps) {
   const course = courses.find(c => c.id === courseId)
 
   // Topic metadata for preloading (computer-networks specific)
-  const topicMetaMap = new Map([
+  const topicMetaMap = useMemo(() => new Map([
     ['introduction', { slidePattern: 'intro-{n}.md', slideCount: 30 }],
     ['osi-model', { slidePattern: 'osi-{n}.md', slideCount: 30 }],
     ['tcp-ip', { slidePattern: 'tcp-{n}.md', slideCount: 30 }],
@@ -41,7 +41,7 @@ export default function CoursePageClient({ courseId }: CoursePageClientProps) {
     ['network-security', { slidePattern: 'security-{n}.md', slideCount: 25 }],
     ['troubleshooting', { slidePattern: 'troubleshooting-{n}.md', slideCount: 15 }],
     ['advanced-topics', { slidePattern: 'advanced-{n}.md', slideCount: 15 }]
-  ])
+  ]), [])
 
   useEffect(() => {
     const loadCourseContent = async () => {
