@@ -105,7 +105,7 @@ export async function loadTopicSlidesDynamic(topicId: string): Promise<CourseSli
       topicInfo.slideCount
     );
     
-    console.log(`Loaded ${slides.length} slides for topic: ${topicId}`);
+    // console.log(`Loaded ${slides.length} slides for topic: ${topicId}`);
     return slides;
   } catch (error) {
     console.error(`Failed to load slides for topic ${topicId}:`, error);
