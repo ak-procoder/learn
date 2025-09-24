@@ -31,11 +31,11 @@ const page = () => {
                 <div 
                   className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500 -z-10"
                   style={{
-                    background: 'linear-gradient(to right, #A9FF6840, #FF898940)',
+                    background: 'linear-gradient(to right, #0f110d40, #FF898940)',
                   }}
                 />
                 <BookOpen className="h-5 w-5 group-hover:text-black transition-colors duration-300" />
-                <span className="font-semibold bg-gradient-to-r from-[#4dc9e6] to-[#210CAE] bg-clip-text text-transparent group-hover:text-black transition-all duration-300">
+                <span className="font-semibold bg-gradient-to-r from-[#392d69] to-[#210CAE] bg-clip-text text-transparent group-hover:text-black transition-all duration-300">
                   Browse Learning
                 </span>
               </Link>

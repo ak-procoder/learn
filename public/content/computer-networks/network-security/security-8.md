@@ -8,6 +8,7 @@ type: text
 
 Access control models provide the theoretical framework and practical implementation methods for controlling who can access what resources in a network environment. These models define how access rights are granted, maintained, and revoked based on various criteria and organizational policies.
 
+
 ### Core Concepts
 - **Access Control**: Regulating who or what can view or use resources
 - **Subjects**: Users, processes, or systems requesting access
