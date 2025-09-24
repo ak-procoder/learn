@@ -11,11 +11,11 @@ const page = () => {
       {/* Hero Section */}
       <section className="container mx-auto px-4 py-4 md:py-4">
         <div className="text-center space-y-6 max-w-4xl mx-auto">
-          <h1 className="text-4xl md:text-6xl font-bold text-foreground">
+          <h1 className="text-2xl md:text-3xl font-bold text-foreground">
             Learn Together, Grow Together
             <span className="text-primary"> Open Learning</span>
           </h1>
-          <p className="text-muted-foreground text-lg md:text-xl max-w-2xl mx-auto">
+          <p className="text-muted-foreground text-base md:text-lg max-w-2xl mx-auto">
             Join our open-source learning community where knowledge is shared freely.
             Contribute, learn, and help others grow through collaborative education.
           </p>

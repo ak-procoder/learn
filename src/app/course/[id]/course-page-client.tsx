@@ -188,74 +188,67 @@ export default function CoursePageClient({ courseId }: CoursePageClientProps) {
     <div className="min-h-screen bg-gradient-to-br from-background via-background/50 to-primary/5">
       {/* Header */}
       <header className="border-b border-border/20 bg-card/80 backdrop-blur-xl supports-[backdrop-filter]:bg-card/60 sticky top-16 z-40 shadow-lg shadow-primary/5">
-        <div className="container mx-auto px-2 lg:px-4 py-1 lg:py-3">
+        <div className="container mx-auto px-1 lg:px-2 py-0.5 lg:py-1">
           <div className="flex items-center justify-between">
-            <div className="flex items-center gap-2 lg:gap-6">
-              {/*<Button variant="ghost" size="sm" asChild className="gap-1 lg:gap-2 hover:bg-secondary/10 rounded-xl transition-all duration-200 text-xs lg:text-sm">*/}
-              {/*  <Link href="/browse-courses">*/}
-              {/*    <ArrowLeft className="h-3 w-3 lg:h-4 lg:w-4" />*/}
-              {/*    <span className="hidden sm:inline">Back to Courses</span>*/}
-              {/*    <span className="sm:hidden">Back</span>*/}
-              {/*  </Link>*/}
-              {/*</Button>*/}
-              <div className="h-6 lg:h-8 w-px bg-gradient-to-b from-primary/20 to-secondary/20" />
+            <div className="flex items-center gap-1 lg:gap-4">
+              <div className="h-5 lg:h-6 w-px bg-gradient-to-b from-primary/20 to-secondary/20" />
               {/* Sidebar toggle for smaller screens */}
               <Button
                 variant="ghost"
                 size="sm"
                 onClick={() => setSidebarOpen(!sidebarOpen)}
-                className="xl:hidden gap-1 hover:bg-secondary/10 rounded-xl transition-all duration-200 text-xs lg:text-sm"
+                className="xl:hidden gap-1 hover:bg-secondary/10 rounded-xl transition-all duration-200 text-xs lg:text-sm p-1"
               >
                 {sidebarOpen ? <X className="h-3 w-3 lg:h-4 lg:w-4" /> : <Menu className="h-3 w-3 lg:h-4 lg:w-4" />}
                 <span className="hidden sm:inline">Topics</span>
               </Button>
-              <div className="xl:hidden h-6 lg:h-8 w-px bg-gradient-to-b from-primary/20 to-secondary/20" />
+              <div className="xl:hidden h-5 lg:h-6 w-px bg-gradient-to-b from-primary/20 to-secondary/20" />
               <div>
-                <h1 className="font-bold text-foreground text-sm lg:text-xl bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">{course.title}</h1>
+                <h1 className="font-bold text-foreground text-xs lg:text-base bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">{course.title}</h1>
                 <p className="text-xs lg:text-sm text-muted-foreground font-medium hidden lg:block">Computer Networking Course</p>
               </div>
             </div>
-            <div className="flex items-center gap-2 lg:gap-4">
-              <Card className="px-2 lg:px-6 py-1 lg:py-3 bg-gradient-to-r from-primary/10 via-secondary/5 to-accent/10 border-primary/20 shadow-lg backdrop-blur-sm">
-                <div className="flex items-center gap-2 lg:gap-4">
+            <div className="flex items-center gap-1 lg:gap-3">
+              <Card className="px-1 lg:px-4 py-0.5 lg:py-2 bg-gradient-to-r from-primary/10 via-secondary/5 to-accent/10 border-primary/20 shadow-lg backdrop-blur-sm">
+                <div className="flex items-center gap-1 lg:gap-3">
                   <div className="text-center">
-                    <div className="text-sm lg:text-lg font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
+                    <div className="text-xs lg:text-base font-bold bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">
                       {completedCount}/{totalTopics}
                     </div>
-                    <div className="text-xs lg:text-xs text-muted-foreground font-medium hidden lg:block">Topics</div>
+                    <div className="text-[10px] lg:text-xs text-muted-foreground font-medium hidden lg:block">Topics</div>
                   </div>
-                  <div className="w-12 lg:w-20 h-2 lg:h-3 bg-muted/50 rounded-full overflow-hidden shadow-inner">
-                    <div 
+                  <div className="w-8 lg:w-16 h-1.5 lg:h-2 bg-muted/50 rounded-full overflow-hidden shadow-inner">
+                    <div
                       className="h-full bg-gradient-to-r from-primary via-secondary to-accent transition-all duration-700 ease-out rounded-full shadow-sm"
                       style={{ width: `${overallProgress}%` }}
                     />
                   </div>
                   <div className="text-center">
-                    <div className="text-sm lg:text-lg font-bold text-primary">
+                    <div className="text-xs lg:text-base font-bold text-primary">
                       {Math.round(overallProgress)}%
                     </div>
-                    <div className="text-xs lg:text-xs text-muted-foreground font-medium hidden lg:block">Complete</div>
+                    <div className="text-[10px] lg:text-xs text-muted-foreground font-medium hidden lg:block">Complete</div>
                   </div>
                 </div>
               </Card>
-              <Badge variant="outline" className="bg-accent/10 border-accent/30 text-accent-foreground font-semibold px-2 lg:px-3 py-1 text-xs lg:text-sm">{course.level}</Badge>
+              <Badge variant="outline" className="bg-accent/10 border-accent/30 text-accent-foreground font-semibold px-1 lg:px-2 py-0.5 text-xs lg:text-sm">{course.level}</Badge>
             </div>
           </div>
         </div>
       </header>
 
       {/* Main Content - Responsive Layout */}
-      <div className="relative flex h-[calc(100vh-6rem)] lg:h-[calc(100vh-8rem)]">
+      <div className="relative flex h-[calc(100vh-4rem)] lg:h-[calc(100vh-5rem)]">
         {/* Sidebar - 35% width for 13" screens */}
         <aside className={`${
           sidebarOpen ? 'translate-x-0' : '-translate-x-full'
         } xl:translate-x-0 fixed xl:relative z-50 xl:z-auto w-72 xl:w-[35%] 2xl:w-[30%] h-full border-r border-border/20 bg-gradient-to-b from-card/95 to-card/98 xl:from-card/50 xl:to-card/80 backdrop-blur-sm overflow-y-auto transition-transform duration-300 ease-in-out`}>
-          <div className="p-3 lg:p-5">
-            <div className="mb-4 lg:mb-6">
-              <div className="flex items-center justify-between xl:justify-start mb-3">
-                <h2 className="font-bold text-foreground flex items-center gap-2 text-sm lg:text-lg">
-                  <div className="p-1.5 lg:p-2 bg-gradient-to-br from-primary to-secondary rounded-lg shadow-sm">
-                    <BookOpen className="h-4 w-4 lg:h-5 lg:w-5 text-primary-foreground" />
+          <div className="p-1 lg:p-2">
+            <div className="mb-1 lg:mb-2">
+              <div className="flex items-center justify-between xl:justify-start mb-2">
+                <h2 className="font-bold text-foreground flex items-center gap-1 text-xs lg:text-base">
+                  <div className="p-1 lg:p-1.5 bg-gradient-to-br from-primary to-secondary rounded-lg shadow-sm">
+                    <BookOpen className="h-3 w-3 lg:h-4 lg:w-4 text-primary-foreground" />
                   </div>
                   <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Course Topics</span>
                 </h2>
@@ -263,12 +256,12 @@ export default function CoursePageClient({ courseId }: CoursePageClientProps) {
                   variant="ghost"
                   size="sm"
                   onClick={() => setSidebarOpen(false)}
-                  className="xl:hidden hover:bg-secondary/10 rounded-lg p-1"
+                  className="xl:hidden hover:bg-secondary/10 rounded-lg p-0.5"
                 >
                   <X className="h-3 w-3" />
                 </Button>
               </div>
-              <p className="text-xs lg:text-sm text-muted-foreground mb-3 bg-card/50 p-2 lg:p-3 rounded-lg">
+              <p className="text-xs lg:text-sm text-muted-foreground mb-2 bg-card/50 p-1 lg:p-2 rounded-lg">
                 {completedCount}/{totalTopics} topics completed - {courseContent?.topics.length} available
               </p>
             </div>
@@ -283,13 +276,13 @@ export default function CoursePageClient({ courseId }: CoursePageClientProps) {
                   }`}
                   onClick={() => {
                     handleTopicSelect(topic)
-                    setSidebarOpen(false) // Close sidebar on mobile after selection
+                    setSidebarOpen(false)
                   }}
                 >
-                  <CardContent className="p-2 lg:p-3">
+                  <CardContent className="p-1 lg:p-2">
                     <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-2 lg:gap-3 flex-1 min-w-0">
-                        <Badge variant="outline" className={`text-xs px-2 lg:px-3 py-0.5 lg:py-1 font-medium flex-shrink-0 ${
+                      <div className="flex items-center gap-1 lg:gap-2 flex-1 min-w-0">
+                        <Badge variant="outline" className={`text-xs px-1 lg:px-2 py-0.5 font-medium flex-shrink-0 ${
                           selectedTopic?.id === topic.id
                             ? 'bg-primary text-primary-foreground border-primary'
                             : 'bg-muted text-muted-foreground'
@@ -297,8 +290,8 @@ export default function CoursePageClient({ courseId }: CoursePageClientProps) {
                           {index + 1}
                         </Badge>
                         {completedTopics.has(topic.id) && (
-                          <div className="flex items-center justify-center w-4 h-4 lg:w-5 lg:h-5 bg-gradient-to-r from-secondary to-accent rounded-full flex-shrink-0">
-                            <CheckCircle className="h-2.5 w-2.5 lg:h-3 lg:w-3 text-white" />
+                          <div className="flex items-center justify-center w-3 h-3 lg:w-4 lg:h-4 bg-gradient-to-r from-secondary to-accent rounded-full flex-shrink-0">
+                            <CheckCircle className="h-2 w-2 lg:h-2.5 lg:w-2.5 text-white" />
                           </div>
                         )}
                         <h3 className={`font-semibold text-xs lg:text-sm truncate transition-colors duration-200 ${
@@ -309,7 +302,7 @@ export default function CoursePageClient({ courseId }: CoursePageClientProps) {
                           {topic.title}
                         </h3>
                       </div>
-                      <ChevronRight className={`h-3 w-3 lg:h-4 lg:w-4 transition-all duration-200 flex-shrink-0 ml-2 ${
+                      <ChevronRight className={`h-3 w-3 lg:h-4 lg:w-4 transition-all duration-200 flex-shrink-0 ml-1 ${
                         selectedTopic?.id === topic.id ? 'rotate-90 text-primary' : 'text-muted-foreground group-hover:text-primary'
                       }`} />
                     </div>

@@ -68,31 +68,31 @@ const useDeviceCapabilities = (): DeviceCapabilities => {
 // Responsive styles configuration
 const getResponsiveStyles = (breakpoint: Breakpoint) => ({
   mobile: {
-    titleSize: 'text-xl sm:text-2xl',
+    titleSize: 'text-base sm:text-lg',
+    contentSize: 'text-xs',
+    padding: 'p-2',
+    cardHeight: 'h-[70vh]',
+    contentMaxHeight: 'max-h-[50vh]',
+    buttonSize: 'min-h-[40px] min-w-[40px] px-2',
+    spacing: 'gap-2'
+  },
+  tablet: {
+    titleSize: 'text-lg md:text-xl',
     contentSize: 'text-sm',
-    padding: 'p-3 sm:p-4',
-    cardHeight: 'h-[70vh]', // Fixed height instead of min-height
-    contentMaxHeight: 'max-h-[50vh]', // Content area max height for scrolling
+    padding: 'p-3',
+    cardHeight: 'h-[75vh]',
+    contentMaxHeight: 'max-h-[55vh]',
     buttonSize: 'min-h-[44px] min-w-[44px] px-3',
     spacing: 'gap-3'
   },
-  tablet: {
-    titleSize: 'text-2xl md:text-3xl',
+  desktop: {
+    titleSize: 'text-xl lg:text-2xl',
     contentSize: 'text-base',
-    padding: 'p-4 md:p-6',
-    cardHeight: 'h-[75vh]', // Fixed height instead of min-height
-    contentMaxHeight: 'max-h-[55vh]', // Content area max height for scrolling
+    padding: 'p-4',
+    cardHeight: 'h-[80vh]',
+    contentMaxHeight: 'max-h-[60vh]',
     buttonSize: 'min-h-[48px] min-w-[48px] px-4',
     spacing: 'gap-4'
-  },
-  desktop: {
-    titleSize: 'text-3xl lg:text-4xl',
-    contentSize: 'text-lg',
-    padding: 'p-6 lg:p-8',
-    cardHeight: 'h-[80vh]', // Fixed height instead of min-height
-    contentMaxHeight: 'max-h-[60vh]', // Content area max height for scrolling
-    buttonSize: 'min-h-[52px] min-w-[52px] px-6',
-    spacing: 'gap-6'
   }
 }[breakpoint])
 
@@ -206,40 +206,40 @@ const ResponsiveContent: React.FC<{
         remarkPlugins={[remarkGfm]}
         components={{
           h1: ({ children }) => (
-            <h1 className="text-3xl font-bold text-primary mb-6 flex items-center gap-3 pb-3 border-b border-primary/20">
-              <div className="w-3 h-10 bg-gradient-to-b from-primary to-secondary rounded-full shadow-sm"></div>
+            <h1 className="text-xl font-bold text-primary mb-3 flex items-center gap-2 pb-1 border-b border-primary/20">
+              <div className="w-1.5 h-6 bg-gradient-to-b from-primary to-secondary rounded-full shadow-sm"></div>
               <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">{children}</span>
             </h1>
           ),
           h2: ({ children }) => (
-            <h2 className="text-2xl font-bold text-primary mb-4 flex items-center gap-3 pb-2 border-b border-primary/20 mt-8">
-              <div className="w-2 h-8 bg-gradient-to-b from-primary to-secondary rounded-full shadow-sm"></div>
+            <h2 className="text-lg font-bold text-primary mb-1.5 flex items-center gap-2 pb-0.5 border-b border-primary/20 mt-1.5">
+              <div className="w-1 h-5 bg-gradient-to-b from-primary to-secondary rounded-full shadow-sm"></div>
               <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">{children}</span>
             </h2>
           ),
           h3: ({ children }) => (
-            <h3 className="text-xl font-semibold text-foreground mb-4 ml-6 text-secondary mt-6">
+            <h3 className="text-base font-semibold text-foreground mb-2 ml-4 text-secondary mt-2">
               {children}
             </h3>
           ),
           h4: ({ children }) => (
-            <h4 className="text-lg font-semibold text-foreground mb-3 ml-8 text-secondary/80 mt-4">
+            <h4 className="text-sm font-semibold text-foreground mb-1.5 ml-6 text-secondary/80 mt-1.5">
               {children}
             </h4>
           ),
           p: ({ children }) => (
-            <p className="text-foreground leading-relaxed text-base ml-4 mb-4 bg-card/30 p-4 rounded-lg border border-border/20">
+            <p className="text-foreground leading-relaxed text-base ml-2 mb-2 bg-card/30 p-2 rounded-lg border border-border/20">
               {children}
             </p>
           ),
           ul: ({ children }) => (
-            <ul className="space-y-3 ml-6 mb-4">
+            <ul className="space-y-1.5 ml-4 mb-2">
               {children}
             </ul>
           ),
           li: ({ children }) => (
-            <li className="flex items-start gap-4 group">
-              <div className="w-2 h-2 bg-gradient-to-r from-primary to-secondary rounded-full mt-2.5 shrink-0 shadow-sm group-hover:scale-125 transition-transform duration-200"></div>
+            <li className="flex items-start gap-2 group">
+              <div className="w-1.5 h-1.5 bg-gradient-to-r from-primary to-secondary rounded-full mt-2 shrink-0 shadow-sm group-hover:scale-125 transition-transform duration-200"></div>
               <span className="text-muted-foreground leading-relaxed text-base group-hover:text-foreground transition-colors duration-200">
                 {children}
               </span>
