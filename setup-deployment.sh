@@ -101,9 +101,9 @@ case $choice in
         else
             echo ""
             echo "⚠️  SSH connection failed. Possible issues:"
-            echo "   • SSH is not enabled on your Hostinger plan"
-            echo "   • Incorrect hostname or username"
-            echo "   • Firewall blocking SSH"
+            echo "   - SSH is not enabled on your Hostinger plan"
+            echo "   - Incorrect hostname or username"
+            echo "   - Firewall blocking SSH"
             echo ""
             echo "💡 Consider using SFTP or FTP instead"
         fi
@@ -122,8 +122,8 @@ case $choice in
         echo "HOSTINGER_SFTP_PORT=22"
         echo ""
         echo "🔧 Update .github/workflows/deploy-hostinger.yml:"
-        echo "   • Comment out the Rsync section"
-        echo "   • Uncomment the SFTP section"
+        echo "   - Comment out the Rsync section"
+        echo "   - Uncomment the SFTP section"
         ;;
         
     3)
@@ -138,8 +138,8 @@ case $choice in
         echo "HOSTINGER_FTP_PASSWORD=your_ftp_password"
         echo ""
         echo "🔧 Update .github/workflows/deploy-hostinger.yml:"
-        echo "   • Comment out the Rsync section"
-        echo "   • Uncomment the FTP section"
+        echo "   - Comment out the Rsync section"
+        echo "   - Uncomment the FTP section"
         ;;
         
     4)

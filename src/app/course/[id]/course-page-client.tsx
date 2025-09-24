@@ -269,7 +269,7 @@ export default function CoursePageClient({ courseId }: CoursePageClientProps) {
                 </Button>
               </div>
               <p className="text-xs lg:text-sm text-muted-foreground mb-3 bg-card/50 p-2 lg:p-3 rounded-lg">
-                {completedCount}/{totalTopics} topics completed • {courseContent?.topics.length} available
+                {completedCount}/{totalTopics} topics completed - {courseContent?.topics.length} available
               </p>
             </div>
             <div className="space-y-1 lg:space-y-2">

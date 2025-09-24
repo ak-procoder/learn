@@ -169,7 +169,7 @@ const NavigationHints: React.FC<{
   if (breakpoint === 'mobile' && capabilities.hasTouch) {
     return (
       <div className="text-center text-xs text-muted-foreground py-2 bg-muted/30 rounded-lg mx-4 mb-2">
-        👆 Swipe left/right to navigate • ⌨️ Use arrow keys
+        👆 Swipe left/right to navigate - ⌨️ Use arrow keys
       </div>
     )
   }
@@ -177,7 +177,7 @@ const NavigationHints: React.FC<{
   if (breakpoint === 'desktop' && capabilities.hasHover) {
     return (
       <div className="text-center text-sm text-muted-foreground py-1">
-        ⌨️ Use ← → arrow keys to navigate • ↑ ↓ to scroll content
+        ⌨️ Use ← → arrow keys to navigate - ↑ ↓ to scroll content
       </div>
     )
   }
