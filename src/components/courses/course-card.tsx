@@ -44,7 +44,7 @@ export function CourseCard({ course }: CourseCardProps) {
   const levelColors = getLevelColors(course.level)
   
   return (
-    <Card className={`group overflow-hidden transition-all duration-500 hover:shadow-xl hover:shadow-primary/10 hover:-translate-y-2 bg-gradient-to-br ${levelColors.gradient} backdrop-blur-sm border-2 ${levelColors.border} relative`}>
+    <Card data-testid="course-card" className={`group overflow-hidden transition-all duration-500 hover:shadow-xl hover:shadow-primary/10 hover:-translate-y-2 bg-gradient-to-br ${levelColors.gradient} backdrop-blur-sm border-2 ${levelColors.border} relative`}>
       {/* Decorative gradient overlay */}
       <div className="absolute inset-0 bg-gradient-to-br from-background/95 via-background/90 to-background/95 backdrop-blur-sm" />
       

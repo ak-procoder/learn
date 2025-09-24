@@ -287,7 +287,7 @@ Line 5`
 - List item
 \`code\``
       
-      render(<ResponsiveContent content={mixedContent} />)
+      render(<ResponsiveContent content={mixedContent} isExpanded={true} />)
       
       expect(screen.getByText('Heading')).toBeInTheDocument()
       expect(screen.getByText('Subheading')).toBeInTheDocument()

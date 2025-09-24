@@ -34,7 +34,7 @@
  */
 
 import React from 'react'
-import { render, screen, fireEvent, waitFor, cleanup } from '@testing-library/react'
+import { render, screen, fireEvent, waitFor, cleanup, act } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
 import { CourseSlide } from '@/data/types/course-types'
@@ -85,7 +85,9 @@ const MockEmblaCarousel = ({ slides, testId = 'embla-carousel' }: {
 
   React.useEffect(() => {
     const handleResize = () => {
-      setBreakpoint(getBreakpoint(window.innerWidth))
+      act(() => {
+        setBreakpoint(getBreakpoint(window.innerWidth))
+      })
     }
     
     window.addEventListener('resize', handleResize)
@@ -285,7 +287,9 @@ describe('Embla Carousel Responsive Tests', () => {
     })
     
     // Trigger resize event
-    window.dispatchEvent(new Event('resize'))
+    act(() => {
+      window.dispatchEvent(new Event('resize'))
+    })
   }
 
   // Utility function to check if element has horizontal scrollbar
@@ -457,6 +461,9 @@ describe('Embla Carousel Responsive Tests', () => {
             expect(hasHorizontalScrollbar(slideContent)).toBe(false)
           }
         })
+        
+        // Clean up before next iteration
+        cleanup()
       })
     })
   })
@@ -611,6 +618,9 @@ describe('Embla Carousel Responsive Tests', () => {
             expect(hasHorizontalScrollbar(slideContent)).toBe(false)
           }
         })
+        
+        // Clean up before next iteration
+        cleanup()
       })
     })
   })
@@ -644,6 +654,9 @@ describe('Embla Carousel Responsive Tests', () => {
         // Should not cause horizontal scroll during navigation
         const viewport = screen.getByTestId('embla-viewport')
         expect(hasHorizontalScrollbar(viewport)).toBe(false)
+        
+        // Clean up before next iteration
+        cleanup()
       }
     })
 

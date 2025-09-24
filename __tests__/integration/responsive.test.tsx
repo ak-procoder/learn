@@ -203,8 +203,8 @@ describe('Responsive Design Integration Tests', () => {
     test('shows appropriate navigation hints based on device', () => {
       render(<KeyboardNavigationTest />)
       
-      const desktopHint = screen.getByText(/arrow keys to navigate/)
-      const mobileHint = screen.getByText(/swipe left\/right/)
+      const desktopHint = screen.getByText('Use ← → arrow keys to navigate')
+      const mobileHint = screen.getByText('Swipe left/right to navigate')
       
       expect(desktopHint).toHaveClass('hidden', 'md:block')
       expect(mobileHint).toHaveClass('block', 'md:hidden')
@@ -352,7 +352,7 @@ describe('Responsive Design Integration Tests', () => {
       
       render(<KeyboardNavigationTest />)
       
-      const mobileHint = screen.getByText(/swipe left\/right/)
+      const mobileHint = screen.getByText('Swipe left/right to navigate')
       expect(mobileHint).toHaveClass('block', 'md:hidden')
     })
 
@@ -362,7 +362,7 @@ describe('Responsive Design Integration Tests', () => {
       render(<KeyboardNavigationTest />)
       
       // Both hints should be available with responsive classes
-      const desktopHint = screen.getByText(/arrow keys/)
+      const desktopHint = screen.getByText('Use ← → arrow keys to navigate')
       expect(desktopHint).toHaveClass('hidden', 'md:block')
     })
 
@@ -371,7 +371,7 @@ describe('Responsive Design Integration Tests', () => {
       
       render(<KeyboardNavigationTest />)
       
-      const desktopHint = screen.getByText(/arrow keys/)
+      const desktopHint = screen.getByText('Use ← → arrow keys to navigate')
       expect(desktopHint).toHaveClass('hidden', 'md:block')
     })
   })

@@ -5,6 +5,7 @@
  * and configurations for the learning platform test suite.
  */
 
+import React from 'react'
 import '@testing-library/jest-dom'
 
 // Mock Next.js router
@@ -99,13 +100,28 @@ Object.defineProperty(navigator, 'vibrate', {
   value: jest.fn(),
 })
 
+// Mock react-markdown to handle ES module issues
+jest.mock('react-markdown', () => {
+  return function ReactMarkdown({ children }) {
+    return React.createElement('div', { 'data-testid': 'react-markdown' }, children)
+  }
+})
+
+// Mock remark-gfm
+jest.mock('remark-gfm', () => {
+  return function remarkGfm() {
+    return { settings: {} }
+  }
+})
+
 // Setup console error/warning suppression for expected errors in tests
 const originalError = console.error
 beforeAll(() => {
   console.error = (...args) => {
     if (
       typeof args[0] === 'string' &&
-      args[0].includes('Warning: ReactDOM.render is no longer supported')
+      (args[0].includes('Warning: ReactDOM.render is no longer supported') ||
+       args[0].includes('Not implemented: navigation'))
     ) {
       return
     }

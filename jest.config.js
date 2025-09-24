@@ -33,8 +33,16 @@ const customJestConfig = {
   
   // Transform ignore patterns for ES modules
   transformIgnorePatterns: [
-    'node_modules/(?!(react-markdown|remark-gfm)/)',
+    'node_modules/(?!(react-markdown|remark-gfm|micromark|decode-named-character-reference|character-entities|unist-util-stringify-position|mdast-util-from-markdown|mdast-util-to-string|unist-util-visit)/)',
   ],
+  
+  // Experimental ESM support
+  extensionsToTreatAsEsm: ['.ts', '.tsx'],
+  globals: {
+    'ts-jest': {
+      useESM: true
+    }
+  },
   
   // Test environment for DOM testing
   testEnvironment: 'jest-environment-jsdom',
