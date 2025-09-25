@@ -1,7 +1,7 @@
 "use client"
 
-import { useState, useEffect, useCallback, useMemo } from 'react'
-import { ArrowLeft, BookOpen, ChevronRight, CheckCircle, Menu, X } from 'lucide-react'
+import { useState, useEffect, useCallback, useMemo, useRef } from 'react'
+import { ArrowLeft, BookOpen, ChevronRight, CheckCircle, Menu, X, GripVertical } from 'lucide-react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
@@ -27,6 +27,10 @@ export default function CoursePageClient({ courseId }: CoursePageClientProps) {
   const [completedTopics, setCompletedTopics] = useState<Set<string>>(new Set())
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [initialSlideIndex, setInitialSlideIndex] = useState(0)
+  const [sidebarWidth, setSidebarWidth] = useState(350)
+  const isDragging = useRef(false)
+  const dragStartX = useRef(0)
+  const dragStartWidth = useRef(0)
   const router = useRouter()
 
   const course = courses.find(c => c.id === courseId)
@@ -184,6 +188,38 @@ export default function CoursePageClient({ courseId }: CoursePageClientProps) {
     )
   }
 
+  const handleMouseDown = (e: React.MouseEvent) => {
+    isDragging.current = true
+    dragStartX.current = e.clientX
+    dragStartWidth.current = sidebarWidth
+    document.body.style.userSelect = 'none'
+    document.body.style.cursor = 'col-resize'
+  }
+
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!isDragging.current) return
+
+      const delta = e.clientX - dragStartX.current
+      const newWidth = Math.min(Math.max(dragStartWidth.current + delta, 250), 600)
+      setSidebarWidth(newWidth)
+    }
+
+    const handleMouseUp = () => {
+      isDragging.current = false
+      document.body.style.userSelect = ''
+      document.body.style.cursor = ''
+    }
+
+    document.addEventListener('mousemove', handleMouseMove)
+    document.addEventListener('mouseup', handleMouseUp)
+
+    return () => {
+      document.removeEventListener('mousemove', handleMouseMove)
+      document.removeEventListener('mouseup', handleMouseUp)
+    }
+  }, [])
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background/50 to-primary/5">
       {/* Header */}
@@ -242,7 +278,9 @@ export default function CoursePageClient({ courseId }: CoursePageClientProps) {
         {/* Sidebar - 35% width for 13" screens */}
         <aside className={`${
           sidebarOpen ? 'translate-x-0' : '-translate-x-full'
-        } xl:translate-x-0 fixed xl:relative z-50 xl:z-auto w-72 xl:w-[35%] 2xl:w-[30%] h-full border-r border-border/20 bg-gradient-to-b from-card/95 to-card/98 xl:from-card/50 xl:to-card/80 backdrop-blur-sm overflow-y-auto transition-transform duration-300 ease-in-out`}>
+        } xl:translate-x-0 fixed xl:relative z-50 xl:z-auto h-full border-r border-border/20 bg-gradient-to-b from-card/95 to-card/98 xl:from-card/50 xl:to-card/80 backdrop-blur-sm overflow-y-auto transition-transform duration-300 ease-in-out`}
+        style={{ width: `${sidebarWidth}px` }}
+        >
           <div className="p-1 lg:p-2">
             <div className="mb-1 lg:mb-2">
               <div className="flex items-center justify-between xl:justify-start mb-2">
@@ -311,6 +349,16 @@ export default function CoursePageClient({ courseId }: CoursePageClientProps) {
               ))}
             </div>
           </div>
+
+          {/* Resize Handle */}
+          <div
+            className="absolute top-0 right-0 w-1 h-full cursor-col-resize hidden xl:block"
+            onMouseDown={handleMouseDown}
+          >
+            <div className="absolute inset-y-0 right-0 w-4 hover:bg-primary/5 transition-colors flex items-center justify-center group">
+              <GripVertical className="w-3 h-8 text-muted-foreground/30 group-hover:text-primary/50 transition-colors" />
+            </div>
+          </div>
         </aside>
 
         {/* Overlay for mobile sidebar */}
@@ -321,8 +369,11 @@ export default function CoursePageClient({ courseId }: CoursePageClientProps) {
           />
         )}
 
-        {/* Slide Area - Full remaining width */}
-        <main className="flex-1 xl:flex-none xl:w-[65%] 2xl:w-[70%] bg-gradient-to-br from-background to-muted/10 relative">
+        {/* Main content area */}
+        <main
+          className="flex-1 xl:flex-none bg-gradient-to-br from-background to-muted/10 relative"
+          style={{ width: `calc(100% - ${sidebarWidth}px)` }}
+        >
           {currentSlides.length > 0 ? (
             <EmblaCarousel 
               key={`${selectedTopic?.id}-${initialSlideIndex}`} // Force remount when topic or initial slide changes
