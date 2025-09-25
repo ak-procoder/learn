@@ -6,7 +6,7 @@
  */
 
 import React from 'react'
-import { render, screen, cleanup, waitFor } from '@testing-library/react'
+import { render, screen, cleanup } from '@testing-library/react'
 import '@testing-library/jest-dom'
 
 // Mock component that simulates the actual content structure
@@ -204,8 +204,6 @@ describe('Scrollbar Integration Tests', () => {
     testElement.style.scrollbarColor = '#3b82f6 transparent'
     
     document.body.appendChild(testElement)
-    
-    const computedStyle = window.getComputedStyle(testElement)
     
     // Should have correct styles applied
     expect(testElement.style.scrollbarWidth).toBe('thin')

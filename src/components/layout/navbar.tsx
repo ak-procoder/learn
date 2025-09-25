@@ -91,7 +91,7 @@ export function Navbar() {
         {pathname !== "/" && (
           <div className="flex items-center pr-6">
             <Button asChild className="bg-gradient-to-r from-primary to-secondary hover:from-primary/90 hover:to-secondary/90 text-primary-foreground font-semibold px-6 py-2 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105">
-              <Link href="/" className="flex items-center gap-2">
+              <Link href="/" className="flex items-center gap-2" data-testid="home-button">
                 <span>Take me Home</span>
               </Link>
             </Button>

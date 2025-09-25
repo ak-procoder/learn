@@ -297,11 +297,6 @@ describe('Embla Carousel Responsive Tests', () => {
     return element.scrollWidth > element.clientWidth
   }
 
-  // Utility function to check if element has vertical scrollbar
-  const hasVerticalScrollbar = (element: Element) => {
-    return element.scrollHeight > element.clientHeight
-  }
-
   beforeEach(() => {
     // Reset to default desktop size
     resizeWindow(1024, 768)
@@ -327,7 +322,6 @@ describe('Embla Carousel Responsive Tests', () => {
 
         await waitFor(() => {
           const viewport = screen.getByTestId('embla-viewport')
-          const container = screen.getByTestId('embla-container')
           
           // Viewport should never exceed screen width
           expect(viewport).toHaveStyle('max-width: 100vw')
@@ -367,13 +361,12 @@ describe('Embla Carousel Responsive Tests', () => {
           expect(carousel).toHaveAttribute('data-breakpoint', bp.name)
           
           const slides = screen.getAllByTestId(/embla-slide-\d+/)
-          slides.forEach((slide, index) => {
+          slides.forEach((slide) => {
             // Each slide should be full width
             expect(slide).toHaveClass('w-full')
             expect(slide).toHaveClass('flex-shrink-0')
             
             // Slide should have appropriate min-height for breakpoint
-            const computedStyle = window.getComputedStyle(slide)
             expect(slide.style.maxWidth).toBe('100vw')
           })
         })
@@ -391,7 +384,6 @@ describe('Embla Carousel Responsive Tests', () => {
         render(<MockEmblaCarousel slides={mockSlides} testId={testId} />)
         
         const viewport = screen.getByTestId('embla-viewport')
-        const container = screen.getByTestId('embla-container')
         
         // Should not have horizontal scrollbar on viewport
         expect(hasHorizontalScrollbar(document.body)).toBe(false)
@@ -499,7 +491,6 @@ describe('Embla Carousel Responsive Tests', () => {
       render(<MockEmblaCarousel slides={mockSlides} />)
       
       const viewport = screen.getByTestId('embla-viewport')
-      const container = screen.getByTestId('embla-container')
       
       // Simulate various touch gestures
       const touchEvents = [
@@ -678,7 +669,6 @@ describe('Embla Carousel Responsive Tests', () => {
         expect(hasHorizontalScrollbar(document.body)).toBe(false)
         
         // Container should maintain proper transform without overflow
-        const computedStyle = window.getComputedStyle(container)
         expect(container).toBeInTheDocument()
       }
     })

@@ -321,20 +321,26 @@ const EmblaCarousel: React.FC<PropType> = (props) => {
   const checkScrollable = useCallback((element: HTMLElement | null) => {
     // This function can be used in the future if scroll indicator is needed
     if (element) {
-      const _isScrollable = element.scrollHeight > element.clientHeight
-      // console.log('Content scrollable:', _isScrollable)
+      const isScrollable = element.scrollHeight > element.clientHeight
+      // console.log('Content scrollable:', isScrollable)
+      // Variable kept for future scroll indicator feature
+      void isScrollable
     }
   }, [])
 
   // Handle scroll events
   const handleScroll = useCallback((e: React.UIEvent<HTMLDivElement>) => {
     // This can be used for future scroll handling
-    const _target = e.target as HTMLDivElement
-    // console.log('Scroll position:', _target.scrollTop)
+    const target = e.target as HTMLDivElement
+    // console.log('Scroll position:', target.scrollTop)
+    // Variable kept for future scroll handling feature
+    void target
   }, [])
 
-  const onInit = useCallback((_emblaApi: EmblaCarouselType) => {
+  const onInit = useCallback((emblaApi: EmblaCarouselType) => {
     // Default carousel initialization (no parallax)
+    // API kept for future carousel features
+    void emblaApi
   }, [])
 
   const onSelect = useCallback((emblaApi: EmblaCarouselType) => {

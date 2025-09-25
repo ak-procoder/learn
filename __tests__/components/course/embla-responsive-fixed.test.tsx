@@ -278,11 +278,6 @@ describe('Embla Carousel Responsive Tests (Fixed)', () => {
     return element.scrollWidth > element.clientWidth
   }
 
-  // Utility function to check if element has vertical scrollbar
-  const hasVerticalScrollbar = (element: Element) => {
-    return element.scrollHeight > element.clientHeight
-  }
-
   beforeEach(() => {
     cleanup()
     // Reset to default desktop size
@@ -340,7 +335,6 @@ describe('Embla Carousel Responsive Tests (Fixed)', () => {
         render(<MockEmblaCarousel slides={mockSlides} testId={testId} />)
         
         const viewport = screen.getByTestId(`${testId}-viewport`)
-        const container = screen.getByTestId(`${testId}-container`)
         
         // Should not have horizontal scrollbar on viewport
         expect(hasHorizontalScrollbar(document.body)).toBe(false)

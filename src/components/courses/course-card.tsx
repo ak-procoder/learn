@@ -128,7 +128,7 @@ export function CourseCard({ course }: CourseCardProps) {
             asChild 
             className="w-full bg-gradient-to-r from-primary via-primary to-secondary hover:from-primary/90 hover:via-primary/90 hover:to-secondary/90 text-primary-foreground shadow-lg hover:shadow-xl hover:shadow-primary/25 transform transition-all duration-300 group-hover:scale-[1.02] font-semibold py-6 text-sm tracking-wide"
           >
-            <Link href={`/course/${course.id}`} className="flex items-center justify-center gap-2">
+            <Link href={`/${course.id}`} className="flex items-center justify-center gap-2">
               <span>Start Learning</span>
               <BookOpen className="h-4 w-4 group-hover:rotate-12 transition-transform duration-300" />
             </Link>

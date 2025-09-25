@@ -33,17 +33,23 @@ jest.mock('embla-carousel-react', () => ({
 }))
 
 // Direct import of the actual EmblaCarousel component to test the real implementation
-let EmblaCarousel: any
+let EmblaCarousel: React.ComponentType<{
+  slides: CourseSlide[]
+  options?: { loop: boolean }
+  onComplete?: () => void
+}>
 
 beforeAll(async () => {
   // Dynamic import to avoid module loading issues during testing
   try {
     EmblaCarousel = (await import('../../../src/components/course/embla-carousel/embla-carousel')).default
-  } catch (error) {
+  } catch {
     // Fallback mock if import fails
-    EmblaCarousel = ({ slides }: { slides: CourseSlide[] }) => (
+    const MockEmblaCarousel = ({ slides }: { slides: CourseSlide[] }) => (
       <div data-testid="embla-carousel-mock">Mock Carousel with {slides.length} slides</div>
     )
+    MockEmblaCarousel.displayName = 'MockEmblaCarousel'
+    EmblaCarousel = MockEmblaCarousel
   }
 })
 

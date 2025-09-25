@@ -153,7 +153,7 @@ describe('Enhanced Course Card Component', () => {
       
       const button = screen.getByRole('link', { name: /start learning/i })
       expect(button).toBeInTheDocument()
-      expect(button).toHaveAttribute('href', `/course/${mockCourse.id}`)
+      expect(button).toHaveAttribute('href', `/${mockCourse.id}`)
       expect(button).toHaveClass('bg-gradient-to-r')
     })
 
@@ -223,7 +223,7 @@ describe('Enhanced Course Card Component', () => {
       render(<CourseCard course={mockCourse} />)
       
       const link = screen.getByRole('link', { name: /start learning/i })
-      expect(link).toHaveAttribute('href', `/course/${mockCourse.id}`)
+      expect(link).toHaveAttribute('href', `/${mockCourse.id}`)
     })
 
     test('maintains semantic HTML structure', () => {

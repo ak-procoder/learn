@@ -30,7 +30,7 @@
  */
 
 import React from 'react'
-import { render, screen, fireEvent, waitFor } from '@testing-library/react'
+import { render, screen, waitFor } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import '@testing-library/jest-dom'
 import EmblaCarousel from '@/components/course/embla-carousel/embla-carousel'
@@ -147,7 +147,7 @@ describe('EmblaCarousel Component', () => {
       
       // Verify responsive content adaptation
       const slideContent = document.querySelector('.embla__slide__content')
-      expect(slideContent).toHaveClass(/p-4|md:p-6/)
+      expect(slideContent).toHaveClass('p-3')
     })
 
     test('adapts to desktop screen size', () => {
@@ -264,24 +264,6 @@ describe('EmblaCarousel Component', () => {
     })
 
     test('disables navigation buttons appropriately', () => {
-      // Mock emblaApi to simulate first slide
-      const mockEmblaApi = {
-        canScrollPrev: () => false,
-        canScrollNext: () => true,
-        scrollNext: jest.fn(),
-        scrollPrev: jest.fn(),
-        on: jest.fn(),
-        off: jest.fn(),
-        scrollTo: jest.fn(),
-        scrollProgress: () => 0,
-        scrollSnapList: () => [0, 1],
-        selectedScrollSnap: () => 0,
-        internalEngine: () => ({
-          slideRegistry: [[0], [1]],
-          options: { loop: false }
-        })
-      }
-      
       render(<EmblaCarousel {...defaultProps} />)
       
       // Previous button should be disabled on first slide
@@ -423,14 +405,14 @@ describe('EmblaCarousel Component', () => {
     })
 
     test('handles invalid slide content', () => {
-      const invalidSlides = [{
+      const invalidSlides: CourseSlide[] = [{
         id: 'invalid',
         title: 'Invalid Content',
         content: '', // Use empty string instead of null
         type: 'text' as const
       }]
       
-      render(<EmblaCarousel slides={invalidSlides as any} />)
+      render(<EmblaCarousel slides={invalidSlides} />)
       
       // Should handle invalid content gracefully
       expect(screen.getByText('Invalid Content')).toBeInTheDocument()

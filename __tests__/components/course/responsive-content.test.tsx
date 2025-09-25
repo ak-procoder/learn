@@ -148,18 +148,6 @@ const ResponsiveContent = ({ content, isExpanded = false, onToggleExpanded }: {
 }
 
 describe('ResponsiveContent Component', () => {
-  const sampleMarkdown = `# Network Basics
-
-**Networks** connect devices together.
-
-## Key Components
-
-- Router
-- Switch
-- Hub
-
-\`TCP/IP\` is the main protocol.`
-
   beforeEach(() => {
     // Reset any mocks or global state
     global.innerWidth = 1024

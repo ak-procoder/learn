@@ -29,15 +29,18 @@
 
 import { render, screen, fireEvent } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import Link from 'next/link'
 import '@testing-library/jest-dom'
 
 // Mock Next.js Link component
 jest.mock('next/link', () => {
-  return ({ children, href, className }: { children: React.ReactNode, href: string, className?: string }) => (
-    <a href={href} className={className}>
+  const MockLink = ({ children, href, ...props }: { children: React.ReactNode, href: string, [key: string]: unknown }) => (
+    <a href={href} {...props}>
       {children}
     </a>
   )
+  MockLink.displayName = 'MockLink'
+  return MockLink
 })
 
 // Simple Home Page component for testing
@@ -58,7 +61,7 @@ const HomePage = () => {
           
           {/* Custom Gradient Button */}
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <a
+            <Link
               href="/browse-courses"
               className="group relative inline-flex items-center justify-center px-8 py-4 text-lg font-semibold text-white rounded-xl transition-all duration-300 overflow-hidden"
               style={{
@@ -81,15 +84,15 @@ const HomePage = () => {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
                 </svg>
               </span>
-            </a>
+            </Link>
             
-            <a
+            <Link
               href="/about"
               className="inline-flex items-center justify-center px-8 py-4 text-lg font-medium text-slate-700 dark:text-slate-200 bg-white dark:bg-slate-800 border border-slate-300 dark:border-slate-600 rounded-xl hover:bg-slate-50 dark:hover:bg-slate-700 transition-colors duration-200"
               data-testid="learn-more-button"
             >
               Learn More
-            </a>
+            </Link>
           </div>
         </div>
       </div>

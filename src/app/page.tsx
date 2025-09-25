@@ -1,7 +1,4 @@
 import React from 'react'
-import Link from 'next/link'
-import { Button } from '@/components/ui/button'
-import { BookOpen } from 'lucide-react'
 import { CourseCard } from '@/components/courses/course-card'
 import { courses } from '@/lib/courses/courses'
 

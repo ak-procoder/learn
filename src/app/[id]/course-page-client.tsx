@@ -1,7 +1,7 @@
 "use client"
 
 import { useState, useEffect, useCallback, useMemo, useRef } from 'react'
-import { ArrowLeft, BookOpen, ChevronRight, CheckCircle, Menu, X, GripVertical } from 'lucide-react'
+import { BookOpen, ChevronRight, CheckCircle, Menu, X, GripVertical } from 'lucide-react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 
@@ -13,7 +13,7 @@ import { getCourseContent } from '@/lib/courses/course-loader'
 import { CourseTopic, CourseSlide, CourseContent } from '@/data/types/course-types'
 import { preloadNextTopic } from '@/lib/courses/dynamic-markdown-loader'
 import EmblaCarousel from '@/components/course/embla-carousel/embla-carousel'
-import '../../../components/course/embla-carousel/embla.css'
+import '../../components/course/embla-carousel/embla.css'
 
 interface CoursePageClientProps {
   courseId: string
@@ -156,6 +156,40 @@ export default function CoursePageClient({ courseId }: CoursePageClientProps) {
     return currentTopicIndex > 0
   }, [selectedTopic, courseContent])
 
+  // Mouse drag handlers for sidebar resizing - MUST be before early returns
+  useEffect(() => {
+    const handleMouseMove = (e: MouseEvent) => {
+      if (!isDragging.current) return
+
+      const delta = e.clientX - dragStartX.current
+      const newWidth = Math.min(Math.max(dragStartWidth.current + delta, 250), 600)
+      setSidebarWidth(newWidth)
+    }
+
+    const handleMouseUp = () => {
+      isDragging.current = false
+      document.body.style.userSelect = ''
+      document.body.style.cursor = ''
+    }
+
+    document.addEventListener('mousemove', handleMouseMove)
+    document.addEventListener('mouseup', handleMouseUp)
+
+    return () => {
+      document.removeEventListener('mousemove', handleMouseMove)
+      document.removeEventListener('mouseup', handleMouseUp)
+    }
+  }, [])
+
+  // Mouse down handler for sidebar resizing
+  const handleMouseDown = (e: React.MouseEvent) => {
+    isDragging.current = true
+    dragStartX.current = e.clientX
+    dragStartWidth.current = sidebarWidth
+    document.body.style.userSelect = 'none'
+    document.body.style.cursor = 'col-resize'
+  }
+
   // Calculate overall progress
   const totalTopics = courseContent?.topics.length || 0
   const completedCount = completedTopics.size
@@ -187,38 +221,6 @@ export default function CoursePageClient({ courseId }: CoursePageClientProps) {
       </div>
     )
   }
-
-  const handleMouseDown = (e: React.MouseEvent) => {
-    isDragging.current = true
-    dragStartX.current = e.clientX
-    dragStartWidth.current = sidebarWidth
-    document.body.style.userSelect = 'none'
-    document.body.style.cursor = 'col-resize'
-  }
-
-  useEffect(() => {
-    const handleMouseMove = (e: MouseEvent) => {
-      if (!isDragging.current) return
-
-      const delta = e.clientX - dragStartX.current
-      const newWidth = Math.min(Math.max(dragStartWidth.current + delta, 250), 600)
-      setSidebarWidth(newWidth)
-    }
-
-    const handleMouseUp = () => {
-      isDragging.current = false
-      document.body.style.userSelect = ''
-      document.body.style.cursor = ''
-    }
-
-    document.addEventListener('mousemove', handleMouseMove)
-    document.addEventListener('mouseup', handleMouseUp)
-
-    return () => {
-      document.removeEventListener('mousemove', handleMouseMove)
-      document.removeEventListener('mouseup', handleMouseUp)
-    }
-  }, [])
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-background via-background/50 to-primary/5">

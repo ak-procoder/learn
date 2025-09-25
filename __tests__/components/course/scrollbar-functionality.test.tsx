@@ -8,7 +8,6 @@
 import React from 'react'
 import { render, screen, cleanup } from '@testing-library/react'
 import '@testing-library/jest-dom'
-import { CourseSlide } from '@/data/types/course-types'
 
 // Mock scrollbar component to test scrollbar behavior
 const MockScrollableContent = ({ content, testId }: { content: string, testId: string }) => {
@@ -45,34 +44,6 @@ const MockScrollableContent = ({ content, testId }: { content: string, testId: s
       </div>
     </div>
   )
-}
-
-const mockSlideWithLongContent: CourseSlide = {
-  id: 'scrollbar-test-slide',
-  title: 'Scrollbar Test Slide',
-  content: {
-    markdown: `
-# Long Content for Scrollbar Testing
-
-This slide contains extensive content to test scrollbar visibility and functionality.
-
-## Section 1
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
-
-## Section 2
-Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-
-## Section 3
-Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur.
-
-## Section 4
-Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-
-## Section 5
-Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium.
-    `
-  },
-  type: 'text'
 }
 
 describe('Scrollbar Functionality Tests', () => {

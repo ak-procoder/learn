@@ -28,6 +28,15 @@
  */
 
 import '@testing-library/jest-dom'
+import { CourseTopic } from '@/data/types/course-types'
+
+// Define Course interface for tests
+interface Course {
+  id: string
+  title: string
+  description: string
+  topics: CourseTopic[]
+}
 
 // Mock course data
 const mockCourseMetadata = {
@@ -106,30 +115,44 @@ class CourseUtils {
     return slides
   }
 
-  static validateCourseData(courseData: any) {
+  static validateCourseData(courseData: unknown) {
     if (!courseData || typeof courseData !== 'object') {
       return { valid: false, error: 'Course data must be an object' }
     }
     
+    const data = courseData as Record<string, unknown>
     const required = ['id', 'title', 'description', 'topics']
     
     for (const field of required) {
-      if (!courseData[field]) {
+      if (!data[field]) {
         return { valid: false, error: `Missing required field: ${field}` }
       }
     }
-
-    if (!Array.isArray(courseData.topics)) {
+    
+    if (!Array.isArray(data.topics)) {
       return { valid: false, error: 'Topics must be an array' }
     }
-
-    for (const topic of courseData.topics) {
-      if (!topic.id || !topic.title || !Array.isArray(topic.slides)) {
+    
+    for (const topic of data.topics) {
+      if (typeof topic !== 'object' || !topic) {
+        return { valid: false, error: 'Invalid topic structure' }
+      }
+      
+      const topicObj = topic as Record<string, unknown>
+      const requiredTopicFields = ['id', 'title', 'slides']
+      
+      for (const field of requiredTopicFields) {
+        if (!topicObj[field]) {
+          return { valid: false, error: 'Invalid topic structure' }
+        }
+      }
+      
+      if (!Array.isArray(topicObj.slides)) {
         return { valid: false, error: 'Invalid topic structure' }
       }
     }
-
-    return { valid: true }
+    
+    return { valid: true, error: null }
   }
 
   static formatDuration(minutes: number) {
@@ -168,13 +191,13 @@ class CourseUtils {
     return Math.round((completed / totalSlides.length) * 100)
   }
 
-  static searchCourses(courses: any[], query: string) {
+  static searchCourses(courses: Course[], query: string) {
     const lowercaseQuery = query.toLowerCase()
     
     return courses.filter(course => 
       course.title.toLowerCase().includes(lowercaseQuery) ||
       course.description.toLowerCase().includes(lowercaseQuery) ||
-      course.topics.some((topic: any) => 
+      course.topics.some((topic: CourseTopic) => 
         topic.title.toLowerCase().includes(lowercaseQuery)
       )
     )
@@ -414,21 +437,42 @@ describe('CourseUtils', () => {
   })
 
   describe('Search Functionality', () => {
-    const mockCourses = [
+    const mockCourses: Course[] = [
       {
+        id: 'js-fundamentals',
         title: 'JavaScript Fundamentals',
         description: 'Learn the basics of JavaScript programming',
-        topics: [{ title: 'Variables and Functions' }]
+        topics: [{ 
+          id: 'variables',
+          title: 'Variables and Functions',
+          description: 'Basic concepts',
+          duration: '30 min',
+          slides: []
+        }]
       },
       {
+        id: 'python-data-science',
         title: 'Python for Data Science',
         description: 'Data analysis with Python and pandas',
-        topics: [{ title: 'Data Manipulation' }]
+        topics: [{ 
+          id: 'data-manipulation',
+          title: 'Data Manipulation',
+          description: 'Working with data',
+          duration: '45 min',
+          slides: []
+        }]
       },
       {
+        id: 'web-development',
         title: 'Web Development',
         description: 'Build modern websites with HTML, CSS, and JavaScript',
-        topics: [{ title: 'Frontend Design' }]
+        topics: [{ 
+          id: 'frontend-design',
+          title: 'Frontend Design',
+          description: 'UI/UX principles',
+          duration: '60 min',
+          slides: []
+        }]
       }
     ]
 
@@ -503,7 +547,7 @@ describe('CourseUtils', () => {
     })
 
     test('handles empty search query', () => {
-      const courses = [{ title: 'Test', description: 'Test', topics: [] }]
+      const courses: Course[] = [{ id: 'test', title: 'Test', description: 'Test', topics: [] }]
       const results = CourseUtils.searchCourses(courses, '')
       
       // Empty query should return all courses

@@ -465,14 +465,26 @@ describe('Responsive Design Integration Tests', () => {
     })
 
     test('handles missing device capability APIs', () => {
-      // Remove APIs
-      delete (navigator as any).maxTouchPoints
-      delete (window as any).matchMedia
+      // Store original values
+      const originalMaxTouchPoints = Object.getOwnPropertyDescriptor(navigator, 'maxTouchPoints')
+      const originalMatchMedia = window.matchMedia
       
-      render(<KeyboardNavigationTest />)
-      
-      // Should render without errors
-      expect(screen.getByTestId('keyboard-navigation')).toBeInTheDocument()
+      try {
+        // Mock undefined APIs
+        Object.defineProperty(navigator, 'maxTouchPoints', { value: undefined, configurable: true })
+        delete (window as unknown as { matchMedia?: unknown }).matchMedia
+        
+        render(<KeyboardNavigationTest />)
+        
+        // Should render without errors
+        expect(screen.getByTestId('keyboard-navigation')).toBeInTheDocument()
+      } finally {
+        // Restore original values
+        if (originalMaxTouchPoints) {
+          Object.defineProperty(navigator, 'maxTouchPoints', originalMaxTouchPoints)
+        }
+        window.matchMedia = originalMatchMedia
+      }
     })
   })
 })

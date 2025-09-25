@@ -29,6 +29,7 @@
 
 import { render, screen, fireEvent } from '@testing-library/react'
 import { usePathname } from 'next/navigation'
+import Link from 'next/link'
 import '@testing-library/jest-dom'
 
 // Mock Next.js navigation
@@ -38,11 +39,13 @@ jest.mock('next/navigation', () => ({
 
 // Mock Next.js Link component
 jest.mock('next/link', () => {
-  return ({ children, href, className }: { children: React.ReactNode, href: string, className?: string }) => (
-    <a href={href} className={className}>
+  const MockLink = ({ children, href, ...props }: { children: React.ReactNode, href: string, [key: string]: unknown }) => (
+    <a href={href} {...props}>
       {children}
     </a>
   )
+  MockLink.displayName = 'MockLink'
+  return MockLink
 })
 
 // Simple Navbar component for testing
@@ -66,24 +69,24 @@ const Navbar = () => {
 
           {/* Navigation Links - Hidden on mobile */}
           <div className="hidden md:flex items-center space-x-8">
-            <a href="/browse-courses" className="text-slate-600 dark:text-slate-300 hover:text-blue-600 transition-colors">
+            <Link href="/browse-courses" className="text-slate-600 dark:text-slate-300 hover:text-blue-600 transition-colors">
               Browse Courses
-            </a>
-            <a href="/about" className="text-slate-600 dark:text-slate-300 hover:text-blue-600 transition-colors">
+            </Link>
+            <Link href="/about" className="text-slate-600 dark:text-slate-300 hover:text-blue-600 transition-colors">
               About
-            </a>
+            </Link>
           </div>
 
           {/* Take me Home Button - Conditional */}
           <div className="flex items-center space-x-4">
             {!isHomePage && (
-              <a
+              <Link
                 href="/"
                 className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-4 py-2 rounded-lg font-medium hover:from-blue-700 hover:to-purple-700 transition-all duration-200"
                 data-testid="home-button"
               >
                 Take me Home
-              </a>
+              </Link>
             )}
             
             {/* Mobile Menu Button */}
@@ -142,7 +145,7 @@ describe('Navbar Component', () => {
 
   describe('Conditional Home Button', () => {
     test('shows "Take me Home" button when not on home page', () => {
-      mockUsePathname.mockReturnValue('/course/123')
+      mockUsePathname.mockReturnValue('/computer-networks')
       
       render(<Navbar />)
       
@@ -170,7 +173,7 @@ describe('Navbar Component', () => {
     })
 
     test('shows button on nested course pages', () => {
-      mockUsePathname.mockReturnValue('/course/computer-networks/introduction')
+      mockUsePathname.mockReturnValue('/computer-networks/introduction')
       
       render(<Navbar />)
       
@@ -183,7 +186,7 @@ describe('Navbar Component', () => {
         '/contact',
         '/profile',
         '/settings',
-        '/course/123/lesson/456'
+        '/computer-networks/lesson/456'
       ]
 
       nonHomeRoutes.forEach(route => {
@@ -315,7 +318,7 @@ describe('Navbar Component', () => {
     })
 
     test('home button has hover effects', () => {
-      mockUsePathname.mockReturnValue('/course/123')
+      mockUsePathname.mockReturnValue('/computer-networks')
       
       render(<Navbar />)
       
@@ -351,7 +354,7 @@ describe('Navbar Component', () => {
     })
 
     test('home button is keyboard accessible', () => {
-      mockUsePathname.mockReturnValue('/course/123')
+      mockUsePathname.mockReturnValue('/computer-networks')
       
       render(<Navbar />)
       
