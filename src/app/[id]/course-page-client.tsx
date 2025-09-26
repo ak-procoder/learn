@@ -27,7 +27,17 @@ export default function CoursePageClient({ courseId }: CoursePageClientProps) {
   const [completedTopics, setCompletedTopics] = useState<Set<string>>(new Set())
   const [sidebarOpen, setSidebarOpen] = useState(false)
   const [initialSlideIndex, setInitialSlideIndex] = useState(0)
-  const [sidebarWidth, setSidebarWidth] = useState(350)
+  const [sidebarWidth, setSidebarWidth] = useState(() => {
+    // Responsive sidebar width based on screen size
+    if (typeof window !== 'undefined') {
+      const width = window.innerWidth
+      if (width < 768) return 280 // Mobile
+      if (width < 1024) return 320 // Tablet
+      if (width < 1440) return 350 // Laptop
+      return 380 // Desktop
+    }
+    return 350 // Default for SSR
+  })
   const isDragging = useRef(false)
   const dragStartX = useRef(0)
   const dragStartWidth = useRef(0)
@@ -42,7 +52,7 @@ export default function CoursePageClient({ courseId }: CoursePageClientProps) {
     ['tcp-ip', { slidePattern: 'tcp-{n}.md', slideCount: 30 }],
     ['network-devices', { slidePattern: 'devices-{n}.md', slideCount: 20 }],
     ['routing-protocols', { slidePattern: 'routing-{n}.md', slideCount: 20 }],
-    ['network-security', { slidePattern: 'security-{n}.md', slideCount: 25 }],
+    ['network-security', { slidePattern: 'security-{n}.md', slideCount: 22 }],
     ['troubleshooting', { slidePattern: 'troubleshooting-{n}.md', slideCount: 15 }],
     ['advanced-topics', { slidePattern: 'advanced-{n}.md', slideCount: 15 }]
   ]), [])
@@ -70,6 +80,23 @@ export default function CoursePageClient({ courseId }: CoursePageClientProps) {
 
     loadCourseContent()
   }, [courseId])
+
+  // Responsive sidebar width handler
+  useEffect(() => {
+    const handleResize = () => {
+      const width = window.innerWidth
+      let newWidth: number
+      if (width < 768) newWidth = 280 // Mobile
+      else if (width < 1024) newWidth = 320 // Tablet  
+      else if (width < 1440) newWidth = 350 // Laptop
+      else newWidth = 380 // Desktop
+      
+      setSidebarWidth(newWidth)
+    }
+
+    window.addEventListener('resize', handleResize)
+    return () => window.removeEventListener('resize', handleResize)
+  }, [])
 
   const handleTopicSelect = (topic: CourseTopic) => {
     setSelectedTopic(topic)
@@ -195,10 +222,10 @@ export default function CoursePageClient({ courseId }: CoursePageClientProps) {
   const completedCount = completedTopics.size
   const overallProgress = totalTopics > 0 ? (completedCount / totalTopics) * 100 : 0
 
-  // Loading state
+    // Loading state
   if (isLoading) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="h-[calc(100vh-4rem)] h-[calc(100dvh-4rem)] supports-[height:100cqh]:h-[calc(100cqh-4rem)] flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto mb-4"></div>
           <h2 className="text-xl font-semibold text-foreground">Loading Course...</h2>
@@ -210,7 +237,7 @@ export default function CoursePageClient({ courseId }: CoursePageClientProps) {
   // Course not found
   if (!course || !courseContent) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
+      <div className="h-[calc(100vh-4rem)] h-[calc(100dvh-4rem)] supports-[height:100cqh]:h-[calc(100cqh-4rem)] flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-2xl font-bold text-foreground mb-4">Course Not Found</h1>
           <p className="text-muted-foreground mb-6">The course you&apos;re looking for doesn&apos;t exist.</p>
@@ -223,9 +250,9 @@ export default function CoursePageClient({ courseId }: CoursePageClientProps) {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-background via-background/50 to-primary/5">
+    <div className="h-[calc(100vh-4rem)] h-[calc(100dvh-4rem)] supports-[height:100cqh]:h-[calc(100cqh-4rem)] bg-gradient-to-br from-background via-background/50 to-primary/5 flex flex-col">
       {/* Header */}
-      <header className="border-b border-border/20 bg-card/80 backdrop-blur-xl supports-[backdrop-filter]:bg-card/60 sticky top-16 z-40 shadow-lg shadow-primary/5">
+      <header className="border-b border-border/20 bg-card/80 backdrop-blur-xl supports-[backdrop-filter]:bg-card/60 sticky top-16 z-40 shadow-lg shadow-primary/5 flex-shrink-0">
         <div className="container mx-auto px-1 lg:px-2 py-0.5 lg:py-1">
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-1 lg:gap-4">
@@ -242,7 +269,7 @@ export default function CoursePageClient({ courseId }: CoursePageClientProps) {
               </Button>
               <div className="xl:hidden h-5 lg:h-6 w-px bg-gradient-to-b from-primary/20 to-secondary/20" />
               <div>
-                <h1 className="font-bold text-foreground text-xs lg:text-base bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">{course.title}</h1>
+                <h1 className="font-bold text-foreground text-xs lg:text-base bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">{course?.title || 'Course'}</h1>
                 <p className="text-xs lg:text-sm text-muted-foreground font-medium hidden lg:block">Computer Networking Course</p>
               </div>
             </div>
@@ -269,14 +296,14 @@ export default function CoursePageClient({ courseId }: CoursePageClientProps) {
                   </div>
                 </div>
               </Card>
-              <Badge variant="outline" className="bg-accent/10 border-accent/30 text-accent-foreground font-semibold px-1 lg:px-2 py-0.5 text-xs lg:text-sm">{course.level}</Badge>
+              <Badge variant="outline" className="bg-accent/10 border-accent/30 text-accent-foreground font-semibold px-1 lg:px-2 py-0.5 text-xs lg:text-sm">{course?.level || 'Course'}</Badge>
             </div>
           </div>
         </div>
       </header>
 
       {/* Main Content - Responsive Layout */}
-      <div className="relative flex h-[calc(100vh-4rem)] lg:h-[calc(100vh-5rem)]">
+      <div className="relative flex flex-1 overflow-hidden">
         {/* Sidebar - 35% width for 13" screens */}
         <aside className={`${
           sidebarOpen ? 'translate-x-0' : '-translate-x-full'
@@ -284,13 +311,13 @@ export default function CoursePageClient({ courseId }: CoursePageClientProps) {
         style={{ width: `${sidebarWidth}px` }}
         >
           <div className="p-1 lg:p-2">
-            <div className="mb-1 lg:mb-2">
-              <div className="flex items-center justify-between xl:justify-start mb-2">
-                <h2 className="font-bold text-foreground flex items-center gap-1 text-xs lg:text-base">
-                  <div className="p-1 lg:p-1.5 bg-gradient-to-br from-primary to-secondary rounded-lg shadow-sm">
-                    <BookOpen className="h-3 w-3 lg:h-4 lg:w-4 text-primary-foreground" />
+            <div className="mb-2 lg:mb-3">
+              <div className="flex items-center justify-between xl:justify-start mb-3">
+                <h2 className="font-bold text-foreground flex items-center gap-2 text-xs lg:text-base">
+                  <div className="p-1.5 lg:p-2 bg-gradient-to-br from-primary/20 via-secondary/15 to-accent/10 rounded-xl shadow-lg border border-primary/20 group-hover:shadow-xl transition-all duration-300">
+                    <BookOpen className="h-3 w-3 lg:h-4 lg:w-4 text-primary drop-shadow-sm" />
                   </div>
-                  <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent">Course Topics</span>
+                  <span className="bg-gradient-to-r from-primary via-secondary to-accent bg-clip-text text-transparent font-extrabold tracking-wide">Course Topics</span>
                 </h2>
                 <Button
                   variant="ghost"
@@ -301,50 +328,71 @@ export default function CoursePageClient({ courseId }: CoursePageClientProps) {
                   <X className="h-3 w-3" />
                 </Button>
               </div>
-              <p className="text-xs lg:text-sm text-muted-foreground mb-2 bg-card/50 p-1 lg:p-2 rounded-lg">
-                {completedCount}/{totalTopics} topics completed - {courseContent?.topics.length} available
-              </p>
+              <div className="bg-gradient-to-r from-card/60 to-card/40 backdrop-blur-sm p-2 lg:p-3 rounded-xl border border-border/30 shadow-sm mb-3">
+                <p className="text-xs lg:text-sm text-muted-foreground font-medium">
+                  <span className="text-primary font-semibold">{completedCount}</span>/<span className="text-secondary font-semibold">{totalTopics}</span> topics completed
+                </p>
+                <div className="w-full bg-muted/30 rounded-full h-1.5 mt-1 overflow-hidden">
+                  <div 
+                    className="bg-gradient-to-r from-primary via-secondary to-accent h-full rounded-full transition-all duration-500 ease-out shadow-sm"
+                    style={{ width: `${totalTopics > 0 ? (completedCount / totalTopics) * 100 : 0}%` }}
+                  />
+                </div>
+              </div>
             </div>
-            <div className="space-y-1 lg:space-y-2">
+            <div className="space-y-2 lg:space-y-3">
               {courseContent?.topics.map((topic, index) => (
                 <Card 
                   key={topic.id}
-                  className={`cursor-pointer transition-all duration-200 hover:shadow-md group ${
+                  className={`cursor-pointer transition-all duration-300 group relative overflow-hidden ${
                     selectedTopic?.id === topic.id
-                      ? 'ring-1 ring-primary bg-gradient-to-r from-primary/8 to-secondary/4 shadow-md border-primary/30'
-                      : 'hover:bg-card/80 hover:border-primary/20 bg-card/40 backdrop-blur-sm'
+                      ? 'ring-2 ring-primary/50 bg-gradient-to-r from-primary/12 via-secondary/8 to-accent/6 shadow-lg border-primary/40 scale-[1.02] hover:shadow-xl'
+                      : 'hover:bg-gradient-to-r hover:from-card/90 hover:via-card/80 hover:to-card/70 hover:border-primary/30 bg-card/50 backdrop-blur-sm hover:scale-[1.01] hover:shadow-lg'
                   }`}
                   onClick={() => {
                     handleTopicSelect(topic)
                     setSidebarOpen(false)
                   }}
                 >
-                  <CardContent className="p-1 lg:p-2">
+                  {/* Subtle glow effect */}
+                  <div className={`absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 ${
+                    selectedTopic?.id === topic.id 
+                      ? 'bg-gradient-to-r from-primary/5 to-secondary/5' 
+                      : 'bg-gradient-to-r from-primary/3 to-secondary/3'
+                  }`} />
+                  <CardContent className="p-2 lg:p-3 relative z-10">
                     <div className="flex items-center justify-between">
-                      <div className="flex items-center gap-1 lg:gap-2 flex-1 min-w-0">
-                        <Badge variant="outline" className={`text-xs px-1 lg:px-2 py-0.5 font-medium flex-shrink-0 ${
+                      <div className="flex items-center gap-2 lg:gap-3 flex-1 min-w-0">
+                        <Badge variant="outline" className={`text-xs px-2 lg:px-3 py-1 font-semibold flex-shrink-0 transition-all duration-300 ${
                           selectedTopic?.id === topic.id
-                            ? 'bg-primary text-primary-foreground border-primary'
-                            : 'bg-muted text-muted-foreground'
+                            ? 'bg-gradient-to-r from-primary to-secondary text-primary-foreground border-primary/50 shadow-md'
+                            : 'bg-gradient-to-r from-muted/80 to-muted/60 text-muted-foreground border-muted-foreground/30 group-hover:border-primary/40 group-hover:bg-gradient-to-r group-hover:from-primary/10 group-hover:to-secondary/10'
                         }`}>
                           {index + 1}
                         </Badge>
                         {completedTopics.has(topic.id) && (
-                          <div className="flex items-center justify-center w-3 h-3 lg:w-4 lg:h-4 bg-gradient-to-r from-secondary to-accent rounded-full flex-shrink-0">
-                            <CheckCircle className="h-2 w-2 lg:h-2.5 lg:w-2.5 text-white" />
+                          <div className="relative flex items-center justify-center w-4 h-4 lg:w-5 lg:h-5 flex-shrink-0">
+                            <div className="absolute inset-0 bg-gradient-to-r from-green-500 to-emerald-500 rounded-full animate-pulse opacity-20" />
+                            <div className="flex items-center justify-center w-full h-full bg-gradient-to-r from-green-500 to-emerald-500 rounded-full shadow-lg">
+                              <CheckCircle className="h-2.5 w-2.5 lg:h-3 lg:w-3 text-white drop-shadow-sm" />
+                            </div>
                           </div>
                         )}
-                        <h3 className={`font-semibold text-xs lg:text-sm truncate transition-colors duration-200 ${
+                        <h3 className={`font-semibold text-xs lg:text-sm truncate transition-all duration-300 ${
                           selectedTopic?.id === topic.id 
-                            ? 'text-primary' 
-                            : 'text-foreground group-hover:text-primary'
+                            ? 'text-primary drop-shadow-sm' 
+                            : 'text-foreground group-hover:text-primary group-hover:translate-x-1'
                         }`}>
                           {topic.title}
                         </h3>
                       </div>
-                      <ChevronRight className={`h-3 w-3 lg:h-4 lg:w-4 transition-all duration-200 flex-shrink-0 ml-1 ${
-                        selectedTopic?.id === topic.id ? 'rotate-90 text-primary' : 'text-muted-foreground group-hover:text-primary'
-                      }`} />
+                      <div className="relative flex items-center justify-center flex-shrink-0">
+                        <ChevronRight className={`h-3 w-3 lg:h-4 lg:w-4 transition-all duration-300 ml-2 ${
+                          selectedTopic?.id === topic.id 
+                            ? 'rotate-90 text-primary scale-110 drop-shadow-sm' 
+                            : 'text-muted-foreground group-hover:text-primary group-hover:translate-x-1 group-hover:scale-110'
+                        }`} />
+                      </div>
                     </div>
                   </CardContent>
                 </Card>
@@ -373,8 +421,12 @@ export default function CoursePageClient({ courseId }: CoursePageClientProps) {
 
         {/* Main content area */}
         <main
-          className="flex-1 xl:flex-none bg-gradient-to-br from-background to-muted/10 relative"
-          style={{ width: `calc(100% - ${sidebarWidth}px)` }}
+          className="flex-1 xl:flex-none bg-gradient-to-br from-background to-muted/10 relative h-full overflow-hidden w-full xl:w-auto"
+          style={{ 
+            width: typeof window !== 'undefined' && window.innerWidth >= 1280 
+              ? `calc(100% - ${sidebarWidth}px)` 
+              : '100%' 
+          }}
         >
           {currentSlides.length > 0 ? (
             <EmblaCarousel 
@@ -406,7 +458,7 @@ export default function CoursePageClient({ courseId }: CoursePageClientProps) {
                     Select a topic from the sidebar to begin your networking journey
                   </p>
                   <Badge variant="secondary" className="text-xs lg:text-sm">
-                    {courseContent.topics.length} topics available
+                    {courseContent?.topics.length || 0} topics available
                   </Badge>
                 </CardContent>
               </Card>

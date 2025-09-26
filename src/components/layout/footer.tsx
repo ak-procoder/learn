@@ -1,113 +1,96 @@
+"use client"
+
 import Link from "next/link"
-import { GraduationCap, Mail, Github, Twitter } from "lucide-react"
+import { Mail, Github, Twitter } from "lucide-react"
+import { useState } from "react"
 
 export function Footer() {
+  const [showCopiedMessage, setShowCopiedMessage] = useState(false)
+
+  // Enhanced email click handler with clipboard copying
+  const handleEmailClick = async () => {
+    // Don't prevent the mailto link from working
+    try {
+      await navigator.clipboard.writeText('info@procoder.work')
+      
+      // Show success feedback
+      setShowCopiedMessage(true)
+      setTimeout(() => setShowCopiedMessage(false), 2000) // Hide after 2 seconds
+      
+    } catch {
+      // Silently fail - mailto link still works normally
+      console.log('Clipboard not available, mailto will still work')
+    }
+  }
+
   return (
     <footer className="border-t border-border/40 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container mx-auto px-4 py-8">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
-          {/* Brand Section */}
-          <div className="space-y-4">
-            <div className="flex items-center space-x-2">
-              <GraduationCap className="h-6 w-6 text-primary" />
-              <span className="font-bold text-lg">ProCoder</span>
-            </div>
-            <p className="text-sm text-muted-foreground">
-              Empowering students with essential computer skills to help them find their dream jobs.
-            </p>
-          </div>
+      <div className="container mx-auto px-4 py-4">
+        {/* Combined Connect and Copyright Section */}
+        <div className="text-center space-y-3 relative">
+          {/* Social Links - Compact Layout */}
+          <div className="flex justify-center items-center gap-4 sm:gap-6">
+            <Link 
+              href="mailto:info@procoder.work" 
+              onClick={handleEmailClick}
+              className="group flex items-center gap-2 p-2 rounded-lg hover:bg-primary/5 transition-all duration-300"
+              aria-label="Email us - Click to open email client and copy address"
+            >
+              <div className="p-2 rounded-lg bg-gradient-to-br from-primary/10 to-secondary/10 group-hover:from-primary/20 group-hover:to-secondary/20 transition-all duration-300">
+                <Mail className="h-4 w-4 text-primary group-hover:scale-110 transition-transform duration-300" />
+              </div>
+              <span className="text-sm font-medium text-foreground group-hover:text-primary transition-colors hidden sm:block">
+                info@procoder.work
+              </span>
+            </Link>
 
-          {/* Learning Section */}
-          <div className="space-y-4">
-            <h3 className="font-semibold text-foreground">Learning</h3>
-            <ul className="space-y-2 text-sm">
-              <li>
-                <Link href="/browse-courses" className="text-muted-foreground hover:text-foreground transition-colors">
-                  Browse Courses
-                </Link>
-              </li>
-              <li>
-                <Link href="/computer-networks" className="text-muted-foreground hover:text-foreground transition-colors">
-                  Computer Networks
-                </Link>
-              </li>
-              <li>
-                <span className="text-muted-foreground">More courses coming soon</span>
-              </li>
-            </ul>
-          </div>
+            <Link 
+              href="https://github.com/ak-procoder" 
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex items-center gap-2 p-2 rounded-lg hover:bg-primary/5 transition-all duration-300"
+              aria-label="Visit our GitHub"
+            >
+              <div className="p-2 rounded-lg bg-gradient-to-br from-primary/10 to-secondary/10 group-hover:from-primary/20 group-hover:to-secondary/20 transition-all duration-300">
+                <Github className="h-4 w-4 text-primary group-hover:scale-110 transition-transform duration-300" />
+              </div>
+              <span className="text-sm font-medium text-foreground group-hover:text-primary transition-colors hidden sm:block">
+                @ak-procoder
+              </span>
+            </Link>
 
-          {/* Support Section */}
-          <div className="space-y-4">
-            <h3 className="font-semibold text-foreground">Support</h3>
-            <ul className="space-y-2 text-sm">
-              <li>
-                <Link href="#" className="text-muted-foreground hover:text-foreground transition-colors">
-                  Help Center
-                </Link>
-              </li>
-              <li>
-                <Link href="#" className="text-muted-foreground hover:text-foreground transition-colors">
-                  Contact Us
-                </Link>
-              </li>
-              <li>
-                <Link href="#" className="text-muted-foreground hover:text-foreground transition-colors">
-                  Community
-                </Link>
-              </li>
-            </ul>
+            <Link 
+              href="https://twitter.com/akprocoder" 
+              target="_blank"
+              rel="noopener noreferrer"
+              className="group flex items-center gap-2 p-2 rounded-lg hover:bg-primary/5 transition-all duration-300"
+              aria-label="Follow us on Twitter"
+            >
+              <div className="p-2 rounded-lg bg-gradient-to-br from-primary/10 to-secondary/10 group-hover:from-primary/20 group-hover:to-secondary/20 transition-all duration-300">
+                <Twitter className="h-4 w-4 text-primary group-hover:scale-110 transition-transform duration-300" />
+              </div>
+              <span className="text-sm font-medium text-foreground group-hover:text-primary transition-colors hidden sm:block">
+                @akprocoder
+              </span>
+            </Link>
           </div>
-
-          {/* Connect Section */}
-          <div className="space-y-4">
-            <h3 className="font-semibold text-foreground">Connect</h3>
-            <div className="flex space-x-4">
-              <Link 
-                href="#" 
-                className="text-muted-foreground hover:text-foreground transition-colors"
-                aria-label="Email"
-              >
-                <Mail className="h-5 w-5" />
-              </Link>
-              <Link 
-                href="#" 
-                className="text-muted-foreground hover:text-foreground transition-colors"
-                aria-label="GitHub"
-              >
-                <Github className="h-5 w-5" />
-              </Link>
-              <Link 
-                href="#" 
-                className="text-muted-foreground hover:text-foreground transition-colors"
-                aria-label="Twitter"
-              >
-                <Twitter className="h-5 w-5" />
-              </Link>
-            </div>
-          </div>
-        </div>
-
-        {/* Bottom Section */}
-        <div className="mt-8 pt-6 border-t border-border/40">
-          <div className="flex flex-col md:flex-row justify-between items-center">
-            <p className="text-sm text-muted-foreground">
-              © 2025 ProCoder. All rights reserved.
-            </p>
-            <div className="flex space-x-6 mt-4 md:mt-0">
-              <Link href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-                Privacy Policy
-              </Link>
-              <Link href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-                Terms of Service
-              </Link>
-              <Link href="#" className="text-sm text-muted-foreground hover:text-foreground transition-colors">
-                Cookie Policy
-              </Link>
-            </div>
-          </div>
+          
+          {/* Copyright */}
+          <p className="text-sm text-muted-foreground">
+            © 2025 ProCoder. All rights reserved. | Let&apos;s stay connected and build something amazing together
+          </p>
         </div>
       </div>
+
+      {/* Toast Notification - Fixed Position */}
+      {showCopiedMessage && (
+        <div className="fixed bottom-6 right-6 bg-primary text-primary-foreground px-4 py-2 rounded-lg text-sm font-medium shadow-lg border border-primary/20 animate-in slide-in-from-right-5 fade-in-0 duration-100 z-50">
+          <div className="flex items-center gap-2">
+            <span className="text-green-200">✅</span>
+            <span>Email copied to clipboard!</span>
+          </div>
+        </div>
+      )}
     </footer>
   )
 }

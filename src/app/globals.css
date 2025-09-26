@@ -128,6 +128,8 @@
       oklch(0.97 0.02 230) 100%);
     background-attachment: fixed;
     min-height: 100vh;
+    /* Support for newer viewport units for better mobile experience */
+    min-height: 100dvh;
   }
   
   /* Ensure dark mode gradient */
@@ -137,5 +139,40 @@
       oklch(0.10 0.05 250) 50%, 
       oklch(0.14 0.03 230) 100%);
     background-attachment: fixed;
+  }
+
+  /* Mobile-specific improvements */
+  @media (max-width: 768px) {
+    body {
+      /* Prevent zoom on iOS */
+      -webkit-text-size-adjust: 100%;
+      /* Better font rendering on mobile */
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+    
+    /* Handle safe areas on mobile devices */
+    .mobile-safe-area {
+      padding-top: env(safe-area-inset-top);
+      padding-bottom: env(safe-area-inset-bottom);
+      padding-left: env(safe-area-inset-left);
+      padding-right: env(safe-area-inset-right);
+    }
+  }
+
+  /* Tablet-specific optimizations */
+  @media (min-width: 769px) and (max-width: 1024px) {
+    body {
+      /* Optimize for tablet viewing */
+      font-size: 16px;
+    }
+  }
+
+  /* Desktop and laptop optimizations */
+  @media (min-width: 1025px) {
+    body {
+      /* Optimize for larger screens */
+      font-size: 16px;
+    }
   }
 }

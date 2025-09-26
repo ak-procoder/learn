@@ -93,7 +93,7 @@ export function CourseCard({ course }: CourseCardProps) {
                 <Badge 
                   key={index} 
                   variant="secondary" 
-                  className="text-xs bg-gradient-to-r from-secondary/20 to-accent/20 text-secondary-foreground border border-secondary/20 hover:from-secondary/30 hover:to-accent/30 transition-all duration-200"
+                  className="text-xs bg-gradient-to-r from-violet-500/20 via-purple-500/20 to-fuchsia-500/20 text-violet-700 dark:text-violet-300 border border-violet-300/30 hover:from-violet-500/40 hover:via-purple-500/40 hover:to-fuchsia-500/40 hover:text-violet-800 dark:hover:text-violet-200 hover:border-violet-400/50 hover:shadow-lg hover:shadow-violet-500/25 transition-all duration-300 hover:scale-105"
                 >
                   {skill}
                 </Badge>

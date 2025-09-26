@@ -54,7 +54,7 @@ const courseMeta = {
       title: 'Network Security and Threats',
       description: 'Comprehensive network security principles and threat mitigation',
       duration: '105 min',
-      slideCount: 21,
+      slideCount: 22,
       slidePattern: 'security-{n}.md'
     },
     {
@@ -72,14 +72,6 @@ const courseMeta = {
       duration: '100 min',
       slideCount: 20,
       slidePattern: 'troubleshooting-{n}.md'
-    },
-    {
-      id: 'network-troubleshooting',
-      title: 'Advanced Network Troubleshooting',
-      description: 'Advanced troubleshooting techniques and tools',
-      duration: '70 min',
-      slideCount: 14,
-      slidePattern: 'troubleshoot-{n}.md'
     }
   ]
 };

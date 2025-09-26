@@ -24,35 +24,35 @@
       "title": "TCP/IP Protocol Suite", 
       "description": "In-depth study of TCP/IP stack, addressing, routing, transport protocols, and application layer protocols",
       "duration": "300 min",
-      "slideCount": 35
+      "slideCount": 30
     },
     {
       "id": "network-devices",
       "title": "Network Devices and Infrastructure",
       "description": "Comprehensive study of hubs, switches, routers, firewalls, load balancers, and modern network appliances", 
       "duration": "240 min",
-      "slideCount": 30
+      "slideCount": 20
     },
     {
       "id": "routing-protocols",
       "title": "Routing Protocols",
       "description": "Detailed coverage of RIP, OSPF, BGP, static routing, dynamic routing, and routing algorithms",
       "duration": "270 min", 
-      "slideCount": 32
+      "slideCount": 20
     },
     {
       "id": "network-security",
       "title": "Network Security",
       "description": "Extensive coverage of threats, vulnerabilities, encryption, firewalls, VPNs, IDS/IPS, and security best practices",
       "duration": "300 min",
-      "slideCount": 35
+      "slideCount": 22
     },
     {
       "id": "troubleshooting", 
       "title": "Network Troubleshooting",
       "description": "Comprehensive guide to diagnostic tools, methodology, common issues, performance optimization, and maintenance",
       "duration": "240 min",
-      "slideCount": 30
+      "slideCount": 20
     },
     {
       "id": "advanced-topics",
