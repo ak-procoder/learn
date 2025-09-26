@@ -335,16 +335,14 @@ export async function preloadTopicSlides(
 }
 
 /**
- * Preload the next topic slides based on current topic
+ * Preload the next topic slides based on current topic (now uses JSON metadata)
  * @param courseContent - Full course content to find next topic
  * @param currentTopicId - Current topic ID to find the next one
- * @param topicMetaMap - Map of topic metadata for loading patterns
  */
-export function preloadNextTopic(
+export async function preloadNextTopic(
   courseContent: { topics: { id: string }[] } | null,
-  currentTopicId: string,
-  topicMetaMap: Map<string, { slidePattern: string; slideCount: number }>
-): void {
+  currentTopicId: string
+): Promise<void> {
   if (!courseContent?.topics) return
 
   const currentIndex = courseContent.topics.findIndex((topic) => topic.id === currentTopicId)
@@ -352,15 +350,40 @@ export function preloadNextTopic(
 
   if (nextIndex < courseContent.topics.length) {
     const nextTopic = courseContent.topics[nextIndex]
-    const nextTopicMeta = topicMetaMap.get(nextTopic.id)
     
-    if (nextTopicMeta) {
-      preloadTopicSlides(
-        `computer-networks/${nextTopic.id}`,
-        nextTopicMeta.slidePattern,
-        nextTopicMeta.slideCount,
-        'low'
-      )
+    try {
+      // Load metadata from JSON
+      const response = await fetch('/content/computer-networks/course-meta.json');
+      if (!response.ok) return;
+      
+      const meta = await response.json();
+      const nextTopicMeta = meta.topics.find((topic: {id: string, slideCount: number}) => topic.id === nextTopic.id);
+      
+      if (nextTopicMeta) {
+        // Slide patterns mapping
+        const slidePatterns: Record<string, string> = {
+          'introduction': 'intro-{n}.md',
+          'osi-model': 'osi-{n}.md',
+          'tcp-ip': 'tcp-{n}.md',
+          'network-devices': 'devices-{n}.md',
+          'routing-protocols': 'routing-{n}.md',
+          'network-security': 'security-{n}.md',
+          'advanced-topics': 'advanced-{n}.md',
+          'troubleshooting': 'troubleshooting-{n}.md'
+        };
+        
+        const slidePattern = slidePatterns[nextTopic.id];
+        if (slidePattern) {
+          preloadTopicSlides(
+            `computer-networks/${nextTopic.id}`,
+            slidePattern,
+            nextTopicMeta.slideCount,
+            'low'
+          )
+        }
+      }
+    } catch (error) {
+      console.warn('Failed to preload next topic:', error);
     }
   }
 }

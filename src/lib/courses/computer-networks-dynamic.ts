@@ -1,80 +1,54 @@
 import { CourseContent, CourseSlide, CourseTopic } from '../../data/types/course-types';
 import { loadTopicSlides } from './dynamic-markdown-loader';
 
-// Course metadata
-const courseMeta = {
-  courseId: 'computer-networks',
-  title: 'Computer Networks',
-  description: 'Comprehensive course covering networking fundamentals, protocols, security, and modern technologies',
-  difficulty: 'intermediate' as const,
-  estimatedDuration: '20 hours',
-  topicMeta: [
-    {
-      id: 'introduction',
-      title: 'Introduction to Computer Networks', 
-      description: 'Comprehensive foundation of computer networking fundamentals for college students',
-      duration: '180 min',
-      slideCount: 30,
-      slidePattern: 'intro-{n}.md'
-    },
-    {
-      id: 'osi-model',
-      title: 'OSI Reference Model',
-      description: 'Comprehensive deep dive into the 7-layer OSI model with detailed protocols, examples, and practical applications', 
-      duration: '240 min',
-      slideCount: 30,
-      slidePattern: 'osi-{n}.md'
-    },
-    {
-      id: 'tcp-ip',
-      title: 'TCP/IP Protocol Suite',
-      description: 'Comprehensive coverage of TCP/IP including addressing, subnetting, CIDR, and advanced topics',
-      duration: '180 min',
-      slideCount: 30,
-      slidePattern: 'tcp-{n}.md'
-    },
-    {
-      id: 'network-devices',
-      title: 'Network Devices and Infrastructure',
-      description: 'Comprehensive study of network hardware and their functions',
-      duration: '120 min',
-      slideCount: 20,
-      slidePattern: 'devices-{n}.md'
-    },
-    {
-      id: 'routing-protocols', 
-      title: 'Routing Protocols and Algorithms',
-      description: 'Dynamic routing protocols and path selection algorithms',
-      duration: '100 min',
-      slideCount: 20,
-      slidePattern: 'routing-{n}.md'
-    },
-    {
-      id: 'network-security',
-      title: 'Network Security and Threats',
-      description: 'Comprehensive network security principles and threat mitigation',
-      duration: '105 min',
-      slideCount: 22,
-      slidePattern: 'security-{n}.md'
-    },
-    {
-      id: 'advanced-topics',
-      title: 'Advanced Networking Topics',
-      description: 'Modern networking technologies and future trends',
-      duration: '75 min',
-      slideCount: 15,
-      slidePattern: 'advanced-{n}.md'
-    },
-    {
-      id: 'troubleshooting',
-      title: 'Network Troubleshooting',
-      description: 'Network troubleshooting methodologies and tools',
-      duration: '100 min',
-      slideCount: 20,
-      slidePattern: 'troubleshooting-{n}.md'
-    }
-  ]
+// Types for course metadata from JSON
+interface CourseTopicMeta {
+  id: string;
+  title: string;
+  description: string;
+  duration: string;
+  slideCount: number;
+}
+
+interface CourseMetaJson {
+  id: string;
+  title: string;
+  description: string;
+  difficulty: string;
+  estimatedDuration: string;
+  topics: CourseTopicMeta[];
+  prerequisites: string[];
+  learningOutcomes: string[];
+}
+
+// Slide patterns mapping for each topic (only thing not in course-meta.json)
+const slidePatterns: Record<string, string> = {
+  'introduction': 'intro-{n}.md',
+  'osi-model': 'osi-{n}.md',
+  'tcp-ip': 'tcp-{n}.md',
+  'network-devices': 'devices-{n}.md',  
+  'routing-protocols': 'routing-{n}.md',
+  'network-security': 'security-{n}.md',
+  'advanced-topics': 'advanced-{n}.md',
+  'troubleshooting': 'troubleshooting-{n}.md'
 };
+
+// Load course metadata from JSON file
+let courseMeta: CourseMetaJson | null = null;async function loadCourseMeta(): Promise<CourseMetaJson> {
+  if (courseMeta) return courseMeta;
+  
+  try {
+    const response = await fetch('/content/computer-networks/course-meta.json');
+    if (!response.ok) {
+      throw new Error(`Failed to load course metadata: ${response.status}`);
+    }
+    courseMeta = await response.json() as CourseMetaJson;
+    return courseMeta;
+  } catch (error) {
+    console.error('Failed to load course metadata:', error);
+    throw error;
+  }
+}
 
 /**
  * Load slides for a specific topic using dynamic markdown loading
@@ -82,10 +56,17 @@ const courseMeta = {
  * @returns Promise resolving to array of course slides
  */
 export async function loadTopicSlidesDynamic(topicId: string): Promise<CourseSlide[]> {
-  const topicInfo = courseMeta.topicMeta.find(topic => topic.id === topicId);
+  const meta = await loadCourseMeta();
+  const topicInfo = meta.topics.find((topic: CourseTopicMeta) => topic.id === topicId);
   
   if (!topicInfo) {
     console.warn(`Topic not found: ${topicId}`);
+    return [];
+  }
+
+  const slidePattern = slidePatterns[topicId];
+  if (!slidePattern) {
+    console.warn(`Slide pattern not found for topic: ${topicId}`);
     return [];
   }
 
@@ -93,7 +74,7 @@ export async function loadTopicSlidesDynamic(topicId: string): Promise<CourseSli
     const topicPath = `computer-networks/${topicId}`;
     const slides = await loadTopicSlides(
       topicPath,
-      topicInfo.slidePattern,
+      slidePattern,
       topicInfo.slideCount
     );
     
@@ -110,9 +91,10 @@ export async function loadTopicSlidesDynamic(topicId: string): Promise<CourseSli
  * @returns Promise resolving to complete course content
  */
 export async function loadCourseContentDynamic(): Promise<CourseContent> {
+  const meta = await loadCourseMeta();
   const topics: CourseTopic[] = [];
 
-  for (const topicMeta of courseMeta.topicMeta) {
+  for (const topicMeta of meta.topics) {
     try {
       const slides = await loadTopicSlidesDynamic(topicMeta.id);
       
@@ -132,7 +114,7 @@ export async function loadCourseContentDynamic(): Promise<CourseContent> {
   }
 
   return {
-    courseId: courseMeta.courseId,
+    courseId: meta.id,
     topics: topics
   };
 }
@@ -141,10 +123,11 @@ export async function loadCourseContentDynamic(): Promise<CourseContent> {
  * Get course metadata without loading slides (faster for navigation)
  * @returns Course metadata with topic information
  */
-export function getCourseMetadata() {
+export async function getCourseMetadata() {
+  const meta = await loadCourseMeta();
   return {
-    ...courseMeta,
-    topics: courseMeta.topicMeta.map(topic => ({
+    ...meta,
+    topics: meta.topics.map((topic: CourseTopicMeta) => ({
       id: topic.id,
       title: topic.title,
       description: topic.description,
@@ -159,8 +142,9 @@ export function getCourseMetadata() {
  * @param topicId - The topic identifier
  * @returns Boolean indicating if topic exists
  */
-export function isValidTopic(topicId: string): boolean {
-  return courseMeta.topicMeta.some(topic => topic.id === topicId);
+export async function isValidTopic(topicId: string): Promise<boolean> {
+  const meta = await loadCourseMeta();
+  return meta.topics.some((topic: CourseTopicMeta) => topic.id === topicId);
 }
 
 /**
@@ -168,6 +152,7 @@ export function isValidTopic(topicId: string): boolean {
  * @param topicId - The topic identifier
  * @returns Topic metadata or null if not found
  */
-export function getTopicMetadata(topicId: string) {
-  return courseMeta.topicMeta.find(topic => topic.id === topicId) || null;
+export async function getTopicMetadata(topicId: string): Promise<CourseTopicMeta | null> {
+  const meta = await loadCourseMeta();
+  return meta.topics.find((topic: CourseTopicMeta) => topic.id === topicId) || null;
 }

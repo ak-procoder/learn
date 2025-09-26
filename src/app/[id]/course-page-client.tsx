@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect, useCallback, useMemo, useRef } from 'react'
+import { useState, useEffect, useCallback, useRef } from 'react'
 import { BookOpen, ChevronRight, CheckCircle, Menu, X, GripVertical } from 'lucide-react'
 import Link from 'next/link'
 import { useRouter } from 'next/navigation'
@@ -44,18 +44,6 @@ export default function CoursePageClient({ courseId }: CoursePageClientProps) {
   const router = useRouter()
 
   const course = courses.find(c => c.id === courseId)
-
-  // Topic metadata for preloading (computer-networks specific)
-  const topicMetaMap = useMemo(() => new Map([
-    ['introduction', { slidePattern: 'intro-{n}.md', slideCount: 30 }],
-    ['osi-model', { slidePattern: 'osi-{n}.md', slideCount: 30 }],
-    ['tcp-ip', { slidePattern: 'tcp-{n}.md', slideCount: 30 }],
-    ['network-devices', { slidePattern: 'devices-{n}.md', slideCount: 20 }],
-    ['routing-protocols', { slidePattern: 'routing-{n}.md', slideCount: 20 }],
-    ['network-security', { slidePattern: 'security-{n}.md', slideCount: 22 }],
-    ['troubleshooting', { slidePattern: 'troubleshooting-{n}.md', slideCount: 15 }],
-    ['advanced-topics', { slidePattern: 'advanced-{n}.md', slideCount: 15 }]
-  ]), [])
 
   useEffect(() => {
     const loadCourseContent = async () => {
@@ -105,7 +93,7 @@ export default function CoursePageClient({ courseId }: CoursePageClientProps) {
     
     // Preload next topic slides in background
     if (courseContent) {
-      preloadNextTopic(courseContent, topic.id, topicMetaMap)
+      preloadNextTopic(courseContent, topic.id)
     }
   }
 
@@ -133,9 +121,9 @@ export default function CoursePageClient({ courseId }: CoursePageClientProps) {
       setInitialSlideIndex(0) // Start from first slide for next topic
       
       // Preload next topic after this one
-      preloadNextTopic(courseContent, nextTopic.id, topicMetaMap)
+      preloadNextTopic(courseContent, nextTopic.id)
     }
-  }, [selectedTopic, courseContent, topicMetaMap])
+  }, [selectedTopic, courseContent])
 
   const handlePreviousTopic = useCallback(() => {
     if (!selectedTopic || !courseContent) return
