@@ -59,7 +59,7 @@
       "title": "Advanced Networking Topics", 
       "description": "In-depth coverage of SDN, cloud networking, virtualization, QoS, and emerging technologies",
       "duration": "300 min",
-      "slideCount": 35
+      "slideCount": 15
     }
   ],
   "prerequisites": [
