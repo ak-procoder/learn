@@ -12,9 +12,11 @@ const page = () => {
             Learn Together, Grow Together
             <span className="text-primary"> Open Learning</span>
           </h1>
-          <p className="text-muted-foreground text-base md:text-lg max-w-2xl mx-auto">
-            Join our open-source learning community where knowledge is shared freely.
-            Contribute, learn, and help others grow through collaborative education.
+          <p className="text-muted-foreground text-base md:text-lg">
+            A 100% free, open-source learning platform built for students. 
+            Access quality educational content with no paywalls, no subscriptions, and no barriers. 
+            Learn at your own pace, contribute course materials, and help shape the future of collaborative education. 
+            All content is community-driven and openly available on GitHub—because knowledge should be accessible to everyone.
           </p>
           {/*<div className="flex gap-4 justify-center flex-wrap">*/}
           {/*  <Button */}

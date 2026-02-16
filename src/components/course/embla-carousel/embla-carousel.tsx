@@ -263,6 +263,38 @@ const ResponsiveContent: React.FC<{
               {children}
             </blockquote>
           ),
+          table: ({ children }) => (
+            <div className="overflow-x-auto mb-4 rounded-lg border border-border/30 shadow-sm">
+              <table className="w-full border-collapse bg-card/50">
+                {children}
+              </table>
+            </div>
+          ),
+          thead: ({ children }) => (
+            <thead className="bg-gradient-to-r from-primary/10 to-secondary/10 border-b-2 border-primary/30">
+              {children}
+            </thead>
+          ),
+          tbody: ({ children }) => (
+            <tbody className="divide-y divide-border/20">
+              {children}
+            </tbody>
+          ),
+          tr: ({ children }) => (
+            <tr className="hover:bg-muted/30 transition-colors duration-150">
+              {children}
+            </tr>
+          ),
+          th: ({ children }) => (
+            <th className="px-4 py-3 text-left text-sm font-semibold text-primary border-r border-border/20 last:border-r-0">
+              {children}
+            </th>
+          ),
+          td: ({ children }) => (
+            <td className="px-4 py-3 text-sm text-foreground border-r border-border/20 last:border-r-0">
+              {children}
+            </td>
+          ),
         }}
       >
         {displayContent}

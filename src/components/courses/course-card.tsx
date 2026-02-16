@@ -1,4 +1,5 @@
 import Link from "next/link"
+import Image from "next/image"
 import { BookOpen, Clock, Users, Star } from "lucide-react"
 
 import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle } from "@/components/ui/card"
@@ -51,13 +52,25 @@ export function CourseCard({ course }: CourseCardProps) {
       {/* Course Header with Icon */}
       <div className="relative overflow-hidden">
         <div className="aspect-video bg-gradient-to-br from-primary/10 via-secondary/5 to-accent/10 flex items-center justify-center relative">
-          <div className="p-4 rounded-full bg-gradient-to-br from-primary/20 to-secondary/20 backdrop-blur-sm border border-primary/20 group-hover:scale-110 transition-transform duration-300">
-            <BookOpen className="h-8 w-8 text-primary group-hover:text-secondary transition-colors duration-300" />
-          </div>
-          
-          {/* Decorative elements */}
-          <div className="absolute top-2 left-2 w-3 h-3 bg-gradient-to-br from-primary to-secondary rounded-full opacity-60 animate-pulse" />
-          <div className="absolute bottom-3 right-4 w-2 h-2 bg-gradient-to-br from-secondary to-accent rounded-full opacity-40 animate-pulse delay-75" />
+          {course.image ? (
+            <Image 
+              src={course.image}
+              alt={course.title}
+              fill
+              className="object-cover group-hover:scale-105 transition-transform duration-300"
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+            />
+          ) : (
+            <>
+              <div className="p-4 rounded-full bg-gradient-to-br from-primary/20 to-secondary/20 backdrop-blur-sm border border-primary/20 group-hover:scale-110 transition-transform duration-300">
+                <BookOpen className="h-8 w-8 text-primary group-hover:text-secondary transition-colors duration-300" />
+              </div>
+              
+              {/* Decorative elements */}
+              <div className="absolute top-2 left-2 w-3 h-3 bg-gradient-to-br from-primary to-secondary rounded-full opacity-60 animate-pulse" />
+              <div className="absolute bottom-3 right-4 w-2 h-2 bg-gradient-to-br from-secondary to-accent rounded-full opacity-40 animate-pulse delay-75" />
+            </>
+          )}
         </div>
         
         {/* Level Badge */}

@@ -1,0 +1,78 @@
+{
+  "id": "linux-fundamentals",
+  "title": "Linux Fundamentals",
+  "description": "Comprehensive course covering Linux operating system fundamentals, command-line, system administration, and shell scripting",
+  "difficulty": "beginner",
+  "estimatedDuration": "20 hours",
+  "topics": [
+    {
+      "id": "introduction",
+      "title": "Introduction to Linux",
+      "description": "Comprehensive foundation of Linux, its history, distributions, and core concepts for beginners",
+      "duration": "180 min",
+      "slideCount": 30
+    },
+    {
+      "id": "linux-architecture",
+      "title": "Linux System Architecture",
+      "description": "Deep dive into Linux kernel, system components, boot process, and system structure",
+      "duration": "240 min",
+      "slideCount": 30
+    },
+    {
+      "id": "file-system",
+      "title": "Linux File System",
+      "description": "In-depth study of file system hierarchy, file types, permissions, and file management",
+      "duration": "300 min",
+      "slideCount": 30
+    },
+    {
+      "id": "command-line",
+      "title": "Command Line Essentials",
+      "description": "Comprehensive guide to bash shell, essential commands, text processing, and command-line utilities",
+      "duration": "300 min",
+      "slideCount": 30
+    },
+    {
+      "id": "user-management",
+      "title": "User and Group Management",
+      "description": "Detailed coverage of user accounts, groups, permissions, sudo, and access control",
+      "duration": "240 min",
+      "slideCount": 20
+    },
+    {
+      "id": "package-management",
+      "title": "Package Management",
+      "description": "Extensive coverage of package managers (apt, yum, dnf), repositories, and software installation",
+      "duration": "240 min",
+      "slideCount": 20
+    },
+    {
+      "id": "shell-scripting",
+      "title": "Shell Scripting",
+      "description": "Comprehensive guide to bash scripting, automation, variables, loops, and functions",
+      "duration": "270 min",
+      "slideCount": 20
+    },
+    {
+      "id": "system-administration",
+      "title": "System Administration",
+      "description": "In-depth coverage of processes, services, monitoring, logging, and system maintenance",
+      "duration": "300 min",
+      "slideCount": 15
+    }
+  ],
+  "prerequisites": [
+    "Basic computer literacy",
+    "Understanding of operating system concepts",
+    "Willingness to learn command-line interface"
+  ],
+  "learningOutcomes": [
+    "Understand Linux architecture and core concepts",
+    "Navigate and manage the Linux file system efficiently",
+    "Master essential command-line tools and utilities",
+    "Manage users, groups, and permissions effectively",
+    "Write shell scripts for automation",
+    "Perform basic system administration tasks"
+  ]
+}
