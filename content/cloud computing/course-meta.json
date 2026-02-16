@@ -1,0 +1,79 @@
+{
+  "id": "cloud-computing",
+  "title": "Cloud Computing",
+  "description": "Comprehensive course covering cloud computing fundamentals, service models, architecture, security, and major cloud platforms",
+  "difficulty": "intermediate",
+  "estimatedDuration": "20 hours",
+  "topics": [
+    {
+      "id": "introduction",
+      "title": "Introduction to Cloud Computing",
+      "description": "Comprehensive foundation of cloud computing concepts, history, characteristics, and benefits",
+      "duration": "180 min",
+      "slideCount": 30
+    },
+    {
+      "id": "cloud-service-models",
+      "title": "Cloud Service Models",
+      "description": "In-depth study of IaaS, PaaS, SaaS, and emerging service models with real-world examples",
+      "duration": "240 min",
+      "slideCount": 30
+    },
+    {
+      "id": "cloud-deployment-models",
+      "title": "Cloud Deployment Models",
+      "description": "Detailed coverage of public, private, hybrid, and multi-cloud deployment strategies",
+      "duration": "240 min",
+      "slideCount": 25
+    },
+    {
+      "id": "virtualization",
+      "title": "Virtualization Technologies",
+      "description": "Comprehensive study of hypervisors, containers, virtual machines, and virtualization platforms",
+      "duration": "300 min",
+      "slideCount": 30
+    },
+    {
+      "id": "cloud-storage",
+      "title": "Cloud Storage Solutions",
+      "description": "Extensive coverage of object storage, block storage, file storage, databases, and data management",
+      "duration": "270 min",
+      "slideCount": 25
+    },
+    {
+      "id": "cloud-security",
+      "title": "Cloud Security and Compliance",
+      "description": "In-depth coverage of security models, encryption, identity management, compliance, and best practices",
+      "duration": "300 min",
+      "slideCount": 30
+    },
+    {
+      "id": "cloud-providers",
+      "title": "Major Cloud Providers",
+      "description": "Comprehensive overview of AWS, Azure, GCP, and their core services and architectures",
+      "duration": "360 min",
+      "slideCount": 35
+    },
+    {
+      "id": "advanced-topics",
+      "title": "Advanced Cloud Topics",
+      "description": "Serverless computing, cloud-native applications, microservices, DevOps, and emerging trends",
+      "duration": "300 min",
+      "slideCount": 30
+    }
+  ],
+  "prerequisites": [
+    "Basic understanding of computer networks",
+    "Familiarity with operating systems",
+    "Basic programming knowledge helpful but not required",
+    "Understanding of web technologies"
+  ],
+  "learningOutcomes": [
+    "Understand cloud computing concepts and architecture",
+    "Differentiate between cloud service and deployment models",
+    "Implement virtualization and containerization solutions",
+    "Design secure and scalable cloud infrastructure",
+    "Work with major cloud platforms (AWS, Azure, GCP)",
+    "Apply cloud security and compliance best practices"
+  ]
+}

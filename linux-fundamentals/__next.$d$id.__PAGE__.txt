@@ -1,0 +1,7 @@
+1:"$Sreact.fragment"
+2:I[74279,["/_next/static/chunks/135aa1e47e43b074.js","/_next/static/chunks/40290d75ad2e4609.js","/_next/static/chunks/b7f7bf6a54e50be7.js","/_next/static/chunks/063e36c8483b3f39.js","/_next/static/chunks/29e99b883ce10e19.js","/_next/static/chunks/d2dd791ce176f148.js"],"default"]
+3:I[97367,["/_next/static/chunks/ff1a16fafef87110.js","/_next/static/chunks/0bd6498bda341889.js"],"OutletBoundary"]
+4:"$Sreact.suspense"
+:HL["/_next/static/chunks/482806d55859e248.css","style"]
+0:{"buildId":"KOvY58ZDGHv2-t48GYX10","rsc":["$","$1","c",{"children":[["$","$L2",null,{"courseId":"linux-fundamentals"}],[["$","link","0",{"rel":"stylesheet","href":"/_next/static/chunks/482806d55859e248.css","precedence":"next"}],["$","script","script-0",{"src":"/_next/static/chunks/063e36c8483b3f39.js","async":true}],["$","script","script-1",{"src":"/_next/static/chunks/29e99b883ce10e19.js","async":true}],["$","script","script-2",{"src":"/_next/static/chunks/d2dd791ce176f148.js","async":true}]],["$","$L3",null,{"children":["$","$4",null,{"name":"Next.MetadataOutlet","children":"$@5"}]}]]}],"loading":null,"isPartial":false}
+5:null
